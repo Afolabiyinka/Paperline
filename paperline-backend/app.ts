@@ -12,7 +12,13 @@ const PORT = process.env.PORT || 8000;
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "paperline-production.up.railway.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 //Database stuff
 connectDb();
