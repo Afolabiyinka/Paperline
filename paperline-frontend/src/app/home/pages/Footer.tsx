@@ -2,25 +2,33 @@ import { motion } from "framer-motion";
 import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
 
-const SOCIAL_ICONS = ["Facebook", "Instagram", "Github", "Dribbble", "X"];
+const SOCIAL_ICONS = [
+  "Facebook",
+  "Instagram",
+  "Github",
+  "Dribbble",
+  "X",
+] as const;
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-background">
+    <footer className="w-full bg-background border-t">
       <div className="mx-auto w-full max-w-7xl px-8">
         <div className="flex w-full flex-col items-center gap-4 py-4 md:flex-row md:justify-between md:items-center">
           <Logo />
+
           <div className="flex gap-4 md:gap-8">
             {SOCIAL_ICONS.map((name) => (
               <motion.a
                 key={name}
                 href="#"
                 target="_blank"
+                rel="noopener noreferrer"
                 whileHover={{ scale: 1.2 }}
                 whileTap={{ scale: 0.9 }}
                 className="text-gray-600 dark:text-gray-300"
               >
-                <Icon isSolid={false} icon={name} tooltip={name} />
+                <Icon icon={name} tooltip={name} isSolid={false} />
               </motion.a>
             ))}
           </div>

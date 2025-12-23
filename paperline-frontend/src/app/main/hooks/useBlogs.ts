@@ -4,7 +4,6 @@ export default function useBlogs() {
   const {
     isLoading: blogsLoading,
     error: blogError,
-    refetch,
     data: blogs,
   } = useQuery({
     queryKey: ["blogs"],

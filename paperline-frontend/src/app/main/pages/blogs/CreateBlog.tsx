@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import BlogCoverUploader from "../../components/create-blog/imageuploader";
 import { Button } from "@/components/ui/button";

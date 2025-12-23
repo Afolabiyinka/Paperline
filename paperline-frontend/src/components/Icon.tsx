@@ -1,41 +1,43 @@
-import React from "react";
-import * as LucideIcon from "lucide-react";
+import { icons } from "lucide-react";
 import { motion } from "framer-motion";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
+type IconName = keyof typeof icons;
+
 interface IconProps {
-  icon: keyof typeof LucideIcon;
+  icon: IconName;
   tooltip?: string;
   onClick?: () => void;
-  isSolid: boolean;
+  isSolid?: boolean;
 }
 
-const Icon = ({ icon, tooltip, onClick, isSolid }: IconProps) => {
-  const IconComponent = LucideIcon[icon] as React.FC<
-    React.SVGProps<SVGSVGElement>
-  >;
+const Icon = ({ icon, tooltip, onClick, isSolid = false }: IconProps) => {
+  const IconComponent = icons[icon];
+
   return (
     <Tooltip>
-      <TooltipTrigger>
-        <span onClick={onClick}>
-          <motion.button
-            onClick={onClick}
-            whileHover={{ y: -4 }}
-            transition={{ ease: "easeIn", duration: 0.8 }}
-            whileTap={{ scale: 0.65 }}
-            className={`${
+      <TooltipTrigger asChild>
+        <motion.button
+          onClick={onClick}
+          whileHover={{ y: -4 }}
+          whileTap={{ scale: 0.85 }}
+          transition={{ ease: "easeOut", duration: 0.2 }}
+          className={`h-11 w-11 rounded-full flex items-center justify-center cursor-pointer transition-all
+            ${
               isSolid
-                ? "bg-foreground text-white shadow"
-                : "shadow backdrop-blur-3xl "
-            } h-11 w-11 stroke-2 rounded-full flex items-center justify-center transition-all duration-200 cursor-pointer p-3`}
-          >
-            <IconComponent className="h-12 w-12" />
-          </motion.button>{" "}
-        </span>
+                ? "bg-foreground text-background shadow"
+                : "shadow backdrop-blur-3xl"
+            }`}
+        >
+          <IconComponent className="h-5 w-5" />
+        </motion.button>
       </TooltipTrigger>
-      <TooltipContent>
-        <p>{tooltip}</p>
-      </TooltipContent>
+
+      {tooltip && (
+        <TooltipContent>
+          <p>{tooltip}</p>
+        </TooltipContent>
+      )}
     </Tooltip>
   );
 };
