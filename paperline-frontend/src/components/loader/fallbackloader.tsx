@@ -1,4 +1,3 @@
-import Loader from "./loader";
 import LoadingContainer from "./loadingcontainer";
 
 const Fallback = () => {

@@ -17,7 +17,7 @@ export default function useSignUp() {
   const baseUrl = import.meta.env.VITE_BASEURL!;
   const navigate = useNavigate();
 
-  const { data, isPending, isSuccess, error, mutate } = useMutation({
+  const { mutate } = useMutation({
     mutationFn: async () => {
       const payload = {
         email: signUpData.email,
