@@ -47,7 +47,7 @@ const BlogPage = () => {
         </div>
 
         <div
-          className="tracking-widest font-[montserrat]  max-w-none text-gray-800 leading-relaxed text-left"
+          className="tracking-widest font-[Open sans]  max-w-none text-gray-800 leading-relaxed text-left"
           dangerouslySetInnerHTML={{ __html: blog?.content }}
         />
       </article>

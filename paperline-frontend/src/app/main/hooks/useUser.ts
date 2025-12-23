@@ -80,7 +80,7 @@ export default function useUser() {
 
   // NEW: update profile picture only
   async function updateProfilePic(url: string) {
-    mutate({ profilePic: url });
+    mutate({ profilePic: url, id: authUser?.id });
     setupdatedData((prev) => ({ ...prev, profilePic: url }));
   }
 
