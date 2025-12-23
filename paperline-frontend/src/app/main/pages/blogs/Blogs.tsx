@@ -12,18 +12,18 @@ const Blogs = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col p-4 md:p-8 gap-8 min-h-screen bg-gray-50">
+    <div className="flex flex-col p-4 md:p-8 gap-8 min-h-screen w-full">
       <div className="w-full flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-0">
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
           Latest Blogs
         </h1>
         <Button
-          size="sm"
+          size="lg"
           className="flex items-center gap-2"
           onClick={() => navigate("create")}
         >
-          Create a blog post
           <Plus className="w-4 h-4" />
+          Create a blog post
         </Button>
       </div>
 
@@ -35,7 +35,7 @@ const Blogs = () => {
         {blogsLoading ? (
           <LoadingContainer />
         ) : blogError ? (
-          <div className="flex flex-col justify-center items-center gap-6 h-full">
+          <div className="flex flex-col justify-center items-center gap-6 h-screen  w-full">
             <Frown size={120} className="text-gray-400" />
             <h1 className="text-2xl md:text-4xl font-semibold text-gray-700">
               Something went wrong

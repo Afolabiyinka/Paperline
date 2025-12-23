@@ -1,10 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import NavBar from "./pages/NavBar";
+import NavBar from "./pages/nav/NavBar";
 import { Toaster } from "sonner";
 import Lenis from "@studio-freight/lenis";
 import {} from "lenis";
-import Footer from "./pages/Footer";
+import Footer from "./pages/nav/Footer";
 
 const HomeLayout = () => {
   React.useEffect(() => {

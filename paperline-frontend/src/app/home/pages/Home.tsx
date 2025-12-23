@@ -7,18 +7,15 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div
-      // className="h-full flex flex-col lg:flex-row p-2 items-center"
-      className="flex flex-col lg:flex-row items-center justify-center h-full min-h-screen w-full p-4 lg:p-8 gap-8"
-    >
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full min-h-screen w-full p-10 lg:p-4 gap-8">
       {/* LEFT */}
-      <div className="w-full h-full flex items-center px-4 lg:px-20">
+      <div className="w-full h-full flex items-center justify-center px-4 lg:px-20">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="max-w-2xl space-y-6 p-2"
+          className="max-w-2xl space-y-6 lg:p-2 p-10"
         >
           <motion.h1
             initial={{ y: 80, opacity: 0 }}
@@ -44,7 +41,11 @@ const Home = () => {
               Read blogs
             </Button>
 
-            <Button variant={`outline`} size={`lg`}>
+            <Button
+              variant={`outline`}
+              size={`lg`}
+              onClick={() => navigate("blogs/create")}
+            >
               Start writing
               <ArrowRight className="w-4 h-4" />
             </Button>

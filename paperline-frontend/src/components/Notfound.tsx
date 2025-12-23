@@ -1,30 +1,40 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { Button } from "./ui/button";
+import { ArrowLeft, Flag } from "lucide-react";
 import { motion } from "framer-motion";
-import { ArrowLeft } from "lucide-react";
+import { Button } from "./ui/button";
+import { useNavigate } from "react-router-dom";
 
-const Notfound = () => {
-  const location = useLocation();
+function Notfound() {
   const navigate = useNavigate();
+
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.5, ease: "easeOut" }}
-      className="h-screen w-screen flex flex-col gap-6 justify-center items-center p-3"
-    >
-      <h1 className="text-5xl font-bold">404</h1>
-      <h1 className="text-5xl font-bold text-gray-800">Not found!</h1>
-      <p className="flex items-center gap-3 font-semibold md:text-xl tracking-wide truncate">
-        The link <p className="border p-1.5 rounded-lg">{location.pathname}</p>
-        is broken or does'nt exist
-      </p>
-      <Button onClick={() => navigate("/")} size={`lg`} variant={`secondary`}>
-        <ArrowLeft className="w-4 h-4" />
-        Go back
-      </Button>
-    </motion.div>
+    <div className="h-screen mx-auto flex flex-col items-center justify-center text-center px-8">
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+        className="flex flex-col items-center justify-center"
+      >
+        <Flag className="w-20 h-20 mx-auto " />
+        <h1 className="mt-6 !text-3xl font-bold !leading-snug md:!text-4xl">
+          Error 404 <br /> Page not Found!
+        </h1>
+        <h1 className="mt-4 mb-10 text-lg text-gray-500 md:max-w-md">
+          Don&apos;t worry, our team is already on it. Please refresh the page
+          or try again later.
+        </h1>
+        <span className="flex flex-col items-center justify-center">
+          <Button
+            onClick={() => navigate("/")}
+            size={`lg`}
+            variant={`secondary`}
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go back
+          </Button>{" "}
+        </span>
+      </motion.div>
+    </div>
   );
-};
+}
 
 export default Notfound;

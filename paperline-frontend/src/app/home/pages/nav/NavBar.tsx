@@ -1,5 +1,5 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import { NAVLINKS } from "../libs/navrelated";
+import { NAVLINKS } from "../../libs/navrelated";
 import Logo from "@/components/Logo";
 import { useIsMobile } from "@/hooks/useMobile";
 import { useState } from "react";
@@ -17,8 +17,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="w-full border-b px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between bg-background">
-      {/* Top row */}
+    <nav className="w-screen border-b px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
       <div className="w-full flex items-center justify-between lg:w-auto">
         <Logo />
 
@@ -50,7 +49,7 @@ const NavBar = () => {
                   to={link.path}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `text-sm font-medium transition hover:opacity-80 ${
+                    `lg:text-sm text-xl font-medium transition hover:opacity-80 ${
                       isActive ? "underline underline-offset-4" : ""
                     }`
                   }
