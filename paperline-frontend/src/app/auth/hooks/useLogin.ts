@@ -11,7 +11,7 @@ export default function useLogin() {
 
   const { toastError, toastSuccess, toastLoading } = useToastMessage();
 
-  //Getting the
+  //Getting the baseurl
   const baseUrl = import.meta.env.VITE_BASEURL!;
 
   const loginMutation = useMutation({

@@ -45,7 +45,7 @@ const loginUser = async (req: Request, res: Response) => {
         lastname: user.getDataValue("lastname"),
         email: user?.getDataValue("email"),
         id: user?.getDataValue("id"),
-        profilePic: user.getDataValue("profilePic"),
+        profilePic: user?.getDataValue("profilePic"),
       },
     });
   } catch (err) {

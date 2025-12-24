@@ -1,9 +1,5 @@
 import { Request, Response } from "express";
-import {
-  CreateBlogPayload,
-  getBlogPayload,
-  deleteBlogPayload,
-} from "../../types/blog";
+import { CreateBlogPayload, deleteBlogPayload } from "../../types/blog";
 import { Blog } from "../../models/posts/Blog";
 import { User } from "../../models/user/User";
 

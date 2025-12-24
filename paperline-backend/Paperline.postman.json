@@ -1,342 +1,298 @@
 {
-    "info": {
-        "name": "Paperline",
-        "description": "",
-        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
-    },
-    "item": [
+  "info": {
+    "name": "Paperline",
+    "description": "",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Authentication",
+      "description": "",
+      "item": [
         {
-            "name": "Authentication",
-            "description": "",
-            "item": [
-                {
-                    "name": "Login a user",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "POST",
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/api/auth/login",
-                            "path": [
-                                "api",
-                                "auth",
-                                "login"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
-                },
-                {
-                    "name": "Update user info",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "PUT",
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/api/auth/profile",
-                            "path": [
-                                "api",
-                                "auth",
-                                "profile"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
-                },
-                {
-                    "name": "Create a new user",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "POST",
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/api/auth/signup",
-                            "path": [
-                                "api",
-                                "auth",
-                                "signup"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
-                },
-                {
-                    "name": "Delete a user",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "DELETE",
-                        "body": {
-                            "mode": "raw",
-                            "raw": "{\r\n    \"id\": \"d13d4f4d-44c3-439c-bd45-b2726a97856e\"\r\n}",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/api/auth/delete",
-                            "path": [
-                                "api",
-                                "auth",
-                                "delete"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
+          "name": "Login a user",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-            ],
-            "event": [
-                {
-                    "listen": "prerequest",
-                    "script": {
-                        "exec": [],
-                        "type": "text/javascript",
-                        "packages": {}
-                    }
-                },
-                {
-                    "listen": "test",
-                    "script": {
-                        "exec": [],
-                        "type": "text/javascript",
-                        "packages": {}
-                    }
-                }
-            ],
-            "auth": {}
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/login",
+              "path": ["api", "auth", "login"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
         },
         {
-            "name": "Blog",
-            "description": "",
-            "item": [
-                {
-                    "name": "Create a new blog",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "POST",
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/api/blogs/create",
-                            "path": [
-                                "api",
-                                "blogs",
-                                "create"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [
-                        {
-                            "name": "Success",
-                            "originalRequest": {
-                                "method": "POST",
-                                "header": [],
-                                "url": {
-                                    "raw": "{{baseUrl}}/api/blogs/create",
-                                    "path": [
-                                        "api",
-                                        "blogs",
-                                        "create"
-                                    ],
-                                    "host": [
-                                        "{{baseUrl}}"
-                                    ],
-                                    "query": [],
-                                    "variable": []
-                                },
-                                "body": {
-                                    "mode": "raw",
-                                    "raw": "{\r\n  \"content\": \"Artificial Intelligence is transforming the way we work, learn, and communicate. In this blog, we dive deep into the latest AI trends and technologies that are shaping tomorrow\",\r\n  \"title\": \"Exploring the Future of AI\",\r\n  \"coverImageUrl\": \"https://loremflickr.com/400/400?lock=5369706106809790\",\r\n  \"authorId\": \"d13d4f4d-44c3-439c-bd45-b2726a97856e\"\r\n}\r\n",
-                                    "options": {
-                                        "raw": {
-                                            "language": "json"
-                                        }
-                                    }
-                                }
-                            },
-                            "cookie": []
-                        }
-                    ],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
-                },
-                {
-                    "name": "Get a particular blog",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "GET",
-                        "body": {
-                            "mode": "raw",
-                            "options": {
-                                "raw": {
-                                    "language": "json"
-                                }
-                            }
-                        },
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/blog",
-                            "path": [
-                                "blog"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
-                },
-                {
-                    "name": "Get all blogs",
-                    "description": "",
-                    "event": [],
-                    "auth": {},
-                    "request": {
-                        "auth": {},
-                        "method": "GET",
-                        "body": {},
-                        "header": [],
-                        "url": {
-                            "raw": "{{baseUrl}}/blogs",
-                            "path": [
-                                "blogs"
-                            ],
-                            "host": [
-                                "{{baseUrl}}"
-                            ],
-                            "query": [],
-                            "variable": []
-                        }
-                    },
-                    "response": [],
-                    "protocolProfileBehavior": {
-                        "strictSSL": false,
-                        "followRedirects": true
-                    }
+          "name": "Update user info",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-            ],
-            "event": [
-                {
-                    "listen": "prerequest",
-                    "script": {
-                        "exec": [],
-                        "type": "text/javascript",
-                        "packages": {}
-                    }
-                },
-                {
-                    "listen": "test",
-                    "script": {
-                        "exec": [],
-                        "type": "text/javascript",
-                        "packages": {}
-                    }
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/profile",
+              "path": ["api", "auth", "profile"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
+        },
+        {
+          "name": "Create a new user",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
                 }
-            ],
-            "auth": {}
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/signup",
+              "path": ["api", "auth", "signup"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
+        },
+        {
+          "name": "Delete a user",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "DELETE",
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"id\": \"d13d4f4d-44c3-439c-bd45-b2726a97856e\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/auth/delete",
+              "path": ["api", "auth", "delete"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
         }
-    ],
-    "variable": [],
-    "event": [],
-    "auth": {}
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "auth": {}
+    },
+    {
+      "name": "Blog",
+      "description": "",
+      "item": [
+        {
+          "name": "Create a new blog",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/blogs/create",
+              "path": ["api", "blogs", "create"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [
+            {
+              "name": "Success",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/api/blogs/create",
+                  "path": ["api", "blogs", "create"],
+                  "host": ["{{baseUrl}}"],
+                  "query": [],
+                  "variable": []
+                },
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"content\": \"Artificial Intelligence is transforming the way we work, learn, and communicate. In this blog, we dive deep into the latest AI trends and technologies that are shaping tomorrow\",\r\n  \"title\": \"Exploring the Future of AI\",\r\n  \"coverImageUrl\": \"https://loremflickr.com/400/400?lock=5369706106809790\",\r\n  \"authorId\": \"d13d4f4d-44c3-439c-bd45-b2726a97856e\"\r\n}\r\n",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "cookie": []
+            }
+          ],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
+        },
+        {
+          "name": "Get a particular blog",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "GET",
+            "body": {
+              "mode": "raw",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/blog",
+              "path": ["blog"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
+        },
+        {
+          "name": "Get all blogs",
+          "description": "",
+          "event": [],
+          "auth": {},
+          "request": {
+            "auth": {},
+            "method": "GET",
+            "body": {},
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/blogs",
+              "path": ["blogs"],
+              "host": ["{{baseUrl}}"],
+              "query": [],
+              "variable": []
+            }
+          },
+          "response": [],
+          "protocolProfileBehavior": {
+            "strictSSL": false,
+            "followRedirects": true
+          }
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "auth": {}
+    }
+  ],
+  "variable": [],
+  "event": [],
+  "auth": {}
 }
