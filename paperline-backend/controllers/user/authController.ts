@@ -14,7 +14,7 @@ const loginUser = async (req: Request, res: Response) => {
   const { email, password } = req.body as LoginPayload;
 
   if (!email || !password) {
-    return res.status(500).json({
+    return res.status(400).json({
       message: "Email, and password is required",
     });
   }
@@ -50,7 +50,7 @@ const loginUser = async (req: Request, res: Response) => {
     });
   } catch (err) {
     console.log(err);
-    return res.status(500).json({
+    return res.status(504).json({
       message: "Something went wrong",
       err,
     });
