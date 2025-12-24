@@ -1,10 +1,11 @@
 {
   "name": "paperline-backend",
   "version": "1.0.0",
-  "main": "app.ts",
+  "main": "dist/app.js",
   "scripts": {
-    "start": "tsx app.ts",
-    "dev": "tsx watch app.ts"
+    "dev": "tsx watch app.ts",
+    "build": "tsc",
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -30,7 +31,6 @@
     "@types/node": "^25.0.0",
     "@types/nodemailer": "^7.0.4",
     "@types/pg": "^8.16.0",
-    "ts-node-dev": "^2.0.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3"
   }
