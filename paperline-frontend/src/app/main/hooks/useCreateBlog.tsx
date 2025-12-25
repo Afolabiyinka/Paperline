@@ -48,7 +48,6 @@ export default function useCreateBlog() {
 
   function createBlog() {
     mutate();
-    alert(blogData);
     console.log(blogData);
   }
   return { createBlog, setBlogData, blogData };

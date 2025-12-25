@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import Input from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "../../hooks/useUser";
 import { useCloudinary } from "@/utils/cloudinary";
@@ -35,9 +35,8 @@ const Onboarding = () => {
   };
 
   return (
-    <div className="flex   flex-col justify-center items-center border  gap-6">
-      <Tabs value={step} className="w-2xl">
-        {/* STEP 1 — PROFILE */}
+    <div className="flex h-screen flex-col justify-center items-center w-full border  gap-6">
+      <Tabs value={step} className="w-full md:w-1/2">
         <TabsContent value="profile">
           <Card>
             <CardHeader>
@@ -50,7 +49,7 @@ const Onboarding = () => {
             <CardContent className="grid gap-6">
               <div className="flex flex-col items-center gap-3">
                 <Avatar className="h-20 w-20">
-                  <AvatarImage src={avatarPreview ?? ""} />
+                  <AvatarImage src={avatarPreview ?? authUser?.profilePic} />
                   <AvatarFallback>
                     {authUser?.username.substring(0, 2)}
                   </AvatarFallback>
@@ -101,7 +100,7 @@ const Onboarding = () => {
               <Button
                 size="lg"
                 className="w-full"
-                onClick={() => navigate("/create-blog")}
+                onClick={() => navigate("/blogs/create")}
               >
                 Go to Create Blog 🚀
               </Button>

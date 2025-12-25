@@ -5,10 +5,11 @@ export default function useBlogs() {
     isLoading: blogsLoading,
     error: blogError,
     data: blogs,
+    refetch,
   } = useQuery({
     queryKey: ["blogs"],
     queryFn: () => getAllblogs(),
   });
 
-  return { blogsLoading, blogError, blogs };
+  return { blogsLoading, blogError, blogs, refetch };
 }

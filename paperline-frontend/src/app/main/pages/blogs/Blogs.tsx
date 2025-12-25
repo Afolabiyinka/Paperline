@@ -1,14 +1,14 @@
 import BlogCard from "../../components/BlogCard";
 import LoadingContainer from "@/components/loader/loadingcontainer";
 import { Button } from "@/components/ui/button";
-import { Frown, Plus } from "lucide-react";
+import { Frown, Loader, Loader2, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
 import Input from "@/components/ui/input";
 
 const Blogs = () => {
-  const { blogsLoading, blogError, blogs } = useBlogs();
+  const { blogsLoading, blogError, blogs, refetch } = useBlogs();
   const navigate = useNavigate();
 
   return (
@@ -38,6 +38,10 @@ const Blogs = () => {
           <div className="flex flex-col justify-center items-center gap-6 h-full  w-full">
             <Frown size={120} className="stroke-[0.5px]" />
             <h1 className="text-2xl md:text-4xl">Something went wrong</h1>
+            <Button variant={`secondary`} onClick={() => refetch}>
+              {blogsLoading ? <Loader2 /> : ""}
+              Try again
+            </Button>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-2 md:p-4">
