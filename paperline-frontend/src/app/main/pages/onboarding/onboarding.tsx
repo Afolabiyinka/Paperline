@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/card";
 import Input from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Tabs, TabsContent, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "../../hooks/useUser";
 import { useCloudinary } from "@/utils/cloudinary";

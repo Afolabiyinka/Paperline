@@ -1,7 +1,7 @@
 import BlogCard from "../../components/BlogCard";
 import LoadingContainer from "@/components/loader/loadingcontainer";
 import { Button } from "@/components/ui/button";
-import { Frown, Loader, Loader2, Plus } from "lucide-react";
+import { Frown, Loader2, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
