@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(
   cors({
     origin: ["https://paperline-icechain.vercel.app", "http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     // credentials: true,
   })
 );
