@@ -13,7 +13,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["https://paperline-icechain.vercel.app", "http://localhost:5173"],
+    origin: ["https://paperline-icechain.vercel.app/", "http://localhost:5173"],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"], // ✅ Add this
     credentials: true, // ✅ Uncomment if you're using cookies/auth
