@@ -36,7 +36,7 @@ const loginUser = async (req: Request, res: Response) => {
     }
 
     const token = jwt.sign({ id: user?.getDataValue("id") }, jwtsecret, {
-      expiresIn: "24hr",
+      expiresIn: "24h",
     });
 
     return res.status(200).json({
@@ -51,10 +51,10 @@ const loginUser = async (req: Request, res: Response) => {
       },
     });
   } catch (err) {
-    console.log(err);
-    return res.status(504).json({
+    console.error("Login error:", err);
+    return res.status(500).json({
       message: "Something went wrong",
-      err,
+      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };
@@ -92,8 +92,13 @@ const createAccount = async (req: Request, res: Response) => {
       password: hashedPassword,
     });
 
+    const token = jwt.sign({ id: user?.getDataValue("id") }, jwtsecret, {
+      expiresIn: "24h",
+    });
+
     return res.status(201).json({
       message: "Account created successfully",
+      token,
       user: {
         username: user?.getDataValue("username"),
         firstname: user.getDataValue("firstname"),

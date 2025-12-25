@@ -1,3 +1,4 @@
+import Onboarding from "@/app/main/pages/onboarding/onboarding";
 import Fallback from "@/components/loader/fallbackloader";
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
@@ -32,6 +33,7 @@ export const routes: RouteObject[] = [
     Component: HomeLayout,
     children: [
       { index: true, Component: Home },
+      { path: "onboarding", Component: Onboarding },
       { path: "newsletter", Component: About },
       {
         path: "settings",

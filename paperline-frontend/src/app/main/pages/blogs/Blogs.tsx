@@ -35,11 +35,9 @@ const Blogs = () => {
         {blogsLoading ? (
           <LoadingContainer />
         ) : blogError ? (
-          <div className="flex flex-col justify-center items-center gap-6 h-screen  w-full">
-            <Frown size={120} className="text-gray-400" />
-            <h1 className="text-2xl md:text-4xl font-semibold text-gray-700">
-              Something went wrong
-            </h1>
+          <div className="flex flex-col justify-center items-center gap-6 h-full  w-full">
+            <Frown size={120} className="stroke-[0.5px]" />
+            <h1 className="text-2xl md:text-4xl">Something went wrong</h1>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 p-2 md:p-4">
