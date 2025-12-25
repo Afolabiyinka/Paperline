@@ -111,7 +111,6 @@ const createAccount = async (req: Request, res: Response) => {
     return res.status(504).json({
       message: "Failed to create account",
     });
-    console.log(error);
   }
 };
 
