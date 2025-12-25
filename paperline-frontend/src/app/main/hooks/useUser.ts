@@ -50,10 +50,10 @@ export default function useUser() {
       const result = await res.json();
 
       if (res.status === 401) {
+        logout();
         window.location.href = "/auth/login";
       }
       if (!res.ok) {
-        toastError(result.message || "Failed to update user");
         throw new Error(result.message || "Update failed");
       }
 
@@ -71,7 +71,6 @@ export default function useUser() {
       toastError("Something went wrong");
     },
   });
-  ``;
 
   function handleUpdate(e: React.FormEvent) {
     e.preventDefault();
@@ -80,8 +79,14 @@ export default function useUser() {
 
   // NEW: update profile picture only
   async function updateProfilePic(url: string) {
-    mutate({ profilePic: url, id: authUser?.id });
-    setupdatedData((prev) => ({ ...prev, profilePic: url }));
+    if (!authUser?.id) return;
+
+    mutate({ profilePic: url, id: authUser.id });
+
+    setupdatedData((prev) => ({
+      ...prev,
+      profilePic: url,
+    }));
   }
 
   return {

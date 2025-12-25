@@ -1,4 +1,4 @@
-node_modules
+dist/ 
+build/       ← Generated files, don't commit these
+node_modules/
 .env
-dist
-build

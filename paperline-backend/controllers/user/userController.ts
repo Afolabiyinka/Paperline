@@ -9,13 +9,11 @@ const updateProfile = async (req: Request, res: Response) => {
   if (!id) {
     return res.status(400).json({ message: "User ID is required" });
   }
-
   try {
     const user = await User.findOne({ where: { id } });
-
     if (!user) return res.status(404).json({ message: "User not found" });
 
-    // Update user
+    // Update user details
     await user.update({
       firstname,
       lastname,
@@ -42,6 +40,10 @@ const updateProfile = async (req: Request, res: Response) => {
       error,
     });
   }
+};
+
+const updateProfilePic = async (req: Request, res: Response) => {
+  const {} = req.body;
 };
 
 const deleteAccount = async (req: Request, res: Response) => {
@@ -72,4 +74,4 @@ const deleteAccount = async (req: Request, res: Response) => {
   }
 };
 
-export { updateProfile, deleteAccount };
+export { updateProfile, deleteAccount, updateProfilePic };
