@@ -17,9 +17,8 @@ import useUser from "../../hooks/useUser";
 import { useCloudinary } from "@/utils/cloudinary";
 
 const Onboarding = () => {
-  const { authUser, updateProfilePic, setupdatedData, handleUpdate } =
-    useUser();
-  const { uploadImage, uploading } = useCloudinary();
+  const { authUser, updateProfilePic, setupdatedData } = useUser();
+  const { uploadImage } = useCloudinary();
   const [step, setStep] = useState("profile");
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
   const navigate = useNavigate();
