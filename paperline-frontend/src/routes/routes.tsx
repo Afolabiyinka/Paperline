@@ -29,6 +29,14 @@ const ProctectedRoute = lazy(() => import("./proctectedroute"));
 
 export const routes: RouteObject[] = [
   {
+    path: "auth",
+    Component: AuthLayout,
+    children: [
+      { path: "login", Component: Login },
+      { path: "signup", Component: SignUp },
+    ],
+  },
+  {
     path: "/",
     Component: HomeLayout,
     children: [
@@ -40,14 +48,7 @@ export const routes: RouteObject[] = [
         element: <ProctectedRoute children={<Settings />} />,
       },
       { path: "pricing", Component: Pricing },
-      {
-        path: "auth",
-        Component: AuthLayout,
-        children: [
-          { path: "login", Component: Login },
-          { path: "signup", Component: SignUp },
-        ],
-      },
+
       {
         path: "blogs",
         Component: BlogLayout,

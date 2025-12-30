@@ -9,15 +9,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Input from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "../../hooks/useUser";
 import { useCloudinary } from "@/utils/cloudinary";
+import { useAuthStore } from "@/app/store/authStore";
 
 const Onboarding = () => {
-  const { authUser, updateProfilePic, setupdatedData } = useUser();
+  const { updateProfilePic, setupdatedData } = useUser();
+  const { authUser } = useAuthStore();
   const { uploadImage } = useCloudinary();
   const [step, setStep] = useState("profile");
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
@@ -67,15 +68,6 @@ const Onboarding = () => {
                   accept="image/*"
                   className="hidden"
                   onChange={handleAvatarChange}
-                />
-              </div>
-
-              <div className="grid gap-2">
-                <Label>Display name</Label>
-                <Input
-                  value={authUser?.username}
-                  startIcon="User"
-                  onChange={(e) => setupdatedData({ email: e })}
                 />
               </div>
             </CardContent>

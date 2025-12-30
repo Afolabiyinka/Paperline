@@ -45,7 +45,7 @@ export default function useSignUp() {
       localStorage.setItem("user", JSON.stringify(data.user));
       localStorage.setItem("token", data.token);
       toastSuccess(data.message);
-      navigate("/onboarding");
+      navigate("/auth/login");
     },
     onError: (err) => toastError(err.message),
     onMutate: () => toastLoading("Creating account"),
