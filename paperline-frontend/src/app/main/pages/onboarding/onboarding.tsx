@@ -17,7 +17,7 @@ import { useCloudinary } from "@/utils/cloudinary";
 import { useAuthStore } from "@/app/store/authStore";
 
 const Onboarding = () => {
-  const { updateProfilePic, setupdatedData } = useUser();
+  const { updateProfilePic } = useUser();
   const { authUser } = useAuthStore();
   const { uploadImage } = useCloudinary();
   const [step, setStep] = useState("profile");
