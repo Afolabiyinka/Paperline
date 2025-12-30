@@ -2,20 +2,20 @@ import { motion } from "framer-motion";
 import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
 
-const SOCIAL_ICONS = [
-  "Facebook",
-  "Instagram",
-  "Github",
-  "Dribbble",
-  "X",
-] as const;
+// const SOCIAL_ICONS = [
+//   "Facebook",
+//   "Instagram",
+//   "Github",
+//   "Dribbble",
+//   "X",
+// ] as const;
 
 const SOCIAL_LINKs = [
   { name: "Facebook", link: "https://facebook.com" },
   { name: "Instagram", link: "https://instagram.com" },
   { name: "Github", link: "" },
   { name: "Dribbble", link: "" },
-];
+] as const;
 
 export default function Footer() {
   return (
