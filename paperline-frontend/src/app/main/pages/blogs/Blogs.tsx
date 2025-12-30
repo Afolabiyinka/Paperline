@@ -38,8 +38,12 @@ const Blogs = () => {
           <div className="flex flex-col justify-center items-center gap-6 h-full  w-full">
             <Frown size={120} className="stroke-[0.5px]" />
             <h1 className="text-2xl md:text-4xl">Something went wrong</h1>
-            <Button variant={`secondary`} onClick={() => refetch}>
-              {blogsLoading ? <Loader2 /> : ""}
+            <Button
+              variant="secondary"
+              onClick={() => refetch}
+              disabled={blogsLoading}
+            >
+              {blogsLoading && <Loader2 className="animate-spin mr-2" />}
               Try again
             </Button>
           </div>

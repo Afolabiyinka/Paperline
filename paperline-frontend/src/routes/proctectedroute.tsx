@@ -1,16 +1,15 @@
 import React from "react";
 import useUser from "@/app/main/hooks/useUser";
-import { useNavigate } from "react-router-dom";
-const ProctectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { authUser } = useUser();
-  const navigate = useNavigate();
+import { Navigate } from "react-router-dom";
 
-  React.useEffect(() => {
-    if (!authUser) {
-      navigate("/auth/login");
-    }
-  }, [authUser]);
-  return <div>{children}</div>;
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { authUser } = useUser();
+
+  if (!authUser) {
+    return <Navigate to="/auth/login" replace />;
+  }
+
+  return children;
 };
 
-export default ProctectedRoute;
+export default ProtectedRoute;

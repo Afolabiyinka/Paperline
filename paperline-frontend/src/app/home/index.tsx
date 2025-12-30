@@ -1,26 +1,34 @@
-import React from "react";
+import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import NavBar from "./pages/nav/NavBar";
-import { Toaster } from "sonner";
+import { useAnimationFrame } from "framer-motion";
 import Lenis from "@studio-freight/lenis";
-import {} from "lenis";
+import NavBar from "./pages/nav/NavBar";
 import Footer from "./pages/nav/Footer";
+import { Toaster } from "sonner";
 
 const HomeLayout = () => {
-  React.useEffect(() => {
-    const lenis = new Lenis();
+  const lenisRef = useRef<Lenis | null>(null);
 
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+  // create Lenis ONCE
+  useEffect(() => {
+    lenisRef.current = new Lenis({
+      smoothWheel: true,
+      // smoothTouch: false,
+    });
 
-    return () => lenis.destroy();
+    return () => {
+      lenisRef.current?.destroy();
+      lenisRef.current = null;
+    };
   }, []);
 
+  // Framer Motion drives Lenis
+  useAnimationFrame((time) => {
+    lenisRef.current?.raf(time);
+  });
+
   return (
-    <div className="font-[Open sans] flex flex-col justify-center items-center">
+    <div className="font-[Open Sans] flex flex-col min-h-screen">
       <NavBar />
       <Outlet />
       <Footer />

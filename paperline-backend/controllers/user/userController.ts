@@ -1,6 +1,6 @@
 import { User } from "../../models/user/User";
 import { Request, Response } from "express";
-import { updateProfilePayload } from "../../types/user";
+import { profilePicPayload, updateProfilePayload } from "../../types/user";
 
 const updateProfile = async (req: Request, res: Response) => {
   const { email, firstname, lastname, profilePic, id } =
@@ -43,7 +43,20 @@ const updateProfile = async (req: Request, res: Response) => {
 };
 
 const updateProfilePic = async (req: Request, res: Response) => {
-  const {} = req.body;
+  const { profilePic, id } = req.body as profilePicPayload;
+
+  if (!id) {
+    return res.status(404).json({
+      message: "Id is required",
+    });
+  }
+
+  try {
+    const user = await User.findOne({ where: { id } });
+    if (!user) return res.status(404).json({ mesage: "User not found" });
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 const deleteAccount = async (req: Request, res: Response) => {
