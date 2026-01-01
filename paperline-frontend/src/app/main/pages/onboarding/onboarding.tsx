@@ -15,9 +15,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "../../hooks/useUser";
 import { useCloudinary } from "@/utils/cloudinary";
 import { useAuthStore } from "@/app/store/authStore";
+import { Loader2 } from "lucide-react";
 
 const Onboarding = () => {
-  const { updateProfilePic } = useUser();
+  const { updateProfilePic, loading } = useUser();
   const { authUser } = useAuthStore();
   const { uploadImage } = useCloudinary();
   const [step, setStep] = useState("profile");
@@ -73,8 +74,12 @@ const Onboarding = () => {
             </CardContent>
 
             <CardFooter>
-              <Button className="w-full" onClick={() => setStep("blog")}>
-                Continue
+              <Button
+                className="w-full"
+                onClick={() => setStep("blog")}
+                disabled={loading}
+              >
+                {loading ? <Loader2 className="animate-spin" /> : "Continue"}
               </Button>
             </CardFooter>
           </Card>

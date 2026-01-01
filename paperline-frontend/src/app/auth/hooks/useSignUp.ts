@@ -3,6 +3,7 @@ import type { SignupPayload } from "../types/types";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "@/app/store/authStore";
 
 export default function useSignUp() {
   const [signUpData, setSignUpData] = React.useState<SignupPayload>({
@@ -13,11 +14,12 @@ export default function useSignUp() {
     confirmedPassword: "",
   });
 
-  const { toastError, toastLoading, toastSuccess } = useToastMessage();
+  const { toastError, toastSuccess } = useToastMessage();
   const baseUrl = import.meta.env.VITE_BASEURL!;
   const navigate = useNavigate();
+  const { token, setAuthUser, setToken } = useAuthStore();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async () => {
       const payload = {
         email: signUpData.email,
@@ -29,6 +31,7 @@ export default function useSignUp() {
         method: "POST",
         headers: {
           "Content-type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
@@ -42,13 +45,12 @@ export default function useSignUp() {
       return data;
     },
     onSuccess: (data) => {
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
+      setAuthUser(data.user);
+      setToken(data.token);
       toastSuccess(data.message);
-      navigate("/auth/login");
+      navigate("/onboarding");
     },
     onError: (err) => toastError(err.message),
-    onMutate: () => toastLoading("Creating account"),
   });
 
   function handleSubmit() {
@@ -67,5 +69,6 @@ export default function useSignUp() {
     signUpData,
     setSignUpData,
     handleSubmit,
+    loading: isPending,
   };
 }

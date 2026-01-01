@@ -18,8 +18,9 @@ export default function useUser() {
   const [updatedData, setupdatedData] = useState<Partial<UpdateUserPayload>>(
     {}
   );
-  const { toastError, toastSuccess, toastLoading } = useToastMessage();
+  const { toastError, toastSuccess } = useToastMessage();
   const baseUrl = import.meta.env.VITE_BASEURL!;
+  const { token } = useAuthStore();
 
   useEffect(() => {
     if (authUser) {
@@ -35,9 +36,8 @@ export default function useUser() {
   }, [authUser]);
 
   // Mutation to update user
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (data: Partial<UpdateUserPayload>) => {
-      const token = localStorage.getItem("token");
       const res = await fetch(`${baseUrl}/api/auth/profile`, {
         method: "PUT",
         headers: {
@@ -59,12 +59,10 @@ export default function useUser() {
 
       return result;
     },
-    onMutate: () => toastLoading("Updating info..."),
     onSuccess: (data) => {
       toastSuccess(data.message);
       if (data.user) {
         setAuthUser(data.user);
-        localStorage.setItem("user", JSON.stringify(data.user));
       }
     },
     onError: () => {
@@ -97,5 +95,6 @@ export default function useUser() {
     handleUpdate,
     updateProfilePic,
     setAuthUser,
+    loading: isPending,
   };
 }

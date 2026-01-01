@@ -11,9 +11,11 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Icon from "@/components/Icon";
 import ProfilePicUploader from "../../../home/components/profilepic";
+import { Loader2 } from "lucide-react";
 
 const UpdateProfile = () => {
-  const { updatedData, setupdatedData, handleUpdate, authUser } = useUser();
+  const { updatedData, setupdatedData, handleUpdate, authUser, loading } =
+    useUser();
   return (
     <Dialog>
       <DialogTrigger>
@@ -75,12 +77,10 @@ const UpdateProfile = () => {
               />
             </div>
           </div>
-          <div className="border flex justify-between w-full mt-4">
-            {/* <div className="flex items-center gap-1 "></div> */}
-          </div>
+          <div className="border flex justify-between w-full mt-4"></div>
           <div className="w-full flex flex-col gap-3 items-center mt-4">
             <Button className="w-full cursor-pointer" type="submit">
-              Update
+              {loading ? <Loader2 className="animate-spin" /> : "Update"}
             </Button>
           </div>
         </form>

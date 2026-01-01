@@ -1,47 +1,50 @@
 import { NextFunction, Request, Response } from "express";
 import jwt, { TokenExpiredError } from "jsonwebtoken";
-import { User } from "../models/user/User";
 import { DecodedUser } from "../types/auth";
+import dotenv from "dotenv";
+import { AuthenticatedRequest } from "../types/request/types";
 
-import { configDotenv } from "dotenv";
+dotenv.config();
 
-configDotenv();
-const jwtsecret = process.env.JWT_SECRET || "";
+const jwtsecret = process.env.JWT_SECRET;
 
-export const authMiddleware = async (
-  req: any,
+if (!jwtsecret) {
+  throw new Error("JWT_SECRET is not defined");
+}
+
+export const authMiddleware = (
+  req: AuthenticatedRequest,
   res: Response,
   next: NextFunction
 ) => {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  const token = authHeader.split(" ")[1];
+  if (!token) return res.status(401).json({ message: "No token provided" });
+
   try {
-    const authHeader = req.headers.authorization;
+    const decoded = jwt.verify(token, jwtsecret);
 
-    const token = authHeader.split(" ")[1];
-
-    if (!token) {
-      return res.status(401).json({
-        message: "Unauthorised",
-      });
+    if (typeof decoded !== "object" || !decoded) {
+      return res.status(401).json({ message: "Invalid token" });
     }
 
-    const decoded = jwt.verify(token, jwtsecret) as DecodedUser;
+    const user = decoded as DecodedUser;
 
-    const user = await User.findOne({
-      where: {
-        id: decoded.id,
-      },
-    });
-    req.user = user;
+    req.user = {
+      id: user.id,
+    };
+
     next();
   } catch (err) {
     if (err instanceof TokenExpiredError) {
-      res.status(401).json({
-        message: "Token expired",
-      });
+      return res.status(401).json({ message: "Token expired" });
     }
-    console.log(err);
-    res.status(401).json({
-      message: "Invalid token",
-    });
+
+    return res.status(401).json({ message: "Invalid token" });
   }
 };

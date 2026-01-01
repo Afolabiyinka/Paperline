@@ -32,7 +32,6 @@ const HomeLayout = () => {
       <NavBar />
       <Outlet />
       <Footer />
-      <Toaster position="top-center" />
     </div>
   );
 };

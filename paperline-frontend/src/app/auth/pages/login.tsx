@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import useLogin from "../hooks/useLogin";
-import { User } from "lucide-react";
+import { Loader, Loader2, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from "@/components/ui/input";
 
 export default function Login() {
-  const { handlelogin, setLoginData, loginData } = useLogin();
+  const { handlelogin, setLoginData, loginData, isLoading } = useLogin();
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -52,8 +52,8 @@ export default function Login() {
             </Link>
           </div>
 
-          <Button type="submit" className="w-full">
-            Log in
+          <Button type="submit" className="w-full" disabled={isLoading}>
+            {isLoading ? <Loader2 className="animate-spin" /> : "Log in"}
           </Button>
         </form>
 

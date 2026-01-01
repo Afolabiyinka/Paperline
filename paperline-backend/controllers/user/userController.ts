@@ -1,16 +1,18 @@
 import { User } from "../../models/user/User";
 import { Request, Response } from "express";
 import { profilePicPayload, updateProfilePayload } from "../../types/user";
+import { AuthenticatedRequest } from "../../types/request/types";
 
-const updateProfile = async (req: Request, res: Response) => {
-  const { email, firstname, lastname, profilePic, id } =
+const updateProfile = async (req: AuthenticatedRequest, res: Response) => {
+  const id = req.user?.id;
+  const { email, firstname, lastname, profilePic } =
     req.body as updateProfilePayload;
 
   if (!id) {
     return res.status(400).json({ message: "User ID is required" });
   }
   try {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findByPk(id);
     if (!user) return res.status(404).json({ message: "User not found" });
 
     // Update user details
@@ -19,7 +21,10 @@ const updateProfile = async (req: Request, res: Response) => {
       lastname,
       profilePic,
       email,
-      username: `${lastname} ${firstname}`,
+      username:
+        firstname && lastname
+          ? `${lastname} ${firstname}`
+          : user.getDataValue("username"),
     });
 
     return res.status(200).json({
@@ -37,13 +42,13 @@ const updateProfile = async (req: Request, res: Response) => {
     console.log(error);
     return res.status(500).json({
       message: "Failed to update profile",
-      error,
     });
   }
 };
 
-const updateProfilePic = async (req: Request, res: Response) => {
-  const { profilePic, id } = req.body as profilePicPayload;
+const updateProfilePic = async (req: AuthenticatedRequest, res: Response) => {
+  const id = req.user?.id;
+  const { profilePic } = req.body as profilePicPayload;
 
   if (!id) {
     return res.status(404).json({
@@ -52,22 +57,22 @@ const updateProfilePic = async (req: Request, res: Response) => {
   }
 
   try {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findByPk(id);
     if (!user) return res.status(404).json({ mesage: "User not found" });
   } catch (err) {
     console.log(err);
   }
 };
 
-const deleteAccount = async (req: Request, res: Response) => {
-  const { id } = req.body;
+const deleteAccount = async (req: AuthenticatedRequest, res: Response) => {
+  const id = req.user?.id;
 
   if (!id) {
     return res.status(400).json({ message: "User ID is required" });
   }
 
   try {
-    const user = await User.findOne({ where: { id } });
+    const user = await User.findByPk(id);
 
     if (!user) {
       return res.status(404).json({
@@ -75,7 +80,7 @@ const deleteAccount = async (req: Request, res: Response) => {
       });
     }
 
-    await user.destroy(); // add await here
+    await user.destroy();
     return res.status(200).json({
       message: "Account deleted successfully",
     });

@@ -2,13 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 
 import Input from "@/components/ui/input";
-import { User } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 import useSignUp from "../hooks/useSignUp";
 import type React from "react";
 import { Link } from "react-router-dom";
 
 export default function SignUp() {
-  const { handleSubmit, setSignUpData, signUpData } = useSignUp();
+  const { handleSubmit, setSignUpData, signUpData, loading } = useSignUp();
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     handleSubmit();
@@ -95,7 +95,13 @@ export default function SignUp() {
             <label htmlFor="checkbox">Remember me</label>
           </div>
           <div className="w-full flex flex-col gap-3 items-center mt-3">
-            <Button className="w-full">Create Account</Button>
+            <Button className="w-full" disabled={loading}>
+              {loading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                "Create Account"
+              )}
+            </Button>
             <Link to={`/auth/login`}>
               Already an account?{" "}
               <a className="text-gray-900 underline underline-offset-4 cursor-pointer">

@@ -2,6 +2,7 @@ import React from "react";
 import useToastMessage from "@/lib/useToastmsg";
 import type { LoginPayload } from "../types/types";
 import { useMutation } from "@tanstack/react-query";
+import { useAuthStore } from "@/app/store/authStore";
 
 export default function useLogin() {
   const [loginData, setLoginData] = React.useState<LoginPayload>({
@@ -9,10 +10,12 @@ export default function useLogin() {
     password: "",
   });
 
-  const { toastError, toastSuccess, toastLoading } = useToastMessage();
+  const { toastError, toastSuccess } = useToastMessage();
 
   //Getting the baseurl
   const baseUrl = import.meta.env.VITE_BASEURL!;
+
+  const { setAuthUser, setToken, token } = useAuthStore();
 
   const loginMutation = useMutation({
     mutationFn: async () => {
@@ -25,6 +28,7 @@ export default function useLogin() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(payload),
       });
@@ -40,18 +44,15 @@ export default function useLogin() {
     },
     onSuccess: (data) => {
       toastSuccess(data.message);
-      toastLoading("Signing in...");
-      localStorage.setItem("user", JSON.stringify(data.user));
-      localStorage.setItem("token", data.token);
+      setToken(data.token);
+      setAuthUser(data.user);
+
       setTimeout(() => {
         window.location.href = "/";
       }, 1500);
     },
     onError: (err: any) => {
       console.log(err);
-    },
-    onMutate: () => {
-      toastLoading("Signing in");
     },
   });
 
