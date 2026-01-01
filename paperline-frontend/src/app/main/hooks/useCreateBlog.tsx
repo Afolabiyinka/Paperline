@@ -18,7 +18,7 @@ export default function useCreateBlog() {
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include", // send cookie for auth
+
         body: JSON.stringify({
           title,
           content,
