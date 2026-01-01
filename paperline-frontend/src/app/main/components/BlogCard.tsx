@@ -8,7 +8,7 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
   const navigate = useNavigate();
   return (
     <motion.div
-      className="border h-fit cursor-pointer hover:bg-black/80 hover:text-white transition-all duration-300"
+      className="border h-fit cursor-pointer hover:bg-black/80 overflow-hidden  rounded-lg hover:text-white transition-all duration-300"
       onClick={() => navigate(`/blogs/${blog.id}`)}
     >
       <img

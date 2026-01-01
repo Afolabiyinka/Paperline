@@ -1,5 +1,4 @@
 import Onboarding from "@/app/main/pages/onboarding/onboarding";
-import Fallback from "@/components/loader/fallbackloader";
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 
@@ -66,9 +65,5 @@ export const routes: RouteObject[] = [
   {
     path: "*",
     Component: Notfound,
-  },
-  {
-    path: "random",
-    Component: Fallback,
   },
 ];

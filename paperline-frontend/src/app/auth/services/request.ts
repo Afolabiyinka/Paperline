@@ -1,10 +1,10 @@
 import { useAuthStore } from "@/app/store/authStore";
 import type { LoginPayload, SignupPayload } from "../types/types";
-import { prodEndpoint, testingEndpoint } from "../../constants/api";
+import { prodEndpoint } from "../../constants/api";
 import type { SuccessResponse } from "@/shared/types";
 import type { AuthUser } from "@/app/main/hooks/useUser";
 
-const token = useAuthStore.getState();
+const token = useAuthStore.getState().token;
 
 const login = async (
   payload: LoginPayload
@@ -30,7 +30,7 @@ const login = async (
 const signup = async (
   payload: SignupPayload
 ): Promise<SuccessResponse<AuthUser>> => {
-  const res = await fetch(`${testingEndpoint}/api/auth/signup`, {
+  const res = await fetch(`${prodEndpoint}/api/auth/signup`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

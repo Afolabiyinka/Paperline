@@ -1,54 +1,57 @@
+import { prodEndpoint } from "@/app/constants/api";
+import { useAuthStore } from "@/app/store/authStore";
+import { useCreateStore } from "@/app/store/createStore";
 import useToastMessage from "@/lib/useToastmsg";
 import { useMutation } from "@tanstack/react-query";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function useCreateBlog() {
   const { toastError, toastSuccess, toastLoading } = useToastMessage();
-  const baseUrl = import.meta.env.VITE_BASEURL!;
-
-  // Get user from localStorage safely
-  const user = localStorage.getItem("user");
-  const parsedUser = user ? JSON.parse(user) : null;
+  const { content, title, imageUrl, reset } = useCreateStore();
   const navigate = useNavigate();
-
-  const [blogData, setBlogData] = useState({
-    title: "",
-    content: "",
-    authorId: parsedUser?.id || null,
-    coverImageUrl: "",
-  });
+  const { authUser } = useAuthStore();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      const res = await fetch(
-        `${baseUrl}
-/api/blogs/create`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(blogData),
-        }
-      );
-      const data = await res.json();
+      const res = await fetch(`${prodEndpoint}/api/blogs/create`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include", // send cookie for auth
+        body: JSON.stringify({
+          title,
+          content,
+          coverImageUrl: imageUrl,
+          authorId: authUser?.id || null,
+        }),
+      });
 
-      return data;
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.message || "Failed to create blog");
+      }
+
+      return res.json();
     },
-    onSuccess: () => {
-      toastSuccess("Blog created succesfully");
+
+    onMutate: () => toastLoading("Creating blog…"),
+
+    onSuccess: (data) => {
+      toastSuccess(data.message || "Blog created successfully");
+      reset(); // clear store after posting
       navigate("/blogs");
     },
-    onError: (err) => {
+
+    onError: (err: any) => {
       toastError(err.message);
     },
-    onMutate: () => toastLoading("Creating blog"),
   });
 
-  function createBlog() {
+  const createBlog = () => {
     mutate();
-    console.log(blogData);
-  }
-  return { createBlog, setBlogData, blogData };
+    console.log({ title, content, imageUrl, authorId: authUser?.id });
+  };
+
+  return { createBlog };
 }

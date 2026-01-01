@@ -1,10 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
+import useToastMessage from "@/lib/useToastmsg";
+import { useCloudinary } from "@/utils/cloudinary";
+import { useCreateStore } from "@/app/store/createStore";
 
 const BlogCoverUploader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
+
+  const { uploadImage, uploading } = useCloudinary();
+  const { toastError } = useToastMessage();
+
+  const { setImageUrl } = useCreateStore();
 
   const handleClick = () => {
     inputRef.current?.click();
@@ -15,13 +23,12 @@ const BlogCoverUploader = () => {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      alert("Only image files allowed");
+      toastError("Only image files allowed");
       return;
     }
 
-    // Blog cover should be crisp but not crazy large
     if (file.size > 3 * 1024 * 1024) {
-      alert("Image must be under 3MB");
+      toastError("Image must be under 3MB");
       return;
     }
 
@@ -30,10 +37,21 @@ const BlogCoverUploader = () => {
   };
 
   useEffect(() => {
+    if (!image) return;
+
+    const upload = async () => {
+      const url = await uploadImage(image, "paperline/blog_covers");
+      if (url) {
+        setImageUrl(url);
+      }
+    };
+
+    upload();
+
     return () => {
       if (preview) URL.revokeObjectURL(preview);
     };
-  }, [preview]);
+  }, [image]);
 
   return (
     <div className="w-full h-full border border-dashed p-4 flex flex-col items-center gap-4 rounded-lg">
@@ -41,7 +59,7 @@ const BlogCoverUploader = () => {
         <img
           src={preview}
           alt="Blog cover preview"
-          className="w-full  object-cover rounded-md"
+          className="w-full object-cover rounded-md"
         />
       ) : (
         <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
@@ -57,8 +75,17 @@ const BlogCoverUploader = () => {
         className="hidden"
       />
 
-      <Button type="button" onClick={handleClick} className="w-full">
-        {image ? "Change cover image" : "Upload cover image"}
+      <Button
+        type="button"
+        onClick={handleClick}
+        className="w-full"
+        disabled={uploading}
+      >
+        {uploading
+          ? "Uploading..."
+          : image
+          ? "Change cover image"
+          : "Upload cover image"}
       </Button>
     </div>
   );

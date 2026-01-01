@@ -33,7 +33,6 @@ export { getAllblogs, getParticularBlog };
 
 //User update requests
 const token = useAuthStore.getState().token;
-console.log(token);
 
 const update = async (data: Partial<UpdateUserPayload>) => {
   const res = await fetch(`${prodEndpoint}/api/auth/profile`, {
