@@ -20,7 +20,7 @@ async function getParticularBlog(
   id: number | string
 ): Promise<BlogPost | null> {
   try {
-    const res = await fetch(`${prodEndpoint}/api/blogs/blog/${id}`);
+    const res = await fetch(`${prodEndpoint}/api/blogs//${id}`);
     const data = await res.json();
     return data;
   } catch (err) {
