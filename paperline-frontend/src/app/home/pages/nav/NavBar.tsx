@@ -76,7 +76,7 @@ const NavBar = () => {
                   </Avatar>
                 </div>
               ) : (
-                <div className="hidden lg:flex items-center gap-3">
+                <div className="flex items-center gap-3">
                   <Button
                     variant="link"
                     onClick={() => navigate("/auth/login")}
