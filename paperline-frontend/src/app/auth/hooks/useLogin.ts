@@ -3,6 +3,7 @@ import useToastMessage from "@/lib/useToastmsg";
 import type { LoginPayload } from "../types/types";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "@/app/store/authStore";
+import { login } from "../services/request";
 
 export default function useLogin() {
   const [loginData, setLoginData] = React.useState<LoginPayload>({
@@ -11,37 +12,10 @@ export default function useLogin() {
   });
 
   const { toastError, toastSuccess } = useToastMessage();
-
-  //Getting the baseurl
-  const baseUrl = import.meta.env.VITE_BASEURL!;
-
-  const { setAuthUser, setToken, token } = useAuthStore();
+  const { setAuthUser, setToken } = useAuthStore();
 
   const loginMutation = useMutation({
-    mutationFn: async () => {
-      const payload = {
-        email: loginData.email,
-        password: loginData.password,
-      };
-
-      const res = await fetch(`${baseUrl}/api/auth/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toastError(data.message);
-        throw new Error(data.message);
-      }
-
-      return data;
-    },
+    mutationFn: (payload: LoginPayload) => login(payload),
     onSuccess: (data) => {
       toastSuccess(data.message);
       setToken(data.token);
@@ -64,7 +38,7 @@ export default function useLogin() {
     if (loginData.password.toLowerCase() === loginData.password)
       return toastError("Password must contain an uppercase letter");
 
-    loginMutation.mutate();
+    loginMutation.mutate(loginData);
   };
 
   return {

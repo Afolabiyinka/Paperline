@@ -3,7 +3,7 @@ export interface SignupPayload {
   lastname: string;
   email: string;
   password: string;
-  confirmedPassword: string;
+  confirmedPassword?: string;
 }
 
 export interface LoginPayload {
@@ -12,10 +12,10 @@ export interface LoginPayload {
 }
 
 export type UpdateUserPayload = {
-  username: string;
-  email: string;
-  id: string;
-  firstname: string;
-  lastname: string;
-  profilePic: string;
+  username?: string;
+  email?: string;
+  id?: string;
+  firstname?: string;
+  lastname?: string;
+  profilePic?: string;
 };

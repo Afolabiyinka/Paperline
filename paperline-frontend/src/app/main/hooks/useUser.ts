@@ -3,6 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import useToastMessage from "@/lib/useToastmsg";
 import type { UpdateUserPayload } from "@/app/auth/types/types";
 import { useAuthStore } from "@/app/store/authStore";
+import { update } from "../services/request";
 
 export interface AuthUser {
   email: string;
@@ -19,15 +20,12 @@ export default function useUser() {
     {}
   );
   const { toastError, toastSuccess } = useToastMessage();
-  const baseUrl = import.meta.env.VITE_BASEURL!;
-  const { token } = useAuthStore();
 
   useEffect(() => {
     if (authUser) {
       setupdatedData({
         email: authUser.email,
         username: authUser.username,
-        id: authUser.id,
         lastname: authUser.lastname,
         firstname: authUser.firstname,
         profilePic: authUser.profilePic,
@@ -37,28 +35,7 @@ export default function useUser() {
 
   // Mutation to update user
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: Partial<UpdateUserPayload>) => {
-      const res = await fetch(`${baseUrl}/api/auth/profile`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
-
-      if (res.status === 401) {
-        logout();
-        window.location.href = "/auth/login";
-      }
-      if (!res.ok) {
-        throw new Error(result.message || "Update failed");
-      }
-
-      return result;
-    },
+    mutationFn: (payload: UpdateUserPayload) => update(payload),
     onSuccess: (data) => {
       toastSuccess(data.message);
       if (data.user) {
@@ -67,6 +44,8 @@ export default function useUser() {
     },
     onError: () => {
       toastError("Something went wrong");
+      logout();
+      window.location.href = "/auth/login";
     },
   });
 
@@ -75,7 +54,7 @@ export default function useUser() {
     mutate(updatedData);
   }
 
-  // NEW: update profile picture only
+  // update profile picture only
   async function updateProfilePic(url: string) {
     if (!authUser?.id) return;
 
