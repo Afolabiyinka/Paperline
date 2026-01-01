@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import useLogin from "../hooks/useLogin";
-import { Loader, Loader2, User } from "lucide-react";
+import { Loader2, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import Input from "@/components/ui/input";
 
