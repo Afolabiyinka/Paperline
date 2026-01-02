@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import Icon from "@/components/Icon";
 import Logo from "@/components/Logo";
+import Scrollbtn from "@/components/Scrollbtn";
 
 // const SOCIAL_ICONS = [
 //   "Facebook",
@@ -39,6 +40,8 @@ export default function Footer() {
               </motion.a>
             ))}
           </div>
+
+          <Scrollbtn />
         </div>
       </div>
     </footer>

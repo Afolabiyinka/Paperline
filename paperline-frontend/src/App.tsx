@@ -3,9 +3,9 @@ import Routesconfig from "./routes/routesconfig";
 
 function App() {
   return (
-    <div>
+    <div className="font-[Montserrat]">
       <Routesconfig />
-      <Toaster position="bottom-right" />
+      <Toaster position="top-right" />
     </div>
   );
 }

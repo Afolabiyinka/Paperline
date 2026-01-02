@@ -8,20 +8,20 @@ import Footer from "./pages/nav/Footer";
 const HomeLayout = () => {
   const lenisRef = useRef<Lenis | null>(null);
 
-  useEffect(() => {
-    lenisRef.current = new Lenis({
-      smoothWheel: true,
-    });
+  // useEffect(() => {
+  //   lenisRef.current = new Lenis({
+  //     smoothWheel: true,
+  //   });
 
-    return () => {
-      lenisRef.current?.destroy();
-      lenisRef.current = null;
-    };
-  }, []);
+  //   return () => {
+  //     lenisRef.current?.destroy();
+  //     lenisRef.current = null;
+  //   };
+  // }, []);
 
-  useAnimationFrame((time) => {
-    lenisRef.current?.raf(time);
-  });
+  // useAnimationFrame((time) => {
+  //   lenisRef.current?.raf(time);
+  // });
 
   return (
     <div className="font-[Open Sans] flex flex-col min-h-screen">

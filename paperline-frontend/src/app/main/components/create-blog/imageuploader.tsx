@@ -54,12 +54,12 @@ const BlogCoverUploader = () => {
   }, [image]);
 
   return (
-    <div className="w-full h-full border border-dashed p-4 flex flex-col items-center gap-4 rounded-lg">
+    <div className="w-full h-full flex flex-col items-center gap-4">
       {preview ? (
         <img
           src={preview}
           alt="Blog cover preview"
-          className="w-full object-cover rounded-md"
+          className="w-full object-cover rounded-md h-96"
         />
       ) : (
         <div className="w-full h-48 flex items-center justify-center text-muted-foreground">

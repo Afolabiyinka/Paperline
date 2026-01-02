@@ -13,7 +13,9 @@ const Settings = () => {
           <div className="flex gap-3 items-center">
             <Avatar>
               <AvatarImage src={authUser?.profilePic} />
-              <AvatarFallback>CN</AvatarFallback>
+              <AvatarFallback>
+                {authUser?.username.substring(0, 2)}
+              </AvatarFallback>
             </Avatar>
             <span>
               <h1 className="lg:text-3xl text-xl font-semibold tracking-widest">

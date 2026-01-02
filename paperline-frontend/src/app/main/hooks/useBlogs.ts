@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllblogs } from "../services/request";
+import { getAllblogs } from "../services/blogs";
 
 export default function useBlogs() {
   const {

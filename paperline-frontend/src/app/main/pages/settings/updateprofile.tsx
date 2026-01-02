@@ -38,7 +38,9 @@ const UpdateProfile = () => {
                 <AvatarImage
                   src={authUser?.profilePic || updatedData.profilePic}
                 />
-                <AvatarFallback>CN</AvatarFallback>
+                <AvatarFallback>
+                  {authUser?.username.substring(0, 2)}
+                </AvatarFallback>
               </Avatar>
               <ProfilePicUploader />
             </div>

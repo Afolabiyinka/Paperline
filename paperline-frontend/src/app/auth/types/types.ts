@@ -19,3 +19,6 @@ export type UpdateUserPayload = {
   lastname?: string;
   profilePic?: string;
 };
+export interface DeleteAccountPayload {
+  id: string;
+}

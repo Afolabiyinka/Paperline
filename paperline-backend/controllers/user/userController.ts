@@ -1,5 +1,5 @@
 import { User } from "../../models/user/User";
-import { Request, Response } from "express";
+import { Response } from "express";
 import { profilePicPayload, updateProfilePayload } from "../../types/user";
 import { AuthenticatedRequest } from "../../types/request/types";
 

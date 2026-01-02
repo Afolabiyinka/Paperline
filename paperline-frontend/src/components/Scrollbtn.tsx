@@ -11,7 +11,7 @@ const Scrollbtn = () => {
   return (
     <Button
       onClick={handleScrollUp}
-      className="fixed bottom-6 right-4 backdrop-blur-3xl text-xl rounded-full"
+      className=" backdrop-blur-3xl text-xl rounded-full"
     >
       <ArrowUp />
     </Button>

@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import useToastMessage from "@/lib/useToastmsg";
 import type { UpdateUserPayload } from "@/app/auth/types/types";
 import { useAuthStore } from "@/app/store/authStore";
-import { update } from "../services/request";
+import { update } from "../services/user";
 
 export interface AuthUser {
   email: string;
@@ -56,7 +56,7 @@ export default function useUser() {
 
   // update profile picture only
   async function updateProfilePic(url: string) {
-    if (!authUser?.id) return;
+    if (!authUser?.id) return toastError("Unathorised");
 
     mutate({ profilePic: url, id: authUser.id });
 

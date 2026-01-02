@@ -2,14 +2,13 @@ import BlogCard from "../../components/BlogCard";
 import LoadingContainer from "@/components/loader/loadingcontainer";
 import { Button } from "@/components/ui/button";
 import { Frown, Loader2, Plus } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
 import Input from "@/components/ui/input";
 
 const Blogs = () => {
   const { blogsLoading, blogError, blogs, refetch } = useBlogs();
-  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col p-4 md:p-8 gap-8 min-h-screen w-full">
@@ -17,14 +16,12 @@ const Blogs = () => {
         <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold">
           Latest Blogs
         </h1>
-        <Button
-          size="lg"
-          className="flex items-center gap-2"
-          onClick={() => navigate("create")}
-        >
-          <Plus className="w-4 h-4" />
-          Create a blog post
-        </Button>
+        <Link to={`create`}>
+          <Button size="lg" className="flex items-center gap-2">
+            <Plus className="w-4 h-4" />
+            Create a blog post
+          </Button>
+        </Link>
       </div>
 
       <span>

@@ -1,47 +1,47 @@
-import { SimpleEditor } from "@/components/tiptap-templates/simple/simple-editor";
 import BlogCoverUploader from "../../components/create-blog/imageuploader";
 import { Button } from "@/components/ui/button";
 import { FileText, Send } from "lucide-react";
 import { useCreateStore } from "@/app/store/createStore";
 import useCreateBlog from "../../hooks/useCreateBlog";
+import TextEditor from "../../components/create-blog/TextEditor";
 
 const CreateBlog = () => {
   const { createBlog } = useCreateBlog();
-  const { content, setContent, title, setTitle } = useCreateStore();
+  const { title, setTitle } = useCreateStore();
 
   return (
-    <div className="flex flex-col lg:flex-row w-full min-h-screen gap-4 p-4">
-      {/* Cover Image */}
-      <div className="w-full lg:w-1/2">
+    <div className="flex flex-col w-full  gap-4 p-4 justify-center items-center">
+      <div className="md:w-[60%]">
         <BlogCoverUploader />
       </div>
 
-      {/* Editor Section */}
-      <div className="w-full lg:w-1/2 flex flex-col gap-4">
+      <div className="w-full md:w-[60%] flex flex-col p-2">
         <input
           type="text"
           placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full text-3xl lg:text-4xl border-0 outline-none font-[open-sans]"
+          className="w-full text-3xl lg:text-4xl border-0 outline-none tracking-widest font-[open-sans] p-2"
         />
 
-        <div className="flex-1">
-          <SimpleEditor content={content} onChange={(e) => setContent(e)} />
-        </div>
+        <TextEditor />
 
-        {/* Action Buttons */}
-        <div className="sticky bottom-0 bg-background pt-3 flex justify-end gap-3">
+        <div className="flex gap-8 mt-4">
           <Button
             variant="secondary"
-            className="flex items-center gap-2"
-            onClick={() => console.log("Draft saved:")}
+            size="lg"
+            className="flex-1 flex items-center gap-2 justify-center"
+            onClick={() => console.log("Draft saved")}
           >
             <FileText size={18} />
             Draft
           </Button>
 
-          <Button className="flex items-center gap-2" onClick={createBlog}>
+          <Button
+            size="lg"
+            className="flex-1 flex items-center gap-2 justify-center"
+            onClick={createBlog}
+          >
             Post
             <Send size={18} />
           </Button>

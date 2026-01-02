@@ -50,7 +50,6 @@ export default function useCreateBlog() {
 
   const createBlog = () => {
     mutate();
-    console.log({ title, content, imageUrl, authorId: authUser?.id });
   };
 
   return { createBlog };

@@ -59,8 +59,7 @@ const ProfilePicDialog = () => {
           <Avatar className="w-32 h-32">
             <AvatarImage src={preview} />
             <AvatarFallback>
-              {authUser?.firstname?.[0]}
-              {authUser?.lastname?.[0]}
+              {authUser?.username.substring(0, 2)}
             </AvatarFallback>
           </Avatar>
 
