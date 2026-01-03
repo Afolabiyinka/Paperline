@@ -1,12 +1,11 @@
-import { useEffect, useRef } from "react";
+// import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
-import { useAnimationFrame } from "framer-motion";
-import Lenis from "@studio-freight/lenis";
+// import Lenis from "@studio-freight/lenis";
 import NavBar from "./pages/nav/NavBar";
 import Footer from "./pages/nav/Footer";
 
 const HomeLayout = () => {
-  const lenisRef = useRef<Lenis | null>(null);
+  // const lenisRef = useRef<Lenis | null>(null);
 
   // useEffect(() => {
   //   lenisRef.current = new Lenis({

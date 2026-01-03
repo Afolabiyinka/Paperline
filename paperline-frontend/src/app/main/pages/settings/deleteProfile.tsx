@@ -1,4 +1,3 @@
-import type { DeleteAccountPayload } from "@/app/auth/types/types";
 import {
   AlertDialog,
   AlertDialogTrigger,
@@ -22,7 +21,7 @@ const DeleteProfile = () => {
   const [confirmPhrase, setConfirmed] = useState("");
   const deletePhrase = "delete-my-account";
   const { toastSuccess, toastError } = useToastMessage();
-  const { authUser, logout } = useAuthStore();
+  const { authUser } = useAuthStore();
 
   const { mutate, isPending } = useMutation({
     mutationFn: () => deleteAccount(),
