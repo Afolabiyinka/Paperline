@@ -2,7 +2,7 @@ import React from "react";
 import useToastMessage from "@/lib/useToastmsg";
 import type { LoginPayload } from "../types/types";
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "@/app/store/authStore";
+import { useAuthStore } from "../store/authStore";
 import { login } from "../services/request";
 
 export default function useLogin() {

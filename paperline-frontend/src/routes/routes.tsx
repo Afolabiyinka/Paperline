@@ -1,4 +1,4 @@
-import Onboarding from "@/app/main/pages/onboarding/onboarding";
+import Onboarding from "@/app/onboarding/onboarding";
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 
@@ -8,19 +8,19 @@ const Login = lazy(() => import("@/app/auth/pages/login"));
 const SignUp = lazy(() => import("@/app/auth/pages/signup"));
 
 // home
-const HomeLayout = lazy(() => import("@/app/home"));
-const Home = lazy(() => import("@/app/home/pages/Home"));
-const About = lazy(() => import("@/app/home/pages/About"));
-const Pricing = lazy(() => import("@/app/home/pages/Pricing"));
+const HomeLayout = lazy(() => import("@/marketing"));
+const Home = lazy(() => import("@/marketing/pages/Home"));
+const About = lazy(() => import("@/marketing/pages/About"));
+const Pricing = lazy(() => import("@/marketing/pages/Pricing"));
 
 // blogs
-const BlogLayout = lazy(() => import("@/app/main/pages/Index"));
-const Blogs = lazy(() => import("@/app/main/pages/blogs/Blogs"));
-const CreateBlog = lazy(() => import("@/app/main/pages/blogs/CreateBlog"));
-const BlogPage = lazy(() => import("@/app/main/pages/blogs/BlogPage"));
+const BlogLayout = lazy(() => import("@/app/blogs/pages/Index"));
+const Blogs = lazy(() => import("@/app/blogs/pages/blogs/Blogs"));
+const CreateBlog = lazy(() => import("@/app/blogs/pages/blogs/CreateBlog"));
+const BlogPage = lazy(() => import("@/app/blogs/pages/blogs/BlogPage"));
 
 // settings
-const Settings = lazy(() => import("@/app/main/pages/settings/Settings"));
+const Settings = lazy(() => import("@/app/settings/Settings"));
 
 // others
 const Notfound = lazy(() => import("@/components/Notfound"));

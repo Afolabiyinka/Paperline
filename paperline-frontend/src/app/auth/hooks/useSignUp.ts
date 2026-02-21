@@ -3,7 +3,7 @@ import type { SignupPayload } from "../types/types";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "@/app/store/authStore";
+import { useAuthStore } from "../store/authStore";
 import { signup } from "../services/request";
 
 export default function useSignUp() {

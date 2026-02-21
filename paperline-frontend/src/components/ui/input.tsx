@@ -26,7 +26,7 @@ const Input = ({
 
   return (
     <span className="border mt-2 w-full rounded-lg flex  p-1 px-6 h-16 items-center">
-      <IconComponent />
+      <IconComponent className="stroke-[1.5px]" />
       <input
         className="h-full w-full border-0 outline-0 p-1"
         placeholder={placeholder}
@@ -40,7 +40,11 @@ const Input = ({
           className="pr-2 cursor-pointer"
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? <Eye /> : <EyeClosed />}
+          {showPassword ? (
+            <Eye className="stroke-[1px]" />
+          ) : (
+            <EyeClosed className="stroke-[1px]" />
+          )}
         </span>
       )}
     </span>

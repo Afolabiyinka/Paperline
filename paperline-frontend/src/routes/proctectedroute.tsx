@@ -1,5 +1,5 @@
 import React from "react";
-import useUser from "@/app/main/hooks/useUser";
+import useUser from "@/app/settings/hooks/useUser";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
