@@ -1,4 +1,4 @@
-const prodEndpoint = "https://paperline-prod.up.railway.app";
+const prodEndpoint = "https://paperline.onrender.com";
 const testingEndpoint = "http://localhost:8000";
 
 export { testingEndpoint, prodEndpoint };

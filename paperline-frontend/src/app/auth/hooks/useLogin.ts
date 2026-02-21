@@ -17,7 +17,7 @@ export default function useLogin() {
   const loginMutation = useMutation({
     mutationFn: (payload: LoginPayload) => login(payload),
     onSuccess: (data) => {
-      toastSuccess(data.message);
+      toastSuccess(data.message || "Logged in successfully");
       setToken(data.token);
       setAuthUser(data.user);
 
