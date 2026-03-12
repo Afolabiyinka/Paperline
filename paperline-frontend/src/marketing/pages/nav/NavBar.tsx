@@ -1,14 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import { NAVLINKS } from "../../libs/navrelated";
-import Logo from "@/components/Logo";
-import { useIsMobile } from "@/hooks/useMobile";
+import Logo from "@/components/custom/Logo";
+import { useIsMobile } from "@/shared/hooks/useMobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AlignRight, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import useUser from "@/app/settings/hooks/useUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Icon from "@/components/Icon";
+import Icon from "@/components/custom/Icon";
 
 const NavBar = () => {
   const isMobile = useIsMobile(1024);

@@ -1,5 +1,5 @@
 import React from "react";
-import useToastMessage from "@/lib/useToastmsg";
+import useToastMessage from "@/shared/lib/useToastmsg";
 import type { LoginPayload } from "../types/types";
 import { useMutation } from "@tanstack/react-query";
 import { useAuthStore } from "../store/authStore";

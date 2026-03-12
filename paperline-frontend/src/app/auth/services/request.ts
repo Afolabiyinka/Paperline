@@ -1,6 +1,6 @@
 import { useAuthStore } from "@/app/auth/store/authStore";
 import type { LoginPayload, SignupPayload } from "../types/types";
-import { prodEndpoint } from "../../../constants/api";
+import { prodEndpoint } from "../../../shared/constants/api";
 import type { SuccessResponse } from "@/shared/types";
 import type { AuthUser } from "@/app/settings/hooks/useUser";
 

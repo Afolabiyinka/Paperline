@@ -1,6 +1,5 @@
-// src/hooks/useCloudinary.ts
 import { useState } from "react";
-import useToastMessage from "@/lib/useToastmsg";
+import useToastMessage from "@/shared/lib/useToastmsg";
 
 export const useCloudinary = () => {
   const { toastError, toastSuccess } = useToastMessage();

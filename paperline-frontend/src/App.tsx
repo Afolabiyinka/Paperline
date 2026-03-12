@@ -1,5 +1,5 @@
 import { Toaster } from "sonner";
-import Routesconfig from "./routes/routesconfig";
+import Routesconfig from "./shared/routes/routesconfig";
 
 function App() {
   return (

@@ -11,7 +11,7 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
-import { useCloudinary } from "@/utils/cloudinary";
+import { useCloudinary } from "@/shared/utils/cloudinary";
 import useUser from "@/app/settings/hooks/useUser";
 
 const ProfilePicDialog = () => {

@@ -1,7 +1,7 @@
-import { prodEndpoint } from "@/constants/api";
+import { prodEndpoint } from "@/shared/constants/api";
 import { useAuthStore } from "@/app/auth/store/authStore";
 import { useCreateStore } from "@/app/blogs/store/createStore";
-import useToastMessage from "@/lib/useToastmsg";
+import useToastMessage from "@/shared/lib/useToastmsg";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 

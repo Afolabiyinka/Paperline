@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import useToastMessage from "@/lib/useToastmsg";
+import useToastMessage from "@/shared/lib/useToastmsg";
 import type { UpdateUserPayload } from "@/app/auth/types/types";
 import { useAuthStore } from "@/app/auth/store/authStore";
 import { update } from "../services/user";

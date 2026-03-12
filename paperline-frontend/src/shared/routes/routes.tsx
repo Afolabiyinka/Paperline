@@ -8,7 +8,7 @@ const Login = lazy(() => import("@/app/auth/pages/login"));
 const SignUp = lazy(() => import("@/app/auth/pages/signup"));
 
 // home
-const HomeLayout = lazy(() => import("@/marketing"));
+const HomeLayout = lazy(() => import("@/marketing/index"));
 const Home = lazy(() => import("@/marketing/pages/Home"));
 const About = lazy(() => import("@/marketing/pages/About"));
 const Pricing = lazy(() => import("@/marketing/pages/Pricing"));

@@ -1,4 +1,4 @@
-import useToastMessage from "@/lib/useToastmsg";
+import useToastMessage from "@/shared/lib/useToastmsg";
 import type { SignupPayload } from "../types/types";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";

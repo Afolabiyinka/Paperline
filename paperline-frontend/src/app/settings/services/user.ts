@@ -1,5 +1,5 @@
 import type { UpdateUserPayload } from "@/app/auth/types/types";
-import { prodEndpoint, testingEndpoint } from "@/constants/api";
+import { prodEndpoint, testingEndpoint } from "@/shared/constants/api";
 import { useAuthStore } from "@/app/auth/store/authStore";
 
 //User update requests

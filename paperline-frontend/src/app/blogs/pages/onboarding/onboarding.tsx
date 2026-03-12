@@ -13,7 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "../../../settings/hooks/useUser";
-import { useCloudinary } from "@/utils/cloudinary";
+import { useCloudinary } from "@/shared/utils/cloudinary";
 import { useAuthStore } from "@/app/auth/store/authStore";
 import { Loader2 } from "lucide-react";
 

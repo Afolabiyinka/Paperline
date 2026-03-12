@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
-import useToastMessage from "@/lib/useToastmsg";
-import { useCloudinary } from "@/utils/cloudinary";
+import useToastMessage from "@/shared/lib/useToastmsg";
+import { useCloudinary } from "@/shared/utils/cloudinary";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 
 const BlogCoverUploader = () => {
