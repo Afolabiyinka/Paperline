@@ -3,7 +3,34 @@ import { Response } from "express";
 import { profilePicPayload, updateProfilePayload } from "../../types/user";
 import { AuthenticatedRequest } from "../../types/request/types";
 
-const updateProfile = async (req: AuthenticatedRequest, res: Response) => {
+
+const getUser = async (req: AuthenticatedRequest, res: Response) => {
+  const id = req.user?.id;
+
+  if (!id) {
+    return res.status(400).json({
+      message: "User Id is required",
+    });
+  }
+
+  try {
+    const user = await User.findByPk(id);
+    if (!user)
+      return res.status(404).json({
+        message: "User not found",
+      });
+
+    res.status(200).json({
+      user: {
+        username: user.getDataValue("username"),
+        email: user.getDataValue("email"),
+      },
+    });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+}; const updateProfile = async (req: AuthenticatedRequest, res: Response) => {
   const id = req.user?.id;
   const { email, firstname, lastname, profilePic } =
     req.body as updateProfilePayload;
@@ -76,4 +103,4 @@ const deleteAccount = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
-export { updateProfile, deleteAccount };
+export { updateProfile, deleteAccount, getUser };

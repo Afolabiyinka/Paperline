@@ -5,6 +5,7 @@ import cors from "cors";
 import { authRouter } from "./routes/auth";
 import { configDotenv } from "dotenv";
 import { blogRouter } from "./routes/blog";
+import cookieParser from "cookie-parser";
 
 configDotenv();
 const PORT = process.env.PORT || 8000;
@@ -14,13 +15,12 @@ const app = express();
 app.use(
   cors({
     origin: ["https://paperline-1st.vercel.app", "http://localhost:5173"],
-    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
 );
 
 app.use(express.json());
+app.use(cookieParser())
 
 //Database stuff
 connectDb();
