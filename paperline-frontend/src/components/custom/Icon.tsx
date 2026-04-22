@@ -23,13 +23,13 @@ const Icon = ({ icon, tooltip, onClick, isSolid = false }: IconProps) => {
       <TooltipTrigger asChild>
         <motion.button
           onClick={onClick}
-          whileHover={{ y: -4 }}
+          // whileHover={{ y: -4 }}
           whileTap={{ scale: 0.85 }}
           transition={{ ease: "easeOut", duration: 0.2 }}
           className={`h-11 w-11 rounded-full flex items-center justify-center cursor-pointer transition-all
-            ${isSolid ? "bg-foreground text-background shadow" : "shadow"}`}
+            ${isSolid ? "bg-foreground text-background" : ""}`}
         >
-          <IconComponent className="h-5 w-5" />
+          <IconComponent className="h-4 w-4" />
         </motion.button>
       </TooltipTrigger>
 

@@ -1,13 +1,13 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useUser from "./hooks/useUser";
 import UpdateProfile from "./updateprofile";
-import { AtSign } from "lucide-react";
+import { AtSign, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import DeleteProfile from "./components/deleteProfile";
+// import DeleteProfile from "./components/deleteProfile";
 const Settings = () => {
   const { authUser, logout } = useUser();
   return (
-    <div className="h-screen flex flex-col w-screen lg:flex-row">
+    <div className="h-screen flex flex-col  lg:flex-row">
       <div className=" w-full h-full relative p-2">
         <div className="flex justify-between p-3">
           <div className="flex gap-3 items-center">
@@ -18,11 +18,11 @@ const Settings = () => {
               </AvatarFallback>
             </Avatar>
             <span>
-              <h1 className="lg:text-3xl text-xl font-semibold tracking-widest">
+              <h1 className="text-xl font-semibold tracking-widest">
                 {authUser?.username}
               </h1>
-              <p className="flex mt-2 lg:text-xl text-xs items-center">
-                <AtSign />
+              <p className="flex mt-2 md:text-base text-xs items-center">
+                <AtSign size={20} />
                 {authUser?.email}
               </p>
             </span>
@@ -32,9 +32,9 @@ const Settings = () => {
         <hr />
         <span className="flex items-center justify-between mt-5">
           <Button onClick={logout} size={`lg`} variant={`destructive`}>
-            Log out
+            <LogOut /> Log out
           </Button>
-          <DeleteProfile />
+          {/* <DeleteProfile /> */}
         </span>
       </div>
       <div className="border w-full  h-full"></div>

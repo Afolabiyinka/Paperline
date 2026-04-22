@@ -1,5 +1,5 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { CheckCircle } from "lucide-react";
+import { ArrowRight, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 
@@ -39,7 +39,9 @@ export default function PricingCard() {
               <p className="text-base sm:text-lg font-medium">{feature}</p>
             </div>
           ))}
-          <Button onClick={() => navigate("/blogs")}>Try it Now</Button>
+          <Button onClick={() => navigate("/blogs")}>
+            Try it Now <ArrowRight />
+          </Button>
         </CardContent>
       </div>
     </Card>

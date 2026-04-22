@@ -7,35 +7,35 @@ import { useNavigate } from "react-router-dom";
 const Home = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full min-h-screen w-full p-10 lg:p-4 gap-8">
+    <div className="flex flex-col lg:flex-row items-center justify-center h-full min-h-screen w-full md:p-10 p-2 gap-8 border">
       {/* LEFT */}
-      <div className="w-full h-full flex items-center justify-center px-4 lg:px-20">
+      <div className="w-full h-full flex items-center justify-center md:p-2">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
           viewport={{ once: true }}
-          className="max-w-2xl space-y-6 lg:p-2 p-10"
+          className="max-w-2xl space-y-6 p-3"
         >
           <motion.h1
             initial={{ y: 80, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
-            className="text-6xl font-bold"
+            className="md:text-6xl text-5xl font-bold"
           >
             Welcome to Paperline
           </motion.h1>
-          <h1 className="text-4xl lg:text-4xl font-semibold leading-snug text-gray-800">
+          <h1 className="text-2xl lg:text-4xl font-semibold leading-snug text-gray-800">
             Where thoughts turn into stories.
           </h1>
 
-          <p className="text-gray-500 text-lg leading-relaxed">
-            Paperline is a calm space to read, write, and publish ideas — one
-            paragraph at a time.
+          <p className="text-muted-foreground text-lg leading-relaxed">
+            Paperline is a calm space to read, write, <br /> and publish ideas —
+            one paragraph at a time.
           </p>
 
-          <div className="flex gap-4 pt-2">
+          <div className="flex gap-4 pt-2 flex-col md:flex-row w-full items-center">
             <Button size={`lg`} onClick={() => navigate("/blogs")}>
               <Book className="w-4 h-4" />
               Read blogs

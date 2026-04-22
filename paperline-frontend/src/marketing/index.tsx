@@ -23,7 +23,7 @@ const HomeLayout = () => {
   // });
 
   return (
-    <div className="font-[Open Sans] flex flex-col min-h-screen">
+    <div className="font-[Open Sans] flex flex-col h-full w-full">
       <NavBar />
       <Outlet />
       <Footer />

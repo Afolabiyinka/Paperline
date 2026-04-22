@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
-import Icon from "@/components/Icon";
-import Logo from "@/components/Logo";
-import Scrollbtn from "@/components/Scrollbtn";
+import Icon from "@/components/custom/Icon";
+import Logo from "@/components/custom/Logo";
+import Scrollbtn from "@/components/custom/Scrollbtn";
 
 // const SOCIAL_ICONS = [
 //   "Facebook",
@@ -21,7 +21,7 @@ const SOCIAL_LINKs = [
 export default function Footer() {
   return (
     <footer className="w-full bg-background border-t  h-full">
-      <div className="mx-auto w-full max-w-7xl px-8">
+      <div className="mx-auto w-full md:max-w-7xl px-8">
         <div className="flex w-full flex-col items-center gap-4 py-4 md:flex-row md:justify-between md:items-center">
           <Logo />
 

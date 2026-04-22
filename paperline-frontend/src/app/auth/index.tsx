@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/components/custom/Logo";
 import { Outlet } from "react-router-dom";
 
 const AuthLayout = () => {

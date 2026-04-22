@@ -9,7 +9,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Icon from "@/components/Icon";
+import Icon from "@/components/custom/Icon";
 import ProfilePicUploader from "../../marketing/components/profilepic";
 import { Loader2 } from "lucide-react";
 
@@ -19,11 +19,7 @@ const UpdateProfile = () => {
   return (
     <Dialog>
       <DialogTrigger>
-        <Icon
-          icon="Pencil"
-          isSolid={false}
-          tooltip="Edit your profile details"
-        />
+        <Icon icon="Pencil" isSolid={false} tooltip="Edit your profile" />
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
@@ -79,7 +75,7 @@ const UpdateProfile = () => {
               />
             </div>
           </div>
-          <div className="border flex justify-between w-full mt-4"></div>
+
           <div className="w-full flex flex-col gap-3 items-center mt-4">
             <Button className="w-full cursor-pointer" type="submit">
               {loading ? <Loader2 className="animate-spin" /> : "Update"}

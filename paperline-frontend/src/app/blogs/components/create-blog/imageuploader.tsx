@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import { useCloudinary } from "@/shared/utils/cloudinary";
 import { useCreateStore } from "@/app/blogs/store/createStore";
+import { ImageUp, UploadCloud } from "lucide-react";
 
 const BlogCoverUploader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -54,15 +55,15 @@ const BlogCoverUploader = () => {
   }, [image]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center gap-4">
+    <div className="flex flex-col items-center h-full justify-between gap-4">
       {preview ? (
         <img
           src={preview}
           alt="Blog cover preview"
-          className="w-full object-cover rounded-md h-96"
+          className="w-full object-cover rounded-md h-full"
         />
       ) : (
-        <div className="w-full h-48 flex items-center justify-center text-muted-foreground">
+        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
           No cover image selected
         </div>
       )}
@@ -86,6 +87,7 @@ const BlogCoverUploader = () => {
           : image
             ? "Change cover image"
             : "Upload cover image"}
+        {preview ? <ImageUp /> : <UploadCloud />}
       </Button>
     </div>
   );

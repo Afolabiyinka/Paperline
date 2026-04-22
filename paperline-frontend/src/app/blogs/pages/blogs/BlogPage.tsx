@@ -41,17 +41,19 @@ const BlogPage = () => {
           {blog.title}
         </h1>
 
-        <span className="flex gap-3 items-center mb-10">
-          <Avatar className="border h-10 w-10">
-            <AvatarImage src={blog.author?.profilePic} />
-            <AvatarFallback>{blog.author?.username?.[0]}</AvatarFallback>
-          </Avatar>
-          <Link
-            className="font-medium text-gray-700 text-lg underline underline-offset-2"
-            to={`/authors/${blog.author.id}`}
-          >
-            {blog.author?.username}
-          </Link>
+        <span className="flex flex-col  gap-3 items-center mb-10">
+          <div className="flex gap-2 items-center">
+            <Avatar className="border h-10 w-10">
+              <AvatarImage src={blog.author?.profilePic} />
+              <AvatarFallback>{blog.author?.username?.[0]}</AvatarFallback>
+            </Avatar>
+            <Link
+              className="font-medium text-gray-700 text-lg underline underline-offset-2"
+              to={`/authors/${blog.author.id}`}
+            >
+              {blog.author?.username}
+            </Link>
+          </div>
           <p>Posted on {formattedDate}</p>
         </span>
 

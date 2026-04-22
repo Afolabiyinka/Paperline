@@ -4,7 +4,7 @@ import Logo from "@/components/custom/Logo";
 import { useIsMobile } from "@/shared/hooks/useMobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { AlignRight, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
 import useUser from "@/app/settings/hooks/useUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -17,7 +17,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="w-screen border-b px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+    <nav className="w-full border-b px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
       <div className="w-full flex items-center justify-between lg:w-auto">
         <Logo />
 
@@ -26,7 +26,7 @@ const NavBar = () => {
             onClick={() => setOpen(!open)}
             className="lg:hidden p-2 rounded-md hover:bg-muted"
           >
-            {open ? <X size={22} /> : <AlignRight size={22} />}
+            {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         )}
       </div>
@@ -42,7 +42,7 @@ const NavBar = () => {
             className="w-full lg:w-auto mt-4 lg:mt-0 flex flex-col lg:flex-row gap-6 lg:gap-10 items-start lg:items-center"
           >
             {/* Nav links */}
-            <div className="flex flex-col lg:flex-row gap-4 lg:gap-8 w-full lg:w-auto">
+            <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 w-full lg:w-auto">
               {NAVLINKS.map((link) => (
                 <NavLink
                   key={link.path}

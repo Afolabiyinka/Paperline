@@ -25,7 +25,7 @@ const Input = ({
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <span className="border mt-2 w-full rounded-lg flex  p-1 px-6 h-16 items-center">
+    <span className="border mt-2 w-full rounded-lg flex  p-1 px-6 h-14 items-center">
       <IconComponent className="stroke-[1.5px]" />
       <input
         className="h-full w-full border-0 outline-0 p-1"

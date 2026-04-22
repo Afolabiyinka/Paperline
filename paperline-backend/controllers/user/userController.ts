@@ -46,23 +46,7 @@ const updateProfile = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
-const updateProfilePic = async (req: AuthenticatedRequest, res: Response) => {
-  const id = req.user?.id;
-  const { profilePic } = req.body as profilePicPayload;
 
-  if (!id) {
-    return res.status(404).json({
-      message: "Id is required",
-    });
-  }
-
-  try {
-    const user = await User.findByPk(id);
-    if (!user) return res.status(404).json({ mesage: "User not found" });
-  } catch (err) {
-    console.log(err);
-  }
-};
 
 const deleteAccount = async (req: AuthenticatedRequest, res: Response) => {
   const id = req.user?.id;
@@ -92,4 +76,4 @@ const deleteAccount = async (req: AuthenticatedRequest, res: Response) => {
   }
 };
 
-export { updateProfile, deleteAccount, updateProfilePic };
+export { updateProfile, deleteAccount };

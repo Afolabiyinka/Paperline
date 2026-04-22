@@ -5,9 +5,9 @@ import { Navigate } from "react-router-dom";
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { authUser } = useUser();
 
-  // if (!authUser) {
-  //   return <Navigate to="/auth/login" replace />;
-  // }
+  if (!authUser) {
+    return <Navigate to="/auth/login" replace />;
+  }
 
   return children;
 };

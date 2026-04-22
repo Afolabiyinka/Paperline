@@ -1,6 +1,6 @@
-import Logo from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import Logo from "@/components/custom/Logo";
 
 const Noblog = () => {
   const navigate = useNavigate();

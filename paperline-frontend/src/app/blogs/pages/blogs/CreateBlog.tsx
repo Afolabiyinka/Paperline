@@ -10,18 +10,18 @@ const CreateBlog = () => {
   const { title, setTitle } = useCreateStore();
 
   return (
-    <div className="flex flex-col w-full  gap-4 p-4 justify-center items-center">
-      <div className="md:w-[60%]">
+    <div className="flex flex-col md:flex-row w-full min-h-[90vh] gap-4 border  p-2">
+      <div className="md:w-1/2  h-full border">
         <BlogCoverUploader />
       </div>
 
-      <div className="w-full md:w-[60%] flex flex-col p-2">
+      <div className="w-full md:w-1/2 flex flex-col p-2">
         <input
           type="text"
-          placeholder="Title"
+          placeholder="Blog title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full text-3xl lg:text-4xl border-0 outline-none tracking-widest font-[open-sans] p-2"
+          className="w-full text-3xl md:text-4xl border-0 outline-none tracking-widest font-[open-sans] p-2"
         />
 
         <TextEditor />
