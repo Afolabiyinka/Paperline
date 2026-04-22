@@ -9,3 +9,8 @@ export interface ErrorResponse {
   message: string;
   error: string;
 }
+
+
+export interface Response {
+  message: string;
+}

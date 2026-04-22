@@ -2,8 +2,8 @@ import React from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import type { LoginPayload } from "../types/types";
 import { useMutation } from "@tanstack/react-query";
-import { useAuthStore } from "../store/authStore";
 import { login } from "../services/request";
+import { useNavigate } from "react-router-dom";
 
 export default function useLogin() {
   const [loginData, setLoginData] = React.useState<LoginPayload>({
@@ -12,21 +12,15 @@ export default function useLogin() {
   });
 
   const { toastError, toastSuccess } = useToastMessage();
-  const { setAuthUser, setToken } = useAuthStore();
+  const navigate = useNavigate()
 
   const loginMutation = useMutation({
     mutationFn: (payload: LoginPayload) => login(payload),
     onSuccess: (data) => {
       toastSuccess(data.message || "Logged in successfully");
-      setToken(data.token);
-      setAuthUser(data.user);
-
-      setTimeout(() => {
-        window.location.href = "/";
-      }, 1500);
+      navigate("/")
     },
     onError: (err: any) => {
-      console.log(err);
       toastError(err.message || "Something went wrong");
     },
   });

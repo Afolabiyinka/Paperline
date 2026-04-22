@@ -1,48 +1,40 @@
-import { useAuthStore } from "@/app/auth/store/authStore";
+import { prodEndpoint } from "@/shared/constants/api";
 import type { LoginPayload, SignupPayload } from "../types/types";
-import { prodEndpoint } from "../../../shared/constants/api";
-import type { SuccessResponse } from "@/shared/types";
-import type { AuthUser } from "@/app/settings/hooks/useUser";
+import type { Response } from "@/shared/types";
 
-const token = useAuthStore.getState().token;
-
-const login = async (
-  payload: LoginPayload,
-): Promise<SuccessResponse<AuthUser>> => {
-  const res = await fetch(`${prodEndpoint}/api/auth/login`, {
+const login = async (payload: LoginPayload): Promise<Response> => {
+  const res = await fetch(`${prodEndpoint}api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify(payload),
+    credentials: "include",
   });
 
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data.message);
+    throw new Error(data.message || "Something went wrong");
   }
 
   return data;
 };
 
-const signup = async (
-  payload: SignupPayload,
-): Promise<SuccessResponse<AuthUser>> => {
-  const res = await fetch(`${prodEndpoint}/api/auth/signup`, {
+const signup = async (payload: SignupPayload): Promise<Response> => {
+  const res = await fetch(`${prodEndpoint}api/auth/signup`, {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
-      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(payload),
+    credentials: "include",
   });
-
   const data = await res.json();
 
   if (!res.ok) {
-    throw new Error(data.message);
+    const message = data?.message || "Login failed";
+    throw new Error(message);
   }
 
   return data;

@@ -24,6 +24,9 @@ const getUser = async (req: AuthenticatedRequest, res: Response) => {
       user: {
         username: user.getDataValue("username"),
         email: user.getDataValue("email"),
+        firstname: user.getDataValue("firstname"),
+        lastname: user.getDataValue("lastname"),
+        profilePic: user.getDataValue("profilePic")
       },
     });
   } catch (err) {

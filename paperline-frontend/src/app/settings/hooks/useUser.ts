@@ -7,7 +7,6 @@ import { update } from "../services/user";
 
 export interface AuthUser {
   email: string;
-  id: string;
   username: string;
   firstname: string;
   lastname: string;
