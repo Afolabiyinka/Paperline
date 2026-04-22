@@ -1,8 +1,9 @@
 import { Router } from "express";
-import { createAccount, loginUser } from "../controllers/user/authController";
+import { createAccount, loginUser, logout } from "../controllers/user/authController";
 import { authMiddleware } from "../middleware/authMiddleWare";
 import {
   deleteAccount,
+  getUser,
   updateProfile,
 } from "../controllers/user/userController";
 
@@ -12,5 +13,7 @@ authRouter.route("/signup").post(createAccount);
 
 //Proctected Routes
 
-authRouter.route("/profile").put(authMiddleware, updateProfile);
+authRouter.route("/edit-profile").put(authMiddleware, updateProfile);
 authRouter.route("/delete").delete(authMiddleware, deleteAccount);
+authRouter.route("/me").get(authMiddleware, getUser)
+authRouter.route("/logout").post(authMiddleware, logout)

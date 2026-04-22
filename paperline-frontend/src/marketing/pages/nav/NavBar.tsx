@@ -17,7 +17,7 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="w-full border-b px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+    <nav className="w-full  px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
       <div className="w-full flex items-center justify-between lg:w-auto">
         <Logo />
 
@@ -49,8 +49,7 @@ const NavBar = () => {
                   to={link.path}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `lg:text-sm text-xl font-medium transition hover:opacity-80 ${
-                      isActive ? "underline underline-offset-4" : ""
+                    `lg:text-sm text-xl font-medium transition hover:opacity-80 ${isActive ? "underline underline-offset-4" : ""
                     }`
                   }
                 >

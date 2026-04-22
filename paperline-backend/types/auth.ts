@@ -15,3 +15,4 @@ export type LoginPayload = Omit<
 export type DecodedUser = {
   id: string;
 };
+
