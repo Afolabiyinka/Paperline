@@ -12,19 +12,21 @@ import {
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
 import { useCloudinary } from "@/shared/utils/cloudinary";
-import useUser from "@/app/settings/hooks/useUser";
+import { useUpdateUser } from "@/app/settings/hooks/useUpdateProfile";
 
 const ProfilePicDialog = () => {
-  const { authUser, updatedData, updateProfilePic } = useUser();
+  const { updatedData, updateProfilePic } = useUpdateUser();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState<string>(
-    updatedData.profilePic || authUser?.profilePic || "",
+  const [preview, setPreview] = useState(
+    updatedData.profilePic
   );
+
   const { uploadImage, uploading } = useCloudinary();
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
     setSelectedFile(file);
 
     const reader = new FileReader();
@@ -32,69 +34,95 @@ const ProfilePicDialog = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleUpload = async (closeDialog: () => void) => {
+  const handleUpload = async (close: () => void) => {
     if (!selectedFile) return;
 
-    const url = await uploadImage(selectedFile, "paperline/profile_pics");
+    const url = await uploadImage(
+      selectedFile,
+      "paperline/profile_pics"
+    );
+
     if (url) {
       updateProfilePic(url);
-      setPreview(url);
       setSelectedFile(null);
-      closeDialog();
+      close();
     }
   };
 
   return (
     <Dialog>
+
       <DialogTrigger asChild>
-        <Button>Change Profile Picture</Button>
+        <Button variant="ghost" className="text-sm">
+          Change photo
+        </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-sm">
+      <DialogContent className="max-w-sm space-y-6">
+
+        {/* Header */}
         <DialogHeader>
-          <DialogTitle>Update Profile Picture</DialogTitle>
+          <DialogTitle className="text-base font-serif font-normal">
+            Profile photo
+          </DialogTitle>
         </DialogHeader>
 
-        <div className="flex flex-col items-center gap-4 my-4">
-          <Avatar className="w-32 h-32">
+        {/* Preview */}
+        <div className="flex flex-col items-center gap-4">
+
+          <Avatar className="w-28 h-28">
             <AvatarImage src={preview} />
             <AvatarFallback>
-              {authUser?.username.substring(0, 2)}
+              {updatedData?.username?.substring(0, 2)}
             </AvatarFallback>
           </Avatar>
 
+          {/* Hidden input */}
           <input
             type="file"
             accept="image/*"
             onChange={handleFileSelect}
             disabled={uploading}
-            className="block w-full text-sm text-gray-500
-              file:mr-4 file:py-2 file:px-4
-              file:rounded-full file:border-0
-              file:text-sm file:font-semibold
-              file:bg-blue-50 file:text-blue-700
-              hover:file:bg-blue-100
-              disabled:opacity-50 disabled:cursor-not-allowed
-              cursor-pointer"
+            className="hidden"
+            id="profile-upload"
           />
-          <p className="text-xs text-gray-500">JPG, PNG or GIF (Max 5MB)</p>
+
+          {/* Custom trigger */}
+          <label
+            htmlFor="profile-upload"
+            className="text-sm text-neutral-600 hover:text-black cursor-pointer transition"
+          >
+            Choose image
+          </label>
+
+          <p className="text-xs text-neutral-400">
+            JPG, PNG or GIF (max 5MB)
+          </p>
+
         </div>
 
-        <DialogFooter className="flex justify-center gap-2">
+        {/* Actions */}
+        <DialogFooter className="flex justify-between">
+
           <DialogClose asChild>
-            <Button variant="outline" disabled={uploading}>
+            <Button variant="ghost" disabled={uploading}>
               Cancel
             </Button>
           </DialogClose>
+
           <Button
-            onClick={() => handleUpload(() => setPreview(preview))}
+            onClick={() => handleUpload(() => { })}
             disabled={!selectedFile || uploading}
-            className="flex items-center gap-2"
           >
-            {uploading && <Loader2 className="w-4 h-4 animate-spin" />}
-            {uploading ? "Uploading..." : "Upload"}
+            {uploading ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              "Save"
+            )}
           </Button>
+
         </DialogFooter>
+
       </DialogContent>
     </Dialog>
   );

@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import { useCloudinary } from "@/shared/utils/cloudinary";
@@ -12,7 +11,6 @@ const BlogCoverUploader = () => {
 
   const { uploadImage, uploading } = useCloudinary();
   const { toastError } = useToastMessage();
-
   const { setImageUrl } = useCreateStore();
 
   const handleClick = () => {
@@ -42,9 +40,7 @@ const BlogCoverUploader = () => {
 
     const upload = async () => {
       const url = await uploadImage(image, "paperline/blog_covers");
-      if (url) {
-        setImageUrl(url);
-      }
+      if (url) setImageUrl(url);
     };
 
     upload();
@@ -55,19 +51,24 @@ const BlogCoverUploader = () => {
   }, [image]);
 
   return (
-    <div className="flex flex-col items-center h-full justify-between gap-4">
-      {preview ? (
-        <img
-          src={preview}
-          alt="Blog cover preview"
-          className="w-full object-cover rounded-md h-full"
-        />
-      ) : (
-        <div className="w-full h-full flex items-center justify-center text-muted-foreground">
-          No cover image selected
-        </div>
-      )}
+    <div className="w-full space-y-4">
 
+      {/* Preview */}
+      <div className="w-full h-64 border border-neutral-200 flex items-center justify-center overflow-hidden">
+        {preview ? (
+          <img
+            src={preview}
+            alt="cover"
+            className="w-full h-full object-cover"
+          />
+        ) : (
+          <p className="text-sm text-neutral-400">
+            No cover image
+          </p>
+        )}
+      </div>
+
+      {/* Hidden input */}
       <input
         ref={inputRef}
         type="file"
@@ -76,19 +77,28 @@ const BlogCoverUploader = () => {
         className="hidden"
       />
 
-      <Button
+      {/* Action */}
+      <button
         type="button"
         onClick={handleClick}
-        className="w-full"
         disabled={uploading}
+        className="text-sm text-neutral-600 hover:text-black transition flex items-center gap-2"
       >
-        {uploading
-          ? "Uploading..."
-          : image
-            ? "Change cover image"
-            : "Upload cover image"}
-        {preview ? <ImageUp /> : <UploadCloud />}
-      </Button>
+        {uploading ? (
+          "Uploading..."
+        ) : image ? (
+          <>
+            <ImageUp className="w-4 h-4" />
+            Change cover
+          </>
+        ) : (
+          <>
+            <UploadCloud className="w-4 h-4" />
+            Add cover image
+          </>
+        )}
+      </button>
+
     </div>
   );
 };

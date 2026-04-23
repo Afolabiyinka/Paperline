@@ -7,43 +7,57 @@ export default function PricingCard() {
   const navigate = useNavigate();
 
   return (
-    <Card
-      className="w-full md:w-[80%] mx-auto flex flex-col md:flex-row"
-      size="default"
-    >
-      <CardHeader className="flex-1 py-20 px-7 text-center md:text-left bg-gray-50 rounded-lg ">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold">
-          Free Blog Access
+    <Card className="w-full md:w-[80%] mx-auto flex flex-col md:flex-row border-neutral-200">
+
+      {/* Left */}
+      <CardHeader className="flex-1 py-16 px-8 text-center md:text-left space-y-3">
+
+        <h1 className="text-2xl md:text-3xl font-serif font-normal text-black">
+          Free access
         </h1>
-        <p className="mt-3 flex justify-center md:justify-start gap-1 text-5xl sm:text-7xl">
-          <span className="mt-2 text-2xl sm:text-4xl">$</span>0
-          <span className="self-end text-2xl sm:text-4xl">/mo</span>
+
+        <p className="text-sm text-neutral-500 max-w-sm">
+          Read and write without limits. No subscription required.
         </p>
+
       </CardHeader>
 
-      <div className="flex-1 flex flex-col justify-between border-t md:border-t-0 md:border-l border-gray-200">
-        <CardContent className="grid gap-4 px-6 sm:px-8 py-8 sm:grid-cols-2">
+      {/* Right */}
+      <div className="flex-1 border-t md:border-t-0 md:border-l border-neutral-200">
+
+        <CardContent className="grid gap-3 px-8 py-8">
+
           {[
-            "Unlimited Article Reads",
-            "Weekly Newsletter",
-            "AI Summaries & Highlights",
-            "Bookmark & Save Favorites",
+            "Unlimited reading",
+            "Weekly updates",
+            "Save bookmarks",
+            "Clean reading experience",
           ].map((feature) => (
             <div
               key={feature}
-              className="flex items-center gap-4 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+              className="flex items-center gap-3 text-sm text-neutral-700"
             >
-              <div className="shrink-0  p-2 rounded-full">
-                <CheckCircle className="h-8 w-8" />
-              </div>
-              <p className="text-base sm:text-lg font-medium">{feature}</p>
+
+              <CheckCircle className="w-4 h-4 text-neutral-400" />
+
+              <p>{feature}</p>
+
             </div>
           ))}
-          <Button onClick={() => navigate("/blogs")}>
-            Try it Now <ArrowRight />
+
+          <Button
+            onClick={() => navigate("/blogs")}
+            variant="ghost"
+            className="mt-4 text-sm w-fit"
+          >
+            Start reading
+            <ArrowRight className="w-4 h-4 ml-2" />
           </Button>
+
         </CardContent>
+
       </div>
+
     </Card>
   );
 }

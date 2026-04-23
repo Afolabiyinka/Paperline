@@ -12,9 +12,15 @@ const TextEditor = () => {
     if (editorRef.current && !quillRef.current) {
       quillRef.current = new Quill(editorRef.current, {
         theme: "snow",
-        placeholder: "Start writing here...",
+        placeholder: "Write your story...",
         modules: {
-          toolbar: "#toolbar",
+          toolbar: [
+            ["bold", "italic", "underline"],
+            [{ header: [1, 2, false] }],
+            [{ list: "ordered" }, { list: "bullet" }],
+            ["link"],
+            ["clean"],
+          ],
         },
       });
 
@@ -25,58 +31,23 @@ const TextEditor = () => {
   }, []);
 
   return (
-    <div className="font-[open-sans]">
-      {/* Blog toolbar */}
-      <div id="toolbar" className="border-0" style={{ border: "none" }}>
-        {/* Basic text formatting */}
-        <button className="ql-bold" />
-        <button className="ql-italic" />
-        <button className="ql-underline" />
-        <button className="ql-strike" />
-
-        {/* Headings */}
-        <select className="ql-header" defaultValue="">
-          <option value="1">H1</option>
-          <option value="2">H2</option>
-          <option value="3">H3</option>
-          <option value="">Normal</option>
-        </select>
-
-        {/* Lists */}
-        <button className="ql-list" value="ordered" />
-        <button className="ql-list" value="bullet" />
-
-        {/* Links & images */}
-        <button className="ql-link" />
-        <button className="ql-image" />
-
-        {/* Code / blockquote */}
-        <button className="ql-code-block" />
-        <button className="ql-blockquote" />
-
-        {/* Text color & background */}
-        <select className="ql-color" />
-        <select className="ql-background" />
-
-        {/* Alignment */}
-        <select className="ql-align" />
-
-        {/* Clean formatting */}
-        <button className="ql-clean" />
-      </div>
+    <div className="font-serif">
+      {/* Toolbar override */}
+      <div id="toolbar" className="border-b border-neutral-200 pb-2 mb-4" />
 
       {/* Editor */}
       <div
         ref={editorRef}
-        className="ql-container border-0 shadow-none "
+        className="ql-container border-0 shadow-none"
         style={{
-          height: "400px",
+          minHeight: "420px",
           backgroundColor: "#fff",
-          border: "none",
-          fontSize: "1.2rem",
-          fontFamily: "Open sans",
+          fontSize: "18px",
+          lineHeight: "1.8",
+          fontFamily: "Merriweather, serif",
+          color: "#111",
         }}
-      ></div>
+      />
     </div>
   );
 };

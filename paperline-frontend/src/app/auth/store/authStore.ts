@@ -1,10 +1,9 @@
+import type { AuthUser } from "@/app/settings/types/types";
 import { create } from "zustand";
-import type { AuthUser } from "@/app/settings/hooks/useUser";
 
 type AuthUserStore = {
   authUser: AuthUser | null;
   setAuthUser: (user: AuthUser) => void;
-
   logout: () => void;
 };
 

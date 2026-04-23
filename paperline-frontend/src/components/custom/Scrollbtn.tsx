@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { ArrowUp } from "lucide-react";
 
 const Scrollbtn = () => {
-  React.useEffect(() => {}, []);
+  React.useEffect(() => { }, []);
 
   function handleScrollUp() {
     window.scrollTo({ behavior: "smooth", top: 0 });

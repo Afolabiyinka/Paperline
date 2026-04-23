@@ -7,7 +7,7 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   onChange?: (val: string) => void;
-  value?: string | undefined;
+  value?: string;
 }
 
 const Input = ({
@@ -25,29 +25,49 @@ const Input = ({
   const [showPassword, setShowPassword] = React.useState(false);
 
   return (
-    <span className="border mt-2 w-full rounded-lg flex  p-1 px-6 h-14 items-center">
-      <IconComponent className="stroke-[1.5px]" />
+    <div
+      className="
+        flex items-center gap-3
+        border border-neutral-200
+        px-4 py-3
+        w-full
+        bg-white
+        focus-within:border-neutral-400
+        transition
+      "
+    >
+
+      <IconComponent className="w-4 h-4 text-neutral-500" />
+
       <input
-        className="h-full w-full border-0 outline-0 p-1"
+        className="
+          w-full
+          outline-none
+          bg-transparent
+          text-sm
+          text-black
+        "
         placeholder={placeholder}
         onChange={(e) => onChange?.(e.target.value)}
         type={type === "password" && showPassword ? "text" : type}
-        {...props}
         value={value}
+        {...props}
       />
+
       {type === "password" && (
-        <span
-          className="pr-2 cursor-pointer"
+        <button
+          type="button"
           onClick={() => setShowPassword(!showPassword)}
+          className="text-neutral-500 hover:text-black transition"
         >
           {showPassword ? (
-            <Eye className="stroke-[1px]" />
+            <Eye className="w-4 h-4" />
           ) : (
-            <EyeClosed className="stroke-[1px]" />
+            <EyeClosed className="w-4 h-4" />
           )}
-        </span>
+        </button>
       )}
-    </span>
+    </div>
   );
 };
 

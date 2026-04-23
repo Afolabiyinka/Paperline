@@ -2,9 +2,12 @@ import { Request, Response } from "express";
 import { CreateBlogPayload, deleteBlogPayload } from "../../types/blog";
 import { Blog } from "../../models/posts/Blog";
 import { User } from "../../models/user/User";
+import { AuthenticatedRequest } from "../../types/request/types";
 
-const createBlog = async (req: Request, res: Response) => {
-  const { content, coverImageUrl, title, authorId } =
+const createBlog = async (req: AuthenticatedRequest, res: Response) => {
+
+  const authorId = req.user?.id
+  const { content, coverImageUrl, title, } =
     req.body as CreateBlogPayload;
 
   try {
@@ -75,6 +78,6 @@ const deleteBlog = async (req: Request, res: Request) => {
   const { id } = req.body as deleteBlogPayload;
 };
 
-const searchBlog = async (req: Request, res: Response) => {};
+const searchBlog = async (req: Request, res: Response) => { };
 
 export { searchBlog, createBlog, deleteBlog, getAllBlogs, getParticularBlog };

@@ -10,26 +10,41 @@ const CreateBlog = () => {
   const { title, setTitle } = useCreateStore();
 
   return (
-    <div className="flex flex-col md:flex-row w-full min-h-[90vh] gap-4 border  p-2">
-      <div className="md:w-1/2  h-full border">
+    <div className="min-h-screen w-full flex flex-col lg:flex-row">
+
+      {/* Cover */}
+      <div className="lg:w-1/3 p-6 border-r border-neutral-100">
         <BlogCoverUploader />
       </div>
 
-      <div className="w-full md:w-1/2 flex flex-col p-2">
+      {/* Writing area */}
+      <div className="flex-1 flex flex-col px-6 py-10 max-w-3xl mx-auto w-full">
+
+        {/* Title */}
         <input
           type="text"
-          placeholder="Blog title"
+          placeholder="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full text-3xl md:text-4xl border-0 outline-none tracking-widest font-[open-sans] p-2"
+          className="
+            w-full
+            text-4xl md:text-5xl
+            font-serif
+            font-normal
+            outline-none
+            border-none
+            mb-6
+            text-black
+          "
         />
 
+        {/* Editor */}
         <TextEditor />
 
-        <div className="flex gap-8 mt-4">
+        {/* Actions */}
+        <div className="flex gap-4 mt-10">
           <Button
-            variant="secondary"
-            size="lg"
+            variant="ghost"
             className="flex-1 flex items-center gap-2 justify-center"
             onClick={() => console.log("Draft saved")}
           >
@@ -38,14 +53,14 @@ const CreateBlog = () => {
           </Button>
 
           <Button
-            size="lg"
             className="flex-1 flex items-center gap-2 justify-center"
             onClick={createBlog}
           >
-            Post
             <Send size={18} />
+            Publish
           </Button>
         </div>
+
       </div>
     </div>
   );

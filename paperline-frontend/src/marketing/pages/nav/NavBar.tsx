@@ -6,18 +6,20 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import { AnimatePresence, motion } from "framer-motion";
-import useUser from "@/app/settings/hooks/useUser";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Icon from "@/components/custom/Icon";
+import { useFetchUser } from "@/app/auth/hooks/useFetchUser";
+import { useAuthStore } from "@/app/auth/store/authStore";
 
 const NavBar = () => {
   const isMobile = useIsMobile(1024);
   const [open, setOpen] = useState(false);
-  const { authUser } = useUser();
+  const { isLoading } = useFetchUser()
+  const { authUser, } = useAuthStore();
   const navigate = useNavigate();
 
   return (
-    <nav className="w-full  px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
+    <nav className="w-full px-4 lg:px-8 py-3 flex flex-col lg:flex-row lg:items-center lg:justify-between">
       <div className="w-full flex items-center justify-between lg:w-auto">
         <Logo />
 
@@ -31,7 +33,6 @@ const NavBar = () => {
         )}
       </div>
 
-      {/* Menu */}
       <AnimatePresence>
         {(open || !isMobile) && (
           <motion.div
@@ -42,7 +43,7 @@ const NavBar = () => {
             className="w-full lg:w-auto mt-4 lg:mt-0 flex flex-col lg:flex-row gap-6 lg:gap-10 items-start lg:items-center"
           >
             {/* Nav links */}
-            <div className="flex flex-col lg:flex-row items-center gap-4 lg:gap-8 w-full lg:w-auto">
+            <div className="flex flex-col lg:flex-row md:items-center gap-4 lg:gap-8 w-full lg:w-auto">
               {NAVLINKS.map((link) => (
                 <NavLink
                   key={link.path}
@@ -58,9 +59,15 @@ const NavBar = () => {
               ))}
             </div>
 
-            {/* Right section */}
+            {/* Auth Section */}
             <div className="flex items-center justify-between lg:justify-end gap-4 w-full lg:w-auto">
-              {authUser ? (
+              {isLoading ? (
+                // 👇 Loading skeleton
+                <div className="flex items-center gap-3">
+                  <div className="h-6 w-6 bg-muted rounded-full animate-pulse" />
+                  <div className="h-10 w-10 bg-muted rounded-full animate-pulse" />
+                </div>
+              ) : authUser ? (
                 <div className="flex items-center gap-3">
                   <Icon icon="Bell" isSolid={false} tooltip="Notifications" />
 
@@ -68,7 +75,7 @@ const NavBar = () => {
                     onClick={() => navigate("/settings")}
                     className="cursor-pointer size-10"
                   >
-                    <AvatarImage src={authUser.profilePic || undefined} />
+                    <AvatarImage src={authUser.profilePic} />
                     <AvatarFallback>
                       {authUser.username?.substring(0, 2) ?? "U"}
                     </AvatarFallback>

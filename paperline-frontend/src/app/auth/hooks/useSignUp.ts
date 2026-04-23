@@ -3,7 +3,6 @@ import type { SignupPayload } from "../types/types";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useAuthStore } from "../store/authStore";
 import { signup } from "../services/request";
 
 export default function useSignUp() {
@@ -17,13 +16,10 @@ export default function useSignUp() {
 
   const { toastError, toastSuccess } = useToastMessage();
   const navigate = useNavigate();
-  const { setAuthUser, setToken } = useAuthStore();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: SignupPayload) => signup(payload),
     onSuccess: (data) => {
-      setAuthUser(data.user);
-      setToken(data.token);
       toastSuccess(data.message);
       navigate("/onboarding");
     },

@@ -10,8 +10,8 @@ export const useFetchUser = () => {
     });
 
     return {
-        fetchedUser: data,
-        loading: isLoading,
+        fetchedUser: data?.user,
+        isLoading,
         isFetched,
         error,
     };

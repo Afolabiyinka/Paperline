@@ -1,14 +1,14 @@
 import AboutImage from "@/assets/undraw_add-post_prex.svg";
 import { Button } from "@/components/ui/button";
+import Input from "@/components/ui/input";
 import { motion } from "framer-motion";
-import { Input } from "@base-ui/react";
 
 const About = () => {
   return (
-    <div className="flex flex-col lg:flex-row items-center justify-center h-full min-h-screen p-4 lg:p-8 gap-8">
-      {/* Image Section */}
+    <div className="flex flex-col lg:flex-row items-center justify-center min-h-screen px-6 lg:px-12 gap-12">
+
       <motion.div
-        className="flex justify-center lg:flex-1"
+        className="flex-1 flex justify-center"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -17,51 +17,52 @@ const About = () => {
         <img
           src={AboutImage}
           alt="About Illustration"
-          className="w-full max-w-md lg:max-w-lg h-auto rounded-3xl p-4"
+          className="w-full max-w-md lg:max-w-lg"
         />
       </motion.div>
 
-      {/* Text & Form Section */}
       <motion.div
-        className="flex flex-col lg:flex-1 max-w-2xl w-full gap-6 px-2 lg:px-8 text-left"
+        className="flex-1 max-w-xl space-y-6"
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         viewport={{ once: true }}
       >
-        <motion.h1
-          className="text-3xl sm:text-4xl lg:text-5xl font-bold"
-          initial={{ y: -10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
-          Where ideas turn to stories
-        </motion.h1>
 
-        <p className="text-xl sm:text-2xl lg:text-4xl">
-          Sign up for amazing content & newsletters
+        <h1 className="text-3xl md:text-4xl font-serif text-black">
+          A space for writing and reading ideas
+        </h1>
+
+        <p className="text-sm md:text-base text-neutral-500 leading-relaxed">
+          Paperline is a minimal blog platform for people who prefer clarity over noise.
         </p>
 
-        <motion.form
-          className="flex flex-col sm:flex-row gap-2 items-center border p-2 rounded-lg w-full"
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          viewport={{ once: true }}
-        >
+        {/* Soft CTA */}
+        <div className="flex items-center gap-4 pt-2">
+
           <Input
+            startIcon="Mail"
             type="email"
-            name="email"
-            aria-label="Email"
-            placeholder="Enter your email"
-            className="h-12 w-full sm:flex-1 p-2 focus:outline-0 border-0"
+            placeholder="your email"
+          // className="
+          //   border-b border-neutral-300
+          //   focus:border-neutral-500
+          //   outline-none
+          //   py-2
+          //   text-sm
+          //   w-full
+          //   bg-transparent
+          // "
           />
-          <Button type="submit" className="h-12  w-full sm:w-auto">
-            Involve me
+
+          <Button variant="ghost" className="text-sm">
+            Join
           </Button>
-        </motion.form>
+
+        </div>
+
       </motion.div>
+
     </div>
   );
 };

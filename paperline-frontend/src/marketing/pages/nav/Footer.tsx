@@ -1,15 +1,6 @@
-import { motion } from "framer-motion";
-import Icon from "@/components/custom/Icon";
+
 import Logo from "@/components/custom/Logo";
 import Scrollbtn from "@/components/custom/Scrollbtn";
-
-// const SOCIAL_ICONS = [
-//   "Facebook",
-//   "Instagram",
-//   "Github",
-//   "Dribbble",
-//   "X",
-// ] as const;
 
 const SOCIAL_LINKs = [
   { name: "Facebook", link: "https://facebook.com" },
@@ -20,27 +11,34 @@ const SOCIAL_LINKs = [
 
 export default function Footer() {
   return (
-    <footer className="w-full bg-background border-t  h-full">
-      <div className="mx-auto w-full md:max-w-7xl px-8">
-        <div className="flex w-full flex-col items-center gap-4 py-4 md:flex-row md:justify-between md:items-center">
-          <Logo />
+    <footer className="w-full border-t border-neutral-200 mt-16">
+      <div className="mx-auto w-full max-w-6xl px-6 py-8">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
 
-          <div className="flex gap-4 md:gap-8">
-            {SOCIAL_LINKs.map((icon) => (
-              <motion.a
-                key={icon.name}
-                href={icon.link}
+          {/* Left */}
+          <div className="flex flex-col items-center md:items-start gap-2">
+            <Logo />
+            <p className="text-sm text-neutral-500">
+              © {new Date().getFullYear()} Paperline
+            </p>
+          </div>
+
+          {/* Center - Links */}
+          <div className="flex gap-6 text-sm text-neutral-600">
+            {SOCIAL_LINKs.map((item) => (
+              <a
+                key={item.name}
+                href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.2 }}
-                whileTap={{ scale: 0.9 }}
-                className="text-gray-600 dark:text-gray-300"
+                className="hover:text-black transition-colors"
               >
-                <Icon icon={icon.name} tooltip={icon.name} isSolid={false} />
-              </motion.a>
+                {item.name}
+              </a>
             ))}
           </div>
 
+          {/* Right */}
           <Scrollbtn />
         </div>
       </div>

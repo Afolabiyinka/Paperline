@@ -5,7 +5,7 @@ import { prodEndpoint } from "@/shared/constants/api";
 
 const getUser = async () => {
   try {
-    const res = await fetch(`${prodEndpoint}api/auth/me`, {
+    const res = await fetch(`${prodEndpoint}/api/auth/me`, {
       credentials: "include",
     });
 
@@ -18,10 +18,12 @@ const getUser = async () => {
 };
 
 const update = async (data: Partial<UpdateUserPayload>) => {
-  const res = await fetch(`${prodEndpoint}/api/auth/profile`, {
+  const res = await fetch(`${prodEndpoint}/api/auth/edit-profile`, {
     method: "PUT",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
+
     },
     body: JSON.stringify(data),
   });
@@ -38,10 +40,12 @@ const update = async (data: Partial<UpdateUserPayload>) => {
 const deleteAccount = async () => {
   const res = await fetch(`${prodEndpoint}/api/auth/delete`, {
     method: "DELETE",
+    credentials: "include",
     headers: {
       "Content-Type": "application/json",
     },
   });
+
   const data = await res.json();
   return data;
 };

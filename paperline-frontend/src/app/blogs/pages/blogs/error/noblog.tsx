@@ -1,19 +1,33 @@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import Logo from "@/components/custom/Logo";
 
 const Noblog = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen w-full text-center gap-4 p-4">
-      <div>
-        <Logo />
-      </div>
-      <h1 className="text-9xl font-bold mt-3">404</h1>
-      <p className="text-2xl mb-3">Oop's blog not found!!</p>
+    <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 space-y-6">
 
-      <Button onClick={() => navigate(-1)}>Go back</Button>
+
+
+      {/* Code */}
+      <h1 className="text-4xl font-serif text-black">
+        404
+      </h1>
+
+      {/* Message */}
+      <p className="text-sm text-neutral-500 max-w-sm">
+        This blog doesn’t exist or may have been removed.
+      </p>
+
+      {/* Action */}
+      <Button
+        onClick={() => navigate(-1)}
+        variant="ghost"
+        className="text-sm"
+      >
+        Go back
+      </Button>
+
     </div>
   );
 };

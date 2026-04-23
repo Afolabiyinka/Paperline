@@ -1,4 +1,3 @@
-import useUser from "@/app/settings/hooks/useUser";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import {
@@ -12,76 +11,92 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Icon from "@/components/custom/Icon";
 import ProfilePicUploader from "../../marketing/components/profilepic";
 import { Loader2 } from "lucide-react";
+import { DialogDescription } from "@radix-ui/react-dialog";
+import { useUpdateUser } from "./hooks/useUpdateProfile";
 
 const UpdateProfile = () => {
-  const { updatedData, setupdatedData, handleUpdate, authUser, loading } =
-    useUser();
+
+  const {
+    updatedData,
+    setupdatedData,
+    handleUpdate,
+    loading,
+  } = useUpdateUser();
+
   return (
     <Dialog>
+
       <DialogTrigger>
-        <Icon icon="Pencil" isSolid={false} tooltip="Edit your profile" />
+        <Icon icon="Pencil" isSolid={false} tooltip="Edit profile" />
       </DialogTrigger>
-      <DialogContent>
+
+      <DialogContent className="space-y-6">
+
         <DialogHeader>
-          <DialogTitle>
-            <h1 className="p-3">Update your profile details</h1>
+          <DialogTitle className="text-base font-serif font-normal">
+            Edit profile
           </DialogTitle>
+          <DialogDescription></DialogDescription>
         </DialogHeader>
-        <form onSubmit={handleUpdate}>
-          <div className="grid gap-4">
-            <div className="flex items-center gap-6 mb-3 p-3">
-              <Avatar>
-                <AvatarImage
-                  src={authUser?.profilePic || updatedData.profilePic}
-                />
-                <AvatarFallback>
-                  {authUser?.username.substring(0, 2)}
-                </AvatarFallback>
-              </Avatar>
-              <ProfilePicUploader />
-            </div>
-            <div className="grid gap-1">
-              <label htmlFor="">Email</label>
-              <Input
-                startIcon="Mail"
-                placeholder="Email"
-                type="email"
-                value={updatedData.email}
-                onChange={(e) => setupdatedData({ ...updatedData, email: e })}
+
+        <form onSubmit={handleUpdate} className="space-y-5">
+
+          <div className="flex items-center gap-4">
+
+            <Avatar className="h-10 w-10">
+              <AvatarImage
+                src={updatedData?.profilePic || updatedData.profilePic}
               />
-            </div>
-            <div className="grid gap-3">
-              <label htmlFor="">Firstname</label>
-              <Input
-                startIcon="User"
-                placeholder="Firstname"
-                type="text"
-                value={updatedData.firstname}
-                onChange={(e) =>
-                  setupdatedData({ ...updatedData, firstname: e })
-                }
-              />
-            </div>
-            <div className="grid gap-3">
-              <label htmlFor="">Lastname</label>
-              <Input
-                startIcon="User"
-                placeholder="Lastname"
-                type="text"
-                value={updatedData.lastname}
-                onChange={(e) =>
-                  setupdatedData({ ...updatedData, lastname: e })
-                }
-              />
-            </div>
+              <AvatarFallback>
+                {updatedData?.username?.substring(0, 2)}
+              </AvatarFallback>
+            </Avatar>
+
+            <ProfilePicUploader />
           </div>
 
-          <div className="w-full flex flex-col gap-3 items-center mt-4">
-            <Button className="w-full cursor-pointer" type="submit">
-              {loading ? <Loader2 className="animate-spin" /> : "Update"}
-            </Button>
-          </div>
+          <Input
+            startIcon="Mail"
+            placeholder="Email"
+            type="email"
+            value={updatedData.email}
+            onChange={(e) =>
+              setupdatedData({ ...updatedData, email: e })
+            }
+          />
+
+          <Input
+            startIcon="User"
+            placeholder="First name"
+            type="text"
+            value={updatedData.firstname}
+            onChange={(e) =>
+              setupdatedData({ ...updatedData, firstname: e })
+            }
+          />
+
+          <Input
+            startIcon="User"
+            placeholder="Last name"
+            type="text"
+            value={updatedData.lastname}
+            onChange={(e) =>
+              setupdatedData({ ...updatedData, lastname: e })
+            }
+          />
+
+          <Button className="w-full" type="submit">
+
+            {loading ? (
+              <Loader2 className="animate-spin w-4 h-4" />
+            ) : (
+              "Save changes"
+            )}
+
+          </Button>
+
         </form>
+
       </DialogContent>
     </Dialog>
   );

@@ -3,7 +3,7 @@ import type { LoginPayload, SignupPayload } from "../types/types";
 import type { Response } from "@/shared/types";
 
 const login = async (payload: LoginPayload): Promise<Response> => {
-  const res = await fetch(`${prodEndpoint}api/auth/login`, {
+  const res = await fetch(`${prodEndpoint}/api/auth/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ const login = async (payload: LoginPayload): Promise<Response> => {
 };
 
 const signup = async (payload: SignupPayload): Promise<Response> => {
-  const res = await fetch(`${prodEndpoint}api/auth/signup`, {
+  const res = await fetch(`${prodEndpoint}/api/auth/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

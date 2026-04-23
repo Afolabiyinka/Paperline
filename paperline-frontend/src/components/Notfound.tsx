@@ -1,4 +1,4 @@
-import { ArrowLeft, Frown } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
@@ -7,28 +7,42 @@ function Notfound() {
   const navigate = useNavigate();
 
   return (
-    <div className="h-screen mx-auto flex flex-col items-center justify-center text-center px-8">
+    <div className="h-screen flex items-center justify-center px-6">
+
       <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-        className="flex flex-col items-center justify-center"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.4 }}
+        className="text-center space-y-6"
       >
-        <Frown className="w-24 h-24 mx-auto stroke-[0.5px]" />
-        <h1 className="mt-6 text-3xl font-bold leading-snug md:text-4xl">
-          Page not Found!
+
+        {/* Icon */}
+        <div className="text-neutral-400">
+          <span className="text-6xl">404</span>
+        </div>
+
+        {/* Title */}
+        <h1 className="text-xl md:text-2xl font-serif text-black">
+          Page not found
         </h1>
-        <h1 className="mt-4 mb-10 text-lg text-gray-500 md:max-w-md">
-          Don&apos;t worry, our team is already on it. Please refresh the page
-          or try again later.
-        </h1>
-        <span className="flex flex-col items-center justify-center">
-          <Button onClick={() => navigate("/")} size={`lg`}>
-            <ArrowLeft className="w-4 h-4" />
-            Go Home
-          </Button>{" "}
-        </span>
+
+        {/* Subtitle */}
+        <p className="text-sm text-neutral-500 max-w-sm mx-auto leading-relaxed">
+          This page doesn’t exist or may have been moved.
+        </p>
+
+        {/* Action */}
+        <Button
+          onClick={() => navigate("/")}
+          variant="ghost"
+          className="text-sm text-black"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back home
+        </Button>
+
       </motion.div>
+
     </div>
   );
 }

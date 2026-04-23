@@ -4,7 +4,7 @@ import LoadingContainer from "@/components/loader/loadingcontainer";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Noblog from "./error/noblog";
 import { Button } from "@/components/ui/button";
-import { ChevronLeft } from "lucide-react";
+import { ChevronLeft, Heart, MessageCircle } from "lucide-react";
 
 const BlogPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -19,57 +19,88 @@ const BlogPage = () => {
 
   const formattedDate = blog?.createdAt
     ? new Date(blog.createdAt).toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      })
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    })
     : null;
 
   //Sanitizing the blog content
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-4 py-12">
-      <span className="w-full mb-3 p-3">
-        <Button onClick={() => navigate(-1)} size={`lg`}>
-          <ChevronLeft />
-          Go Back
+    <div className="min-h-screen bg-white px-4 py-12">
+      <div className="max-w-3xl mx-auto mb-8">
+        <Button
+          onClick={() => navigate(-1)}
+          variant="ghost"
+          className="text-sm text-neutral-600 hover:text-black"
+        >
+          <ChevronLeft className="w-4 h-4" />
+          Back
         </Button>
-      </span>
+      </div>
 
-      <article className="w-full max-w-3xl flex flex-col items-center text-center">
-        <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900 mb-6">
+      <article className="max-w-3xl mx-auto">
+        <h1 className="text-4xl md:text-5xl font-serif font-normal tracking-tight text-black mb-6">
           {blog.title}
         </h1>
+        <div className="flex items-center justify-between mb-10 text-sm text-neutral-600">
 
-        <span className="flex flex-col  gap-3 items-center mb-10">
-          <div className="flex gap-2 items-center">
-            <Avatar className="border h-10 w-10">
+          {/* Left: Author info */}
+          <div className="flex items-center gap-3">
+            <Avatar className="h-9 w-9">
               <AvatarImage src={blog.author?.profilePic} />
-              <AvatarFallback>{blog.author?.username?.[0]}</AvatarFallback>
+              <AvatarFallback>
+                {blog.author?.username?.[0]}
+              </AvatarFallback>
             </Avatar>
+
             <Link
-              className="font-medium text-gray-700 text-lg underline underline-offset-2"
               to={`/authors/${blog.author.id}`}
+              className="hover:underline text-black"
             >
               {blog.author?.username}
             </Link>
-          </div>
-          <p>Posted on {formattedDate}</p>
-        </span>
 
-        <div className="w-full mb-12">
+            <span>·</span>
+            <span>{formattedDate}</span>
+          </div>
+
+          {/* Right: Actions */}
+          <div className="flex items-center gap-4 text-neutral-500">
+            <div className="flex items-center gap-1 cursor-pointer hover:text-black transition">
+              <Heart className="w-5 h-5" />
+              <span className="text-xs">0</span>
+            </div>
+
+            <div className="flex items-center gap-1 cursor-pointer hover:text-black transition">
+              <MessageCircle className="w-5 h-5" />
+              <span className="text-xs">0</span>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div className="mb-12">
           <img
             src={blog.coverImageUrl}
             alt={blog.title}
-            className="w-full rounded-2xl object-cover h-[420px] border"
+            className="w-full object-cover h-[420px]"
           />
         </div>
 
         <div
-          className="tracking-widest max-w-3xl text-gray-800 leading-relaxed text-left"
+          className="
+        prose 
+        prose-neutral 
+        prose-lg 
+        max-w-none
+      "
           dangerouslySetInnerHTML={{ __html: blog.content }}
         />
       </article>
+
     </div>
   );
 };
