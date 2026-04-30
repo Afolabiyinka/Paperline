@@ -22,11 +22,11 @@ app.use(
 app.use(express.json());
 app.use(cookieParser())
 
-//Database stuff
+//Database
 connectDb();
 syncModels();
 
-//Routing stuff
+//Routing
 app.use("/api/auth", authRouter);
 app.use("/api/blogs", blogRouter);
 
@@ -39,3 +39,7 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on ${PORT}`);
 });
+
+async function start() {
+
+}

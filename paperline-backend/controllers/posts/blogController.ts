@@ -80,4 +80,34 @@ const deleteBlog = async (req: Request, res: Request) => {
 
 const searchBlog = async (req: Request, res: Response) => { };
 
-export { searchBlog, createBlog, deleteBlog, getAllBlogs, getParticularBlog };
+const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
+  const authorId = req.user?.id;
+
+  if (!authorId) {
+    return res.status(401).json({
+      message: "Unauthorized",
+    });
+  }
+
+  try {
+    const blogs = await Blog.findAll({
+      where: { authorId },
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "username", "email", "profilePic"],
+      },
+    });
+
+    return res.status(200).json({
+      blogs,
+    });
+  } catch (err) {
+    res.status(500).json({
+      message: "Internal server error",
+    });
+    console.log("ERR", err);
+  }
+};
+
+export { searchBlog, createBlog, deleteBlog, getAllBlogs, getParticularBlog, getUserBlogs };
