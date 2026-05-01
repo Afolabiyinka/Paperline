@@ -1,11 +1,11 @@
 export interface CreateBlogPayload {
-    title: string
-    content: string
-    coverImageUrl: string
-    authorId: string
-    id: string | number
+    title: string;
+    content: string;
+    coverImageUrl?: string;
 }
-export interface getBlogPayload{
-    id: string | number
+
+export interface BlogByIdPayload {
+    id: string;
 }
-export type deleteBlogPayload = getBlogPayload
+
+export type DeleteBlogPayload = BlogByIdPayload;

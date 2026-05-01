@@ -1,92 +1,139 @@
 import { Request, Response } from "express";
-import { CreateBlogPayload, deleteBlogPayload } from "../../types/blog";
+import { Op } from "sequelize";
+import { CreateBlogPayload, DeleteBlogPayload } from "../../types/blog"; // ✅ removed unused BlogByIdPayload
 import { Blog } from "../../models/posts/Blog";
 import { User } from "../../models/user/User";
 import { AuthenticatedRequest } from "../../types/request/types";
 
 const createBlog = async (req: AuthenticatedRequest, res: Response) => {
+  const authorId = req.user?.id;
+  const { content, coverImageUrl, title } = req.body as CreateBlogPayload;
 
-  const authorId = req.user?.id
-  const { content, coverImageUrl, title, } =
-    req.body as CreateBlogPayload;
+  if (!authorId) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
 
   try {
     if (!title || !content) {
-      return res.status(400).json({
-        message: "Title & content is required",
-      });
+      return res.status(400).json({ message: "Title & content is required" });
     }
 
-    const author = await User.findByPk(authorId);
-    if (!author) {
-      return res.status(400).json({
-        message: "Author not found",
-      });
-    }
     const blog = await Blog.create({
       title,
       content,
-      coverImageUrl,
       authorId,
+      ...(coverImageUrl && { coverImageUrl }),
     });
 
-    return res.status(201).json({
-      message: "Blog created succesfully",
-      blog,
-    });
+    return res.status(201).json({ message: "Blog created successfully" });
   } catch (err) {
-    res.status(500).json({
-      message: "Internal server error",
-    });
-    console.log("ERR", err);
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
 const getParticularBlog = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const blog = await Blog.findByPk(id, {
-    include: {
-      model: User,
-      as: "author",
-      attributes: ["id", "username", "email", "profilePic"],
-    },
-  });
-
-  if (!blog) {
-    return res.status(404).json({
-      message: "Blog not found",
+  try {
+    const blog = await Blog.findByPk(id, {
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "username", "email", "profilePic"],
+      },
     });
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    return res.status(200).json(blog);
+  } catch (err) {
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const getAllBlogs = async (req: Request, res: Response) => {
+  try {
+    const blogs = await Blog.findAll({
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "username", "email", "profilePic"],
+      },
+    });
+
+    return res.status(200).json({ blogs });
+  } catch (err) {
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const deleteBlog = async (req: AuthenticatedRequest, res: Response) => {
+  const { id } = req.body as DeleteBlogPayload;
+  const authorId = req.user?.id;
+
+  try {
+    const blog = await Blog.findByPk(id);
+
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    if (blog.getDataValue("authorId") !== authorId) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    await blog.destroy();
+    return res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (err) {
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+const searchBlog = async (req: Request, res: Response) => {
+  const { q } = req.query;
+
+  if (!q || typeof q !== "string") {
+    return res.status(400).json({ message: "Search query is required" });
   }
 
-  return res.status(200).json(blog);
-};
-const getAllBlogs = async (req: Request, res: Response) => {
-  const blogs = await Blog.findAll({
-    include: {
-      model: User,
-      as: "author",
-      attributes: ["id", "username", "email", "profilePic"],
-    },
-  });
+  try {
+    const blogs = await Blog.findAll({
+      where: {
+        [Op.or]: [
+          { title: { [Op.iLike]: `%${q}%` } },
+          { content: { [Op.iLike]: `%${q}%` } },
+        ],
+      },
+      include: {
+        model: User,
+        as: "author",
+        attributes: ["id", "username", "email", "profilePic"],
+      },
+    });
 
-  res.status(200).json({
-    blogs,
-  });
-};
-const deleteBlog = async (req: Request, res: Request) => {
-  const { id } = req.body as deleteBlogPayload;
+    if (blogs.length === 0) {
+      return res.status(404).json({ message: "No blogs found" });
+    }
+
+    return res.status(200).json({ blogs });
+  } catch (err) {
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
 };
 
-const searchBlog = async (req: Request, res: Response) => { };
 
 const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
   const authorId = req.user?.id;
 
   if (!authorId) {
-    return res.status(401).json({
-      message: "Unauthorized",
-    });
+    return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
@@ -97,17 +144,17 @@ const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
         as: "author",
         attributes: ["id", "username", "email", "profilePic"],
       },
+      order: [["createdAt", "DESC"]],
     });
 
-    return res.status(200).json({
-      blogs,
-    });
+    if (blogs.length === 0) {
+      return res.status(404).json({ message: "You have no blogs yet" });
+    }
+
+    return res.status(200).json({ blogs });
   } catch (err) {
-    res.status(500).json({
-      message: "Internal server error",
-    });
-    console.log("ERR", err);
+    console.error("ERR", err);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
-
-export { searchBlog, createBlog, deleteBlog, getAllBlogs, getParticularBlog, getUserBlogs };
+export { searchBlog, createBlog, deleteBlog, getAllBlogs, getParticularBlog, getUserBlogs, };

@@ -4,32 +4,46 @@ import { Blog } from "./posts/Blog";
 import { Comments } from "./posts/Comment";
 import { Likes } from "./posts/Like";
 
-export const syncModels = async () => {
-  try {
-    await sequelize.sync({ force: false }); // Use { force: true } in development to drop and recreate tables
-    console.log("All models synchronized successfully.");
-  } catch (error) {
-    console.error("Error syncing models:", error);
-  }
-};
-
-//Associations for the models
-
 User.hasMany(Blog, {
   foreignKey: "authorId",
   as: "blogs",
 });
-
 Blog.belongsTo(User, {
   foreignKey: "authorId",
   as: "author",
 });
 
 Blog.hasMany(Comments, {
-  foreignKey: "authorId",
-  as: "commentAuthor",
+  foreignKey: "blogId",
+  as: "comments",
 });
+Comments.belongsTo(Blog, {
+  foreignKey: "blogId",
+  as: "blog",
+});
+Comments.belongsTo(User, {
+  foreignKey: "authorId",
+  as: "author",
+});
+
 Blog.hasMany(Likes, {
-  foreignKey: "authorId",
-  as: "likeauthor",
+  foreignKey: "blogId",
+  as: "likes",
 });
+Likes.belongsTo(Blog, {
+  foreignKey: "blogId",
+  as: "blog",
+});
+Likes.belongsTo(User, {
+  foreignKey: "userId",
+  as: "user",
+});
+
+export const syncModels = async () => {
+  try {
+    await sequelize.sync({ force: false });
+    console.log("All models synchronized successfully.");
+  } catch (error) {
+    console.error("Error syncing models:", error);
+  }
+};
