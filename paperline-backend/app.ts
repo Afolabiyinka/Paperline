@@ -29,7 +29,7 @@ app.get("/", (req, res) => {
   res.send(`<h1>View the api docs <a href="https://bk52izj9t0.apidog.io">Here</a></h1>`);
 });
 
-// ✅ consolidated into one async start function
+
 const start = async () => {
   try {
     await connectDb();
@@ -39,7 +39,7 @@ const start = async () => {
     });
   } catch (err) {
     console.error("Failed to start server:", err);
-    process.exit(1); // ✅ exit if DB or sync fails — don't serve a broken app
+    process.exit(1);
   }
 };
 
