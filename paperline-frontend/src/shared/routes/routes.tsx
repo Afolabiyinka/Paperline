@@ -1,4 +1,5 @@
 import Onboarding from "@/app/onboarding/onboarding";
+import Profile from "@/app/profile/pages/Profile";
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 
@@ -66,4 +67,8 @@ export const routes: RouteObject[] = [
     path: "*",
     Component: Notfound,
   },
+  {
+    path: "profile",
+    Component: Profile
+  }
 ];

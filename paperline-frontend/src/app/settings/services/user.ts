@@ -1,5 +1,6 @@
 import type { UpdateUserPayload } from "@/app/auth/types/types";
 import { prodEndpoint } from "@/shared/constants/api";
+import type { MyBlogs } from "../types/types";
 
 //User update requests
 
@@ -50,4 +51,17 @@ const deleteAccount = async () => {
   return data;
 };
 
-export { update, deleteAccount, getUser };
+const getUserBlogs = async (page: number): Promise<MyBlogs> => {
+  const res = await fetch(`${prodEndpoint}/api/blogs/me?page=${page}`, {
+    method: "GET",
+    credentials: "include",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  const data = await res.json();
+  return data;
+}
+
+export { update, deleteAccount, getUser, getUserBlogs };

@@ -3,7 +3,13 @@ import React from "react";
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const { authUser } = useAuthStore();
+  const { authUser, isAuthResolved } = useAuthStore();
+
+  if (!isAuthResolved) {
+    return (
+      <div className="h-screen w-full flex justify-center items-center">Loading..</div>
+    );
+  }
 
   if (!authUser) {
     return <Navigate to="/auth/login" replace />;

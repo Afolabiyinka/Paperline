@@ -5,16 +5,17 @@ import { useAuthStore } from "./app/auth/store/authStore";
 import { useEffect } from "react";
 
 function App() {
-  const { fetchedUser, } = useFetchUser()
-  const { setAuthUser } = useAuthStore()
+  const { fetchedUser, isLoading, } = useFetchUser()
+  const { setAuthUser, setAuthResolved } = useAuthStore()
 
   useEffect(() => {
-    if (fetchedUser) {
-      setAuthUser(fetchedUser);
+    if (!isLoading) {
+      setAuthUser(fetchedUser || null);
+      setAuthResolved(true);
     }
-  }, [fetchedUser, setAuthUser]);
+  }, [fetchedUser, isLoading, setAuthUser, setAuthResolved]);
   return (
-    <div className="font-['IBM_Plex_Serif'] text-primary">
+    <div className="font-['IBM_Plex_Serif'] text-primary min-h-screen">
       <Routesconfig />
       <Toaster
         position="top-center"

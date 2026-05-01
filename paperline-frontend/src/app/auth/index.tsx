@@ -3,12 +3,20 @@ import { Navigate, Outlet } from "react-router-dom";
 import { useAuthStore } from "./store/authStore";
 
 const AuthLayout = () => {
-  const { authUser } = useAuthStore()
-  if (authUser) {
-    return <Navigate to={`/`} />
+  const { authUser, isAuthResolved } = useAuthStore();
+
+  if (!isAuthResolved) {
+    return (
+      <div className="h-screen w-full flex justify-center items-center ">Loading..</div>
+    );
   }
+
+  if (authUser) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
-    <div className="h-screen w-full">
+    <div className="h-full w-full">
       <nav>
         <Logo />
       </nav>

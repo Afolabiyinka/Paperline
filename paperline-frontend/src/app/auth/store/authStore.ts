@@ -3,18 +3,28 @@ import { create } from "zustand";
 
 type AuthUserStore = {
   authUser: AuthUser | null;
-  setAuthUser: (user: AuthUser) => void;
+  isAuthResolved: boolean;
+
+  setAuthUser: (user: AuthUser | null) => void;
+  setAuthResolved: (value: boolean) => void;
+
   logout: () => void;
 };
 
-
 export const useAuthStore = create<AuthUserStore>((set) => ({
   authUser: null,
+  isAuthResolved: false,
+
   setAuthUser: (user) => {
     set({ authUser: user });
   },
+
+  setAuthResolved: (value) => {
+    set({ isAuthResolved: value });
+  },
+
   logout: () => {
-    set({ authUser: null });
+    set({ authUser: null, isAuthResolved: true });
     window.location.href = "/";
   },
 }));
