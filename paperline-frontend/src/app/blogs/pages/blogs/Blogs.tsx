@@ -6,7 +6,6 @@ import { Frown, Loader2, Plus, Search, X } from "lucide-react";
 import { Link } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
-import Input from "@/components/ui/input";
 import BlogCardSkeleton from "./sub-components/blog-card-skeloton";
 
 const Blogs = () => {

@@ -1,6 +1,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { AtSign, MapPin, Link, MessageCircle, UserPlus, UserCheck } from "lucide-react";
+import { AtSign, MessageCircle, UserPlus, UserCheck } from "lucide-react";
 import { useState } from "react";
 import useBlogs from "@/app/blogs/hooks/useBlogs";
 import { useAuthStore } from "@/app/auth/store/authStore";
