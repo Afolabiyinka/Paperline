@@ -20,7 +20,7 @@ const createBlog = async (req: AuthenticatedRequest, res: Response) => {
       return res.status(400).json({ message: "Title & content is required" });
     }
 
-    await Blog.create({
+    const blog = await Blog.create({
       title,
       content,
       authorId,
@@ -59,8 +59,7 @@ const getParticularBlog = async (req: Request, res: Response) => {
 
 const getAllBlogs = async (req: Request, res: Response) => {
   const page = Math.max(1, parseInt(req.query.page as string) || 1);
-  const limit = Math.min(50, parseInt(req.query.limit as string) || ITEMS_PER_PAGE);
-  const offset = (page - 1) * limit;
+  const offset = (page - 1) * ITEMS_PER_PAGE;
 
   try {
     const { count, rows: blogs } = await Blog.findAndCountAll({
@@ -70,7 +69,7 @@ const getAllBlogs = async (req: Request, res: Response) => {
         attributes: ["id", "username", "email", "profilePic"],
       },
       order: [["createdAt", "DESC"]],
-      limit,
+      limit: ITEMS_PER_PAGE,
       offset,
     });
 
@@ -79,9 +78,8 @@ const getAllBlogs = async (req: Request, res: Response) => {
       pagination: {
         total: count,
         page,
-        limit,
-        totalPages: Math.ceil(count / limit),
-        hasNextPage: page < Math.ceil(count / limit),
+        totalPages: Math.ceil(count / ITEMS_PER_PAGE),
+        hasNextPage: page < Math.ceil(count / ITEMS_PER_PAGE),
         hasPrevPage: page > 1,
       },
     });
@@ -117,8 +115,7 @@ const deleteBlog = async (req: AuthenticatedRequest, res: Response) => {
 const searchBlog = async (req: Request, res: Response) => {
   const { q } = req.query;
   const page = Math.max(1, parseInt(req.query.page as string) || 1);
-  const limit = Math.min(50, parseInt(req.query.limit as string) || ITEMS_PER_PAGE);
-  const offset = (page - 1) * limit;
+  const offset = (page - 1) * ITEMS_PER_PAGE;
 
   if (!q || typeof q !== "string") {
     return res.status(400).json({ message: "Search query is required" });
@@ -138,7 +135,7 @@ const searchBlog = async (req: Request, res: Response) => {
         attributes: ["id", "username", "email", "profilePic"],
       },
       order: [["createdAt", "DESC"]],
-      limit,
+      limit: ITEMS_PER_PAGE,
       offset,
     });
 
@@ -151,9 +148,8 @@ const searchBlog = async (req: Request, res: Response) => {
       pagination: {
         total: count,
         page,
-        limit,
-        totalPages: Math.ceil(count / limit),
-        hasNextPage: page < Math.ceil(count / limit),
+        totalPages: Math.ceil(count / ITEMS_PER_PAGE),
+        hasNextPage: page < Math.ceil(count / ITEMS_PER_PAGE),
         hasPrevPage: page > 1,
       },
     });
@@ -166,8 +162,7 @@ const searchBlog = async (req: Request, res: Response) => {
 const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
   const authorId = req.user?.id;
   const page = Math.max(1, parseInt(req.query.page as string) || 1);
-  const limit = Math.min(50, parseInt(req.query.limit as string) || ITEMS_PER_PAGE);
-  const offset = (page - 1) * limit;
+  const offset = (page - 1) * ITEMS_PER_PAGE;
 
   if (!authorId) {
     return res.status(401).json({ message: "Unauthorized" });
@@ -182,7 +177,7 @@ const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
         attributes: ["id", "username", "email", "profilePic"],
       },
       order: [["createdAt", "DESC"]],
-      limit,
+      limit: ITEMS_PER_PAGE,
       offset,
     });
 
@@ -195,9 +190,8 @@ const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
       pagination: {
         total: count,
         page,
-        limit,
-        totalPages: Math.ceil(count / limit),
-        hasNextPage: page < Math.ceil(count / limit),
+        totalPages: Math.ceil(count / ITEMS_PER_PAGE),
+        hasNextPage: page < Math.ceil(count / ITEMS_PER_PAGE),
         hasPrevPage: page > 1,
       },
     });
