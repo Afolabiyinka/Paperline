@@ -85,7 +85,7 @@ export default function Login() {
         <p className="text-center text-sm text-neutral-500">
           No account?
           <Link
-            to="/auth/signup"
+            to="/signup"
             className="ml-2 text-black hover:underline"
           >
             Create one

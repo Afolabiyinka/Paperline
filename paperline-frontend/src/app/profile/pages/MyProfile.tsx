@@ -1,14 +1,14 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import UpdateProfile from "./updateprofile";
 import { AtSign, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { useAuthStore } from "../auth/store/authStore";
-import { useUserBlogs } from "./hooks/useUserBlogs";
+import { useAuthStore } from "../../auth/store/authStore";
+import { useUserBlogs } from "../../settings/hooks/useUserBlogs";
 import { useState } from "react";
-import MyBlogActions from "./components/myBlogActions";
+import MyBlogActions from "../myBlogActions";
+import SettingsTabs from "@/app/settings/SettingsTabs";
 
-const Settings = () => {
+const MyProfile = () => {
   const { authUser, logout } = useAuthStore();
   const [page, setPage] = useState(1);
   const { error, isLoading, myBlogs, pagination } = useUserBlogs({ page: page })
@@ -43,7 +43,7 @@ const Settings = () => {
 
           </div>
 
-          <UpdateProfile />
+          <SettingsTabs />
         </div>
 
         {/* Divider */}
@@ -151,4 +151,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default MyProfile;

@@ -12,11 +12,15 @@ const BlogPage = () => {
 
   if (!id) return <Noblog />;
 
+
+
   const { particularBlog: blog, isLoading, error } = useParticularBlog(id);
 
   if (isLoading) return <LoadingContainer />;
   if (error || !blog) return <Noblog />;
 
+
+  document.title = `${blog.title}`
   const formattedDate = blog?.createdAt
     ? new Date(blog.createdAt).toLocaleDateString("en-US", {
       year: "numeric",

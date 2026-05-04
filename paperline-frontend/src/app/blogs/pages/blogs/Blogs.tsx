@@ -2,11 +2,12 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import BlogCard from "../../components/BlogCard";
 import { Button } from "@/components/ui/button";
-import { Frown, Loader2, Plus, Search, X } from "lucide-react";
+import { Frown, Loader2, Pen, } from "lucide-react";
 import { Link } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
 import BlogCardSkeleton from "./sub-components/blog-card-skeloton";
+import Input from "@/components/ui/input";
 
 const Blogs = () => {
   const { blogsLoading, blogError, blogs, refetch } = useBlogs();
@@ -56,9 +57,9 @@ const Blogs = () => {
             </p>
           </div>
 
-          <Link to="create" className="flex-shrink-0">
-            <Button className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-normal text-sm px-6">
-              <Plus className="w-4 h-4 mr-2" />
+          <Link to="create" className="shrink-0">
+            <Button size={`lg`}>
+              <Pen className="w-4 h-4 mr-2" />
               Write a story
             </Button>
           </Link>
@@ -69,9 +70,9 @@ const Blogs = () => {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12"
+          className="mb-12 max-w-md"
         >
-          <div className="relative max-w-md">
+          {/* <div className="relative max-w-md">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" />
             <input
               type="text"
@@ -88,7 +89,17 @@ const Blogs = () => {
                 <X className="w-4 h-4" />
               </button>
             )}
-          </div>
+          </div> */}
+          <Input
+
+            startIcon="Search"
+            type="search"
+            placeholder="Search stories..."
+            onChange={(e) => setSearchQuery(e)}
+            value={searchQuery}
+
+
+          />
         </motion.div>
 
         {/* Content Section */}

@@ -30,7 +30,6 @@ const About = () => {
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
           viewport={{ once: true }}
         >
-          {/* Kicker */}
           <p
             className="text-xs font-medium tracking-widest uppercase mb-5"
             style={{ color: "#6b6b6b", fontFamily: "system-ui, sans-serif" }}
@@ -52,7 +51,7 @@ const About = () => {
           </h1>
 
           {/* Divider */}
-          <div className="mb-5" style={{ width: 40, height: 2, background: "#1a1a1a" }} />
+          <div className="mb-5 w-full" style={{ height: 2, background: "#1a1a1a" }} />
 
           {/* Body */}
           <p
@@ -72,12 +71,8 @@ const About = () => {
             </p>
 
             <div
-              className="flex items-stretch overflow-hidden"
-              style={{
-                border: "1px solid #d0cdc8",
-                borderRadius: 4,
-                background: "#fff",
-              }}
+              className="flex items-center overflow-hidden"
+
             >
               <Input
                 startIcon="Mail"
@@ -87,14 +82,7 @@ const About = () => {
               />
               <Button
                 variant="default"
-                className="rounded-none border-l px-5 text-xs font-medium tracking-wide"
-                style={{
-                  borderColor: "#d0cdc8",
-                  background: "#1a1a1a",
-                  color: "#faf9f7",
-                  fontFamily: "system-ui, sans-serif",
-                  letterSpacing: "0.05em",
-                }}
+                size={`lg`}
               >
                 Join
               </Button>

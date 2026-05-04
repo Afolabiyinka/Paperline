@@ -1,5 +1,4 @@
 import { prodEndpoint } from "@/shared/constants/api";
-import { useAuthStore } from "@/app/auth/store/authStore";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import { useMutation } from "@tanstack/react-query";
@@ -9,7 +8,6 @@ export default function useCreateBlog() {
   const { toastError, toastSuccess, toastLoading } = useToastMessage();
   const { content, title, imageUrl, reset } = useCreateStore();
   const navigate = useNavigate();
-  const { authUser } = useAuthStore();
 
   const { mutate } = useMutation({
     mutationFn: async () => {
@@ -23,7 +21,6 @@ export default function useCreateBlog() {
           title,
           content,
           coverImageUrl: imageUrl,
-          authorId: authUser?.id || null,
         }),
       });
 
@@ -39,7 +36,7 @@ export default function useCreateBlog() {
 
     onSuccess: (data) => {
       toastSuccess(data.message || "Blog created successfully");
-      reset(); // clear store after posting
+      reset();
       navigate("/blogs");
     },
 

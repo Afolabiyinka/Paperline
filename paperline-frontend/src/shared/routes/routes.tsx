@@ -1,74 +1,61 @@
-import Onboarding from "@/app/onboarding/onboarding";
-import Profile from "@/app/profile/pages/Profile";
-import { lazy } from "react";
-import type { RouteObject } from "react-router-dom";
+import { authRoutes } from "@/app/auth/auth.routes";
+import { blogRoutes } from "@/app/blogs/blog.routes";
+import { markettingRoutes } from "@/marketing/home.routes";
+import { lazy, useEffect } from "react";
+import { Outlet, useMatches, type RouteObject } from "react-router-dom";
 
-// auth
+
+//Layouts
 const AuthLayout = lazy(() => import("@/app/auth"));
-const Login = lazy(() => import("@/app/auth/pages/login"));
-const SignUp = lazy(() => import("@/app/auth/pages/signup"));
-
-// home
 const HomeLayout = lazy(() => import("@/marketing/index"));
-const Home = lazy(() => import("@/marketing/pages/Home"));
-const About = lazy(() => import("@/marketing/pages/About"));
-const Pricing = lazy(() => import("@/marketing/pages/Pricing"));
-
-// blogs
 const BlogLayout = lazy(() => import("@/app/blogs/pages/Index"));
-const Blogs = lazy(() => import("@/app/blogs/pages/blogs/Blogs"));
-const CreateBlog = lazy(() => import("@/app/blogs/pages/blogs/CreateBlog"));
-const BlogPage = lazy(() => import("@/app/blogs/pages/blogs/BlogPage"));
-
-// settings
-const Settings = lazy(() => import("@/app/settings/Settings"));
-
-// others
 const Notfound = lazy(() => import("@/components/Notfound"));
-const ProctectedRoute = lazy(() => import("./proctectedroute"));
+
+
+const RootWrapper = () => {
+  const matches = useMatches();
+  useEffect(() => {
+    const currentMatch = [...matches].reverse().find((m) =>
+      (m.handle as { title?: string })?.title
+    );
+    const pageTitle = (currentMatch?.handle as { title?: string })?.title || "";
+    document.title = `${pageTitle}`;
+  }, [matches]);
+  return <Outlet />;
+};
 
 export const routes: RouteObject[] = [
   {
-    path: "auth",
-    Component: AuthLayout,
+    element: <RootWrapper />,
     children: [
-      { path: "login", Component: Login },
-      { path: "signup", Component: SignUp },
-    ],
-  },
-  {
-    path: "/",
-    Component: HomeLayout,
-    children: [
-      { index: true, Component: Home },
-      { path: "onboarding", Component: Onboarding },
-      { path: "newsletter", Component: About },
       {
-        path: "settings",
-        element: <ProctectedRoute children={<Settings />} />,
+        path: "",
+        Component: AuthLayout,
+        children: authRoutes
       },
-      { path: "pricing", Component: Pricing },
+      {
+        path: "/",
+        Component: HomeLayout,
+        children: [
+          {
+            children: markettingRoutes
+          },
+          {
+            path: "blogs",
+            Component: BlogLayout,
+            children: blogRoutes
+          },
+        ]
+      },
 
       {
-        path: "blogs",
-        Component: BlogLayout,
-        children: [
-          { index: true, Component: Blogs },
-          {
-            path: "create",
-            element: <ProctectedRoute children={<CreateBlog />} />,
-          },
-          { path: ":id", Component: BlogPage },
-        ],
+        path: "*",
+        Component: Notfound,
+        handle: {
+          title: "Oop's Page not found"
+        }
       },
-    ],
-  },
-  {
-    path: "*",
-    Component: Notfound,
-  },
-  {
-    path: "profile",
-    Component: Profile
+    ]
   }
+
 ];

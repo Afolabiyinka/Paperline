@@ -29,7 +29,7 @@ const Input = ({
       className="
         flex items-center gap-3
         border border-neutral-200
-        px-4 py-3
+        px-4 py-4
         w-full
         bg-white
         focus-within:border-neutral-400
@@ -37,7 +37,7 @@ const Input = ({
       "
     >
 
-      <IconComponent className="w-4 h-4 text-neutral-500" />
+      <IconComponent className="w-5 h-5 text-neutral-500" />
 
       <input
         className="

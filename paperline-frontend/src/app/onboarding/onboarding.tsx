@@ -33,7 +33,10 @@ const Onboarding = () => {
     reader.onloadend = () => setAvatarPreview(reader.result as string);
     reader.readAsDataURL(file);
     const image_url = await uploadImage(file, "paperline/profile_pics");
-    if (image_url) updateProfilePic(image_url);
+    if (image_url) {
+      updateProfilePic(image_url);
+      setAvatarPreview(image_url)
+    }
   };
 
   return (
@@ -50,7 +53,7 @@ const Onboarding = () => {
 
             <CardContent className="grid gap-6">
               <div className="flex flex-col items-center gap-3">
-                <Avatar className="h-20 w-20">
+                <Avatar className="">
                   <AvatarImage src={avatarPreview ?? authUser?.profilePic} />
                   <AvatarFallback>
                     {authUser?.username.substring(0, 2)}

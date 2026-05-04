@@ -29,7 +29,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-white dark:bg-black">
+    <div className="w-full min-h-screen">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-20">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center min-h-[calc(100vh-120px)]">
           {/* LEFT: Content */}
@@ -49,6 +49,7 @@ const Home = () => {
 
             {/* Main Heading */}
             <motion.h1
+
               variants={itemVariants}
               className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal leading-tight text-black dark:text-white"
             >
@@ -68,7 +69,7 @@ const Home = () => {
             <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
               <Button
                 size="lg"
-                className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-normal text-base px-8"
+                className="font-normal text-base"
                 onClick={() => navigate("/blogs")}
               >
                 Start Reading
@@ -77,7 +78,7 @@ const Home = () => {
               <Button
                 variant="ghost"
                 size="lg"
-                className="text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-900 font-normal text-base px-8 group"
+                className="font-normal text-base group"
                 onClick={() => navigate("/blogs/create")}
               >
                 Write a story
@@ -85,12 +86,10 @@ const Home = () => {
               </Button>
             </motion.div>
 
-            {/* Divider */}
             <motion.div variants={itemVariants} className="pt-4">
-              <div className="h-px bg-gray-200 dark:bg-gray-800 w-12" />
+              <div className="h-px w-12" />
             </motion.div>
 
-            {/* Stats/Social Proof */}
             <motion.div variants={itemVariants} className="flex gap-12 pt-4">
               <div>
                 <p className="text-sm text-gray-500 dark:text-gray-400">Stories</p>
@@ -115,7 +114,7 @@ const Home = () => {
             viewport={{ once: true, margin: "-100px" }}
             className="relative hidden lg:flex items-center justify-center"
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-gray-100/40 dark:from-gray-900/40 to-transparent rounded-2xl blur-3xl" />
+            <div className="absolute inset-0  rounded-2xl blur-3xl" />
             <img
               src={landingImg}
               alt="Blogging illustration"

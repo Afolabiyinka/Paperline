@@ -100,7 +100,7 @@ export default function SignUp() {
         <p className="text-center text-sm text-neutral-500">
           Already have an account?
           <Link
-            to="/auth/login"
+            to="/login"
             className="ml-2 text-black hover:underline"
           >
             Sign in

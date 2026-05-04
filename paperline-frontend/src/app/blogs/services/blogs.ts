@@ -1,7 +1,6 @@
 import { prodEndpoint } from "@/shared/constants/api";
 import type { BlogPost } from "../types/types";
 
-prodEndpoint;
 
 async function getAllblogs(): Promise<BlogPost[]> {
   try {

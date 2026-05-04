@@ -4,12 +4,14 @@ import useToastMessage from "@/shared/lib/useToastmsg";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
 import { update } from "../services/user";
+import { queryClient } from "@/shared/constants/api";
 
 export const useUpdateUser = () => {
     const [updatedData, setupdatedData] = useState<Partial<UpdateUserPayload>>(
         {},
     );
-    const { authUser, setAuthUser } = useAuthStore();
+    const [openEdit, setOpenEdit] = useState(false)
+    const { authUser, } = useAuthStore();
 
     const { toastError, toastSuccess } = useToastMessage();
 
@@ -30,10 +32,11 @@ export const useUpdateUser = () => {
         mutationFn: (payload: UpdateUserPayload) => update(payload),
         onSuccess: (data) => {
             toastSuccess(data.message);
-            if (data.user) {
-                setAuthUser(data.user);
-            }
+            queryClient.invalidateQueries({ queryKey: ["user"] })
+            setOpenEdit(false)
+
         },
+
         onError: () => {
             toastError("Something went wrong");
         },
@@ -45,8 +48,6 @@ export const useUpdateUser = () => {
     }
 
     async function updateProfilePic(url: string) {
-        if (!authUser?.id) return toastError("Unathorised");
-
         mutate({ profilePic: url });
 
         setupdatedData((prev) => ({
@@ -61,5 +62,6 @@ export const useUpdateUser = () => {
         handleUpdate,
         loading: isPending,
         updateProfilePic,
+        openEdit, setOpenEdit
     };
 };

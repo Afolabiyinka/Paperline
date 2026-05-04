@@ -3,7 +3,7 @@ import { Feather } from "lucide-react";
 
 const Logo = () => {
   return (
-    <a href="/" className="flex items-center gap-2  p-1.5  w-full">
+    <a href="/" className="flex items-center  p-1.5  w-full">
       <Button className="rounded-full" size={`icon-lg`} variant={`link`}>
         <Feather />
       </Button>

@@ -10,6 +10,7 @@ const Scrollbtn = () => {
   }
   return (
     <Button
+      variant={`ghost`}
       onClick={handleScrollUp}
       className=" backdrop-blur-3xl text-xl rounded-full"
     >
