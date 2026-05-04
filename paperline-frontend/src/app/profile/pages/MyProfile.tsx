@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AtSign, LogOut } from "lucide-react";
+import { AtSign, Loader2, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../auth/store/authStore";
@@ -7,9 +7,12 @@ import { useUserBlogs } from "../../settings/hooks/useUserBlogs";
 import { useState } from "react";
 import MyBlogActions from "../myBlogActions";
 import SettingsTabs from "@/app/settings/SettingsTabs";
+import { useLogout } from "@/app/settings/hooks/useLogout";
 
 const MyProfile = () => {
-  const { authUser, logout } = useAuthStore();
+  const { authUser } = useAuthStore();
+
+  const { logoutLoading, logoutMutate } = useLogout()
   const [page, setPage] = useState(1);
   const { error, isLoading, myBlogs, pagination } = useUserBlogs({ page: page })
 
@@ -137,11 +140,14 @@ const MyProfile = () => {
         <div className="flex justify-end">
 
           <Button
-            onClick={logout}
+            onClick={() => logoutMutate()}
+            disabled={logoutLoading}
             variant="destructive"
           >
-            <LogOut className="w-4 h-4 mr-2" />
-            Log out
+            {logoutLoading ? <Loader2 className="animate-spin" /> : (<>
+              <LogOut className="w-4 h-4 mr-2" />
+              Logout
+            </>)}
           </Button>
 
         </div>

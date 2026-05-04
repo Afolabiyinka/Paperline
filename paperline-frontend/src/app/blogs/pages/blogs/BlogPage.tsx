@@ -5,6 +5,10 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Noblog from "./error/noblog";
 import { Button } from "@/components/ui/button";
 import { ChevronLeft, Heart, MessageCircle } from "lucide-react";
+import DOMPurify from "dompurify";
+import { useEffect } from "react";
+
+
 
 const BlogPage = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,11 +20,20 @@ const BlogPage = () => {
 
   const { particularBlog: blog, isLoading, error } = useParticularBlog(id);
 
+  useEffect(() => {
+    if (blog?.title) {
+      document.title = blog.title;
+    }
+  }, [blog?.title]);
+
+
   if (isLoading) return <LoadingContainer />;
   if (error || !blog) return <Noblog />;
 
 
-  document.title = `${blog.title}`
+
+
+
   const formattedDate = blog?.createdAt
     ? new Date(blog.createdAt).toLocaleDateString("en-US", {
       year: "numeric",
@@ -30,6 +43,9 @@ const BlogPage = () => {
     : null;
 
   //Sanitizing the blog content
+
+
+  const sanitizedContent = DOMPurify.sanitize(blog.content);
 
   return (
     <div className="min-h-screen bg-white px-4 py-12">
@@ -48,7 +64,7 @@ const BlogPage = () => {
         <h1 className="text-4xl md:text-5xl font-serif font-normal tracking-tight text-black mb-6">
           {blog.title}
         </h1>
-        <div className="flex items-center justify-between mb-10 text-sm text-neutral-600">
+        <div className="flex md:items-center gap-4 justify-between mb-10 text-sm text-neutral-600 flex-col md:flex-row">
 
           {/* Left: Author info */}
           <div className="flex items-center gap-3">
@@ -101,7 +117,7 @@ const BlogPage = () => {
         prose-lg 
         max-w-none
       "
-          dangerouslySetInnerHTML={{ __html: blog.content }}
+          dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </article>
 

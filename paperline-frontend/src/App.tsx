@@ -18,7 +18,7 @@ function App() {
     <div className="font-['IBM_Plex_Serif'] text-primary min-h-screen">
       <Routesconfig />
       <Toaster
-        position="top-center"
+        position="top-left"
         toastOptions={{
           style: {
             background: "#fff",

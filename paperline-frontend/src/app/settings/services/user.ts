@@ -64,4 +64,13 @@ const getUserBlogs = async (page: number): Promise<MyBlogs> => {
   return data;
 }
 
-export { update, deleteAccount, getUser, getUserBlogs };
+const logout = async () => {
+  const res = await fetch(`${prodEndpoint}/api/auth/logout`, {
+    method: "POST",
+    credentials: "include",
+  })
+  const data = await res.json();
+  return data;
+}
+
+export { update, deleteAccount, getUser, getUserBlogs, logout };
