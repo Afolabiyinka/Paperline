@@ -52,7 +52,7 @@ const deleteAccount = async () => {
 };
 
 const getUserBlogs = async (page: number): Promise<MyBlogs> => {
-  const res = await fetch(`${prodEndpoint}/api/blogs/me?page=${page}`, {
+  const res = await fetch(`${prodEndpoint}/api/blogs/my-blogs?page=${page}`, {
     method: "GET",
     credentials: "include",
     headers: {

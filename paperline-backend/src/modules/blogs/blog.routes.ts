@@ -6,7 +6,7 @@ import {
   searchBlog,
   deleteBlog,
   getUserBlogs,
-} from "./blogController";
+} from "./blog.controller";
 import { authMiddleware } from "../../shared/middleware/authMiddleWare";
 
 export const blogRouter = Router();
@@ -14,9 +14,10 @@ export const blogRouter = Router();
 // Public
 blogRouter.get("/", getAllBlogs);
 blogRouter.get("/search", searchBlog);
+blogRouter.get("/my-blogs", authMiddleware, getUserBlogs);
 blogRouter.get("/:id", getParticularBlog);
+
 
 // Protected
 blogRouter.post("/", authMiddleware, createBlog);
-blogRouter.get("/my-blogs", authMiddleware, getUserBlogs);
 blogRouter.delete("/:id", authMiddleware, deleteBlog);             
