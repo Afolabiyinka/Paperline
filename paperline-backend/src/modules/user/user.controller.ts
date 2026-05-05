@@ -1,7 +1,7 @@
-import { User } from "../../models/user/User";
+import { User } from "./user.model";
 import { Response } from "express";
-import { profilePicPayload, updateProfilePayload } from "../../types/user";
-import { AuthenticatedRequest } from "../../types/request/types";
+import { updateProfilePayload } from "./user.types";
+import { AuthenticatedRequest } from "../../shared/types/types";
 
 
 const getUser = async (req: AuthenticatedRequest, res: Response) => {

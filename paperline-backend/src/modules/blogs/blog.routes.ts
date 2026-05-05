@@ -6,14 +6,15 @@ import {
   searchBlog,
   deleteBlog,
   getUserBlogs,
-} from "../controllers/posts/blogController";
-import { authMiddleware } from "../middleware/authMiddleWare";
+} from "./blogController";
+import { authMiddleware } from "../../shared/middleware/authMiddleWare";
 
 export const blogRouter = Router();
 
+blogRouter.use(authMiddleware);
 blogRouter.route("/").get(getAllBlogs);
-blogRouter.route("/create").post(authMiddleware, createBlog);
+blogRouter.route("/create").post(createBlog);
 blogRouter.route("/search").get(searchBlog);
-blogRouter.route("/me").get(authMiddleware, getUserBlogs);
-blogRouter.route("/delete").delete(authMiddleware, deleteBlog);
+blogRouter.route("/me").get(getUserBlogs);
+blogRouter.route("/delete").delete(deleteBlog);
 blogRouter.route("/:id").get(getParticularBlog);             

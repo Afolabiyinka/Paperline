@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../../config/db";
+import { sequelize } from "../../shared/database/connect";
 export const User = sequelize.define("User", {
   id: {
     type: DataTypes.UUID,
