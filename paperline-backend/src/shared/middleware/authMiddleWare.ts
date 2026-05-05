@@ -1,7 +1,7 @@
 import { NextFunction, Response } from "express";
 import jwt, { TokenExpiredError } from "jsonwebtoken";
-import { DecodedUser } from "../types/auth";
-import { AuthenticatedRequest } from "../types/request/types";
+import { DecodedUser } from "../../modules/auth/auth.types";
+import { AuthenticatedRequest } from "../types/types";
 
 const jwtSecret = process.env.JWT_SECRET;
 

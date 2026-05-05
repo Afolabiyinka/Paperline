@@ -1,5 +1,5 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../../config/db";
+import { sequelize } from "../../shared/database/connect";
 
 export const Comments = sequelize.define("Comment", {
   id: {

@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { Op } from "sequelize";
-import { CreateBlogPayload, DeleteBlogPayload } from "../../types/blog";
-import { Blog } from "../../models/posts/Blog";
-import { User } from "../../models/user/User";
-import { AuthenticatedRequest } from "../../types/request/types";
+import { CreateBlogPayload, DeleteBlogPayload } from "./blog.types";
+import { Blog } from "./blog.model";
+import { User } from "../user/user.model";
+import { AuthenticatedRequest } from "../../shared/types/types";
 
 const ITEMS_PER_PAGE = 10;
 

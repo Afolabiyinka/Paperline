@@ -1,8 +1,8 @@
-import { sequelize } from "../config/db";
-import { User } from "./user/User";
-import { Blog } from "./posts/Blog";
-import { Comments } from "./posts/Comment";
-import { Likes } from "./posts/Like";
+import { sequelize } from "./connect";
+import { User } from "../../modules/user/user.model";
+import { Blog } from "../../modules/blogs/blog.model";
+import { Comments } from "../../modules/comment/comment.model";
+import { Likes } from "../../modules/likes/likes.model";
 
 User.hasMany(Blog, {
   foreignKey: "authorId",

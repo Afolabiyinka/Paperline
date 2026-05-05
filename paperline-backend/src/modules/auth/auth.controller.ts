@@ -1,11 +1,11 @@
 import { Response } from "express";
-import { LoginPayload, RegisterPayload } from "../../types/auth";
-import { User } from "../../models/user/User";
+import { LoginPayload, RegisterPayload } from "./auth.types";
+import { User } from "../user/user.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import { configDotenv } from "dotenv";
-import { AuthenticatedRequest } from "../../types/request/types";
+import { AuthenticatedRequest } from "../../shared/types/types";
 
 configDotenv();
 

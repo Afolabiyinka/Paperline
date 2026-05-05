@@ -1,8 +1,8 @@
 import { DataTypes, Model, Optional } from "sequelize";
-import { sequelize } from "../../config/db";
-import { User } from "../user/User";
+import { sequelize } from "../../shared/database/connect";
+import { User } from "../user/user.model";
 
-// DB-level attributes — every column on the table
+// DB-level attributes
 interface BlogAttributes {
   id: string;
   title: string;
