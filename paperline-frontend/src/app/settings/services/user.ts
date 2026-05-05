@@ -6,7 +6,7 @@ import type { MyBlogs } from "../types/types";
 
 const getUser = async () => {
   try {
-    const res = await fetch(`${prodEndpoint}/api/auth/me`, {
+    const res = await fetch(`${prodEndpoint}/api/me`, {
       credentials: "include",
     });
 

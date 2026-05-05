@@ -11,10 +11,12 @@ import { authMiddleware } from "../../shared/middleware/authMiddleWare";
 
 export const blogRouter = Router();
 
-blogRouter.use(authMiddleware);
-blogRouter.route("/").get(getAllBlogs);
-blogRouter.route("/create").post(createBlog);
-blogRouter.route("/search").get(searchBlog);
-blogRouter.route("/me").get(getUserBlogs);
-blogRouter.route("/delete").delete(deleteBlog);
-blogRouter.route("/:id").get(getParticularBlog);             
+// Public
+blogRouter.get("/", getAllBlogs);
+blogRouter.get("/search", searchBlog);
+blogRouter.get("/:id", getParticularBlog);
+
+// Protected
+blogRouter.post("/", authMiddleware, createBlog);
+blogRouter.get("/my-blogs", authMiddleware, getUserBlogs);
+blogRouter.delete("/:id", authMiddleware, deleteBlog);             
