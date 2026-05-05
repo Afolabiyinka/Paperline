@@ -11,7 +11,7 @@ export default function useCreateBlog() {
 
   const { mutate } = useMutation({
     mutationFn: async () => {
-      const res = await fetch(`${prodEndpoint}/api/blogs/create`, {
+      const res = await fetch(`${prodEndpoint}/api/blogs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

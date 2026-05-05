@@ -6,7 +6,7 @@ import type { MyBlogs } from "../types/types";
 
 const getUser = async () => {
   try {
-    const res = await fetch(`${prodEndpoint}/api/auth/me`, {
+    const res = await fetch(`${prodEndpoint}/api/me`, {
       credentials: "include",
     });
 
@@ -19,7 +19,7 @@ const getUser = async () => {
 };
 
 const update = async (data: Partial<UpdateUserPayload>) => {
-  const res = await fetch(`${prodEndpoint}/api/auth/edit-profile`, {
+  const res = await fetch(`${prodEndpoint}/api/me`, {
     method: "PUT",
     credentials: "include",
     headers: {
@@ -39,7 +39,7 @@ const update = async (data: Partial<UpdateUserPayload>) => {
 };
 
 const deleteAccount = async () => {
-  const res = await fetch(`${prodEndpoint}/api/auth/delete`, {
+  const res = await fetch(`${prodEndpoint}/api/me`, {
     method: "DELETE",
     credentials: "include",
     headers: {
