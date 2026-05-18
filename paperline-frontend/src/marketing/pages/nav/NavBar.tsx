@@ -5,6 +5,7 @@ import { useIsMobile } from "@/shared/hooks/useMobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Search, Bell } from "lucide-react";
+
 import { AnimatePresence, motion } from "framer-motion";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useFetchUser } from "@/app/auth/hooks/useFetchUser";

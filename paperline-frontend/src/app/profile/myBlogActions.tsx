@@ -14,7 +14,7 @@ const MyBlogActions = () => {
                 <Button
                     variant="ghost"
                     size="icon"
-                    className="h-7 w-7 rounded-md opacity-0 group-hover:opacity-100 transition-opacity"
+                    className="h-7 w-7 rounded-md transition-opacity"
                 >
                     <MoreHorizontal className="h-4 w-4 text-neutral-500" />
                 </Button>

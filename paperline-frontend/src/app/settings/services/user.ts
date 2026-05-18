@@ -19,7 +19,7 @@ const getUser = async () => {
 };
 
 const update = async (data: Partial<UpdateUserPayload>) => {
-  const res = await fetch(`${prodEndpoint}/api/auth/edit-profile`, {
+  const res = await fetch(`${prodEndpoint}/api/me`, {
     method: "PUT",
     credentials: "include",
     headers: {

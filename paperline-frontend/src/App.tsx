@@ -19,12 +19,13 @@ function App() {
       <Routesconfig />
       <Toaster
         position="top-left"
+        richColors
         toastOptions={{
           style: {
             background: "#fff",
             color: "#111",
             border: "1px solid #e5e5e5",
-            borderRadius: "10px",
+            borderRadius: "100px",
             fontSize: "14px",
           },
         }}

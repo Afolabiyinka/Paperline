@@ -1,21 +1,14 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
 import BlogCard from "../../components/BlogCard";
 import { Button } from "@/components/ui/button";
-import { Frown, Loader2, Pen, } from "lucide-react";
+import { Frown, Loader2, Pen } from "lucide-react";
 import { Link } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
 import type { BlogPost } from "../../types/types";
 import BlogCardSkeleton from "./sub-components/blog-card-skeloton";
-import Input from "@/components/ui/input";
 
 const Blogs = () => {
   const { blogsLoading, blogError, blogs, refetch } = useBlogs();
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const filteredBlogs = blogs.filter((blog: BlogPost) =>
-    blog.title?.toLowerCase().includes(searchQuery.toLowerCase())
-  );
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -52,54 +45,18 @@ const Blogs = () => {
             <h1 className="text-5xl md:text-6xl font-serif font-normal text-black dark:text-white leading-tight mb-2">
               Latest stories
             </h1>
+
             <p className="text-lg text-gray-600 dark:text-gray-400 font-light">
               Discover and explore stories from our community
             </p>
           </div>
 
           <Link to="create" className="shrink-0">
-            <Button size={`lg`}>
+            <Button size="lg">
               <Pen className="w-4 h-4 mr-2" />
               Write a story
             </Button>
           </Link>
-        </motion.div>
-
-        {/* Search Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12 max-w-md"
-        >
-          {/* <div className="relative max-w-md">
-            <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 dark:text-gray-500 pointer-events-none" />
-            <input
-              type="text"
-              placeholder="Search stories..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2.5 text-sm rounded-lg border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-gray-300 dark:focus:ring-gray-700 transition-all"
-            />
-            {searchQuery && (
-              <button
-                onClick={() => setSearchQuery("")}
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            )}
-          </div> */}
-          <Input
-
-            startIcon="Search"
-            type="search"
-            placeholder="Search stories..."
-            onChange={(e) => setSearchQuery(e)}
-            value={searchQuery}
-
-
-          />
         </motion.div>
 
         {/* Content Section */}
@@ -124,12 +81,17 @@ const Blogs = () => {
             className="flex flex-col items-center justify-center gap-6 py-20"
           >
             <div className="rounded-full bg-gray-100 dark:bg-gray-900 p-6">
-              <Frown size={48} className="stroke-1 text-gray-400 dark:text-gray-600" />
+              <Frown
+                size={48}
+                className="stroke-1 text-gray-400 dark:text-gray-600"
+              />
             </div>
+
             <div className="text-center">
               <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">
                 Something went wrong
               </p>
+
               <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
                 We couldn't load the stories. Please try again.
               </p>
@@ -143,7 +105,7 @@ const Blogs = () => {
               Try again
             </Button>
           </motion.div>
-        ) : filteredBlogs.length === 0 ? (
+        ) : blogs.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,12 +113,11 @@ const Blogs = () => {
             className="text-center py-20"
           >
             <p className="text-lg text-gray-600 dark:text-gray-400 mb-2">
-              {searchQuery ? "No stories found" : "No stories yet"}
+              No stories yet
             </p>
+
             <p className="text-sm text-gray-500 dark:text-gray-500">
-              {searchQuery
-                ? "Try adjusting your search terms"
-                : "Be the first to write a story"}
+              Be the first to write a story
             </p>
           </motion.div>
         ) : (
@@ -166,7 +127,7 @@ const Blogs = () => {
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
-            {filteredBlogs.map((blog: BlogPost) => (
+            {blogs.map((blog: BlogPost) => (
               <motion.div key={blog.id} variants={itemVariants}>
                 <BlogCard blog={blog} />
               </motion.div>

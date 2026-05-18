@@ -18,7 +18,11 @@ export default function useLogin() {
     mutationFn: (payload: LoginPayload) => login(payload),
     onSuccess: (data) => {
       toastSuccess(data.message || "Logged in successfully");
-      navigate("/")
+      if (window.history.state && window.history.state.idx > 0) {
+        navigate(-1);
+      } else {
+        navigate("/");
+      }
     },
     onError: (err: any) => {
       toastError(err.message || "Something went wrong");
