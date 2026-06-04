@@ -13,6 +13,8 @@ async function getAllblogs(): Promise<BlogPost[]> {
   return [];
 }
 
+
+
 async function getParticularBlog(
   id: number | string,
 ): Promise<BlogPost | null> {
@@ -26,4 +28,18 @@ async function getParticularBlog(
   return null;
 }
 
-export { getAllblogs, getParticularBlog };
+async function deleteBlog(id: string): Promise<void> {
+  try {
+    const res = await fetch(`${prodEndpoint}/api/blogs/${id}`, {
+      method: "DELETE",
+      credentials: "include",
+    });
+    if (!res.ok) {
+      throw new Error("Failed to delete blog");
+    }
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export { getAllblogs, getParticularBlog, deleteBlog };

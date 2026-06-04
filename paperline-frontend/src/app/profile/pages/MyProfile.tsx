@@ -89,7 +89,7 @@ const MyProfile = () => {
             myBlogs.map((blog) => (
               <div
                 key={blog.id}
-                className="p-3 border border-neutral-100 hover:border-neutral-300 transition rounded-md flex items-center justify-between group"
+                className="p-3 border-b border-border hover:border-neutral-300 transition flex items-center justify-between group"
               >
                 <Link to={`/blogs/${blog.id}`} className="flex-1">
                   <div>
@@ -105,7 +105,7 @@ const MyProfile = () => {
                   </div>
                 </Link>
 
-                <MyBlogActions />
+                <MyBlogActions blogId={blog.id} />
               </div>
             ))
           )}

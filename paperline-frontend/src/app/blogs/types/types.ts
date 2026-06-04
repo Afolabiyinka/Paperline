@@ -1,5 +1,5 @@
 type BlogPost = {
-  id: string | number;
+  id: string;
   title: string;
   content: string;
   coverImageUrl: string;

@@ -1,17 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
-import { useCloudinary } from "@/shared/utils/cloudinary";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 import { ImageUp, UploadCloud, X } from "lucide-react";
 
 const BlogCoverUploader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const { uploadImage, uploading } = useCloudinary();
   const { toastError } = useToastMessage();
-  const { setImageUrl } = useCreateStore();
+  const { setImageFile } = useCreateStore();
+
+  // Revoke object URL on unmount to avoid memory leaks
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   const handleClick = () => inputRef.current?.click();
 
@@ -20,42 +24,30 @@ const BlogCoverUploader = () => {
     if (!file) return;
 
     if (!file.type.startsWith("image/")) {
-      toastError("Only image files allowed");
+      toastError("Only image files are allowed");
       return;
     }
-
     if (file.size > 3 * 1024 * 1024) {
       toastError("Image must be under 3MB");
       return;
     }
 
-    setPreview(prev => {
+    setPreview((prev) => {
       if (prev) URL.revokeObjectURL(prev);
       return URL.createObjectURL(file);
     });
-    setImage(file);
+    setImageFile(file); // passes the File to the store, which handles Cloudinary upload
     e.target.value = "";
   };
 
   const handleRemove = () => {
     if (preview) URL.revokeObjectURL(preview);
     setPreview(null);
-    setImage(null);
-    setImageUrl("");
+    setImageFile(null);
   };
-
-  useEffect(() => {
-    if (!image) return;
-    const upload = async () => {
-      const url = await uploadImage(image, "paperline/blog_covers");
-      if (url) setImageUrl(url);
-    };
-    upload();
-  }, [image, uploadImage, setImageUrl]);
 
   return (
     <div className="w-full">
-
       <input
         ref={inputRef}
         type="file"
@@ -81,19 +73,17 @@ const BlogCoverUploader = () => {
             <button
               type="button"
               onClick={handleClick}
-              disabled={uploading}
-              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors"
+              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <ImageUp className="w-3.5 h-3.5" />
-              {uploading ? "Uploading…" : "Change"}
+              Change
             </button>
 
             <button
               type="button"
               onClick={handleRemove}
-              disabled={uploading}
-              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors"
+              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <X className="w-3.5 h-3.5" />
@@ -101,25 +91,15 @@ const BlogCoverUploader = () => {
             </button>
           </div>
 
-          {/* Uploading bar */}
-          {uploading && (
-            <div className="absolute bottom-0 left-0 w-full h-0.5 bg-neutral-200">
-              <div className="h-full bg-neutral-800 animate-pulse w-2/3" />
-            </div>
-          )}
         </div>
-
       ) : (
         /* ── Empty state ── */
         <button
           type="button"
           onClick={handleClick}
-          disabled={uploading}
-          className="w-full h-72 flex flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 hover:border-neutral-400 bg-neutral-50 hover:bg-white transition-all duration-300 group"
+          className="w-full h-72 flex flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 hover:border-neutral-400 bg-neutral-50 hover:bg-white transition-all duration-300 group disabled:opacity-50 disabled:pointer-events-none"
         >
-          <UploadCloud
-            className="w-6 h-6 text-neutral-300 group-hover:text-neutral-500 transition-colors duration-300"
-          />
+          <UploadCloud className="w-6 h-6 text-neutral-300 group-hover:text-neutral-500 transition-colors duration-300" />
           <div
             className="flex flex-col items-center gap-1"
             style={{ fontFamily: "system-ui, sans-serif" }}
@@ -132,9 +112,7 @@ const BlogCoverUploader = () => {
             </span>
           </div>
         </button>
-
       )}
-
     </div>
   );
 };
