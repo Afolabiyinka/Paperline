@@ -6,7 +6,7 @@ import useCreateBlog from "../../hooks/useCreateBlog";
 import TextEditor from "../../components/create-blog/TextEditor";
 
 const CreateBlog = () => {
-  const { createBlog } = useCreateBlog();
+  const { createBlog, imageUploading, creatingBlog } = useCreateBlog();
   const { title, setTitle } = useCreateStore();
 
   return (
@@ -43,13 +43,16 @@ const CreateBlog = () => {
 
           <Button
             variant="default"
+            disabled={imageUploading || creatingBlog}
             size="sm"
             onClick={createBlog}
             className="flex items-center gap-1.5 text-xs font-medium rounded-full px-4"
             style={{ background: "#1a1a1a", color: "#faf9f7" }}
           >
-            <Send size={13} />
-            Publish
+            {imageUploading || creatingBlog ? "Creating..." : <span className="flex items-center gap-2">
+              <Send size={13} />
+              Publish
+            </span>}
           </Button>
         </div>
       </header>

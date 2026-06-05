@@ -17,6 +17,7 @@ function App() {
   return (
     <div className="font-['IBM_Plex_Serif'] text-primary min-h-screen">
       <Routesconfig />
+
       <Toaster
         position="top-left"
         richColors
@@ -24,9 +25,7 @@ function App() {
           style: {
             background: "#fff",
             color: "#111",
-            border: "1px solid #e5e5e5",
-            borderRadius: "100px",
-            fontSize: "14px",
+            borderRadius: "1px",
           },
         }}
       />    </div>

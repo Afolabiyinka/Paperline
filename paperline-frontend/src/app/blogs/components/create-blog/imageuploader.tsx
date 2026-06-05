@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-import useToastMessage from "@/shared/lib/useToastmsg";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 import { ImageUp, UploadCloud, X } from "lucide-react";
 
@@ -7,7 +6,6 @@ const BlogCoverUploader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
-  const { toastError } = useToastMessage();
   const { setImageFile } = useCreateStore();
 
   // Revoke object URL on unmount to avoid memory leaks
@@ -23,20 +21,11 @@ const BlogCoverUploader = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      toastError("Only image files are allowed");
-      return;
-    }
-    if (file.size > 3 * 1024 * 1024) {
-      toastError("Image must be under 3MB");
-      return;
-    }
-
     setPreview((prev) => {
       if (prev) URL.revokeObjectURL(prev);
       return URL.createObjectURL(file);
     });
-    setImageFile(file); // passes the File to the store, which handles Cloudinary upload
+    setImageFile(file);
     e.target.value = "";
   };
 
@@ -108,7 +97,7 @@ const BlogCoverUploader = () => {
               Add a cover image
             </span>
             <span className="text-xs text-neutral-400">
-              JPEG, PNG or WebP · max 3 MB
+              JPEG, PNG or WebP · max 5 MB
             </span>
           </div>
         </button>

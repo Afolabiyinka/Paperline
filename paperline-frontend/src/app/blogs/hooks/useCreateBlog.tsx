@@ -9,9 +9,9 @@ export default function useCreateBlog() {
   const { toastError, toastSuccess, toastLoading } = useToastMessage();
   const { content, title, imageFile, reset } = useCreateStore();
   const navigate = useNavigate();
-  const { uploadImage } = useCloudinary();
+  const { uploadImage, uploading } = useCloudinary();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: async (coverImageUrl: string | null) => {
       const res = await fetch(`${prodEndpoint}/api/blogs`, {
         method: "POST",
@@ -49,5 +49,5 @@ export default function useCreateBlog() {
     mutate(coverImageUrl);
   };
 
-  return { createBlog };
+  return { createBlog, imageUploading: uploading, creatingBlog: isPending };
 }

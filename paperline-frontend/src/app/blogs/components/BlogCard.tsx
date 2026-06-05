@@ -15,7 +15,7 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
         <img
           src={blog.coverImageUrl}
           alt={blog.title}
-          className="h-60 w-full object-cover grayscale group-hover:grayscale-0 transition duration-500"
+          className="h-60 w-full object-cover  transition duration-500"
         />
       </div>
 

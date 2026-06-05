@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { ChevronLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const Noblog = () => {
@@ -6,9 +7,6 @@ const Noblog = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center text-center px-6 space-y-6">
-
-
-
       {/* Code */}
       <h1 className="text-4xl font-serif text-black">
         404
@@ -22,9 +20,10 @@ const Noblog = () => {
       {/* Action */}
       <Button
         onClick={() => navigate(-1)}
-        variant="ghost"
+        variant="secondary"
         className="text-sm"
       >
+        <ChevronLeft className="w-4 h-4" />
         Go back
       </Button>
 

@@ -2,7 +2,7 @@ import { useState } from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
 
 export const useCloudinary = () => {
-  const { toastError, toastSuccess } = useToastMessage();
+  const { toastError } = useToastMessage();
   const [uploading, setUploading] = useState(false);
 
   const CLOUD_NAME = import.meta.env.VITE_CLD_CLOUDNAME;
@@ -42,7 +42,6 @@ export const useCloudinary = () => {
       if (!res.ok) throw new Error("Upload failed");
 
       const data = await res.json();
-      toastSuccess("Image uploaded successfully!");
       return data.secure_url as string;
     } catch (err) {
       console.error("Cloudinary upload error:", err);

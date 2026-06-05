@@ -69,7 +69,7 @@ const MyBlogActions = ({ blogId }: { blogId: string }) => {
                             variant="destructive"
                             disabled={loading}
                             onClick={handleDelete}
-                            size={`lg`}
+                            size={`default`}
                         >
                             <Trash2 />
                             Delete Post

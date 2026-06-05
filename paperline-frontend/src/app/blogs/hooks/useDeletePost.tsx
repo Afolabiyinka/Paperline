@@ -11,7 +11,8 @@ export const useDeleteBlog = (id: string) => {
         onMutate: () => toastLoading("Deleting blog…"),
         onSuccess: () => {
             toastSuccess("Blog deleted successfully")
-            queryClient.invalidateQueries({ queryKey: ["myBlogs"] })
+            queryClient.invalidateQueries({ queryKey: ["my-blogs"] });
+            queryClient.invalidateQueries({ queryKey: ["blogs"] });
         },
         onError: (err) => toastError(err.message),
     })
