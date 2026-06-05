@@ -3,6 +3,7 @@ import Routesconfig from "./shared/routes/routesconfig";
 import { useFetchUser } from "./app/auth/hooks/useFetchUser";
 import { useAuthStore } from "./app/auth/store/authStore";
 import { useEffect } from "react";
+import Scrollbtn from "./components/custom/Scrollbtn";
 
 function App() {
   const { fetchedUser, isLoading, } = useFetchUser()
@@ -17,6 +18,7 @@ function App() {
   return (
     <div className="font-['IBM_Plex_Serif'] text-primary min-h-screen">
       <Routesconfig />
+      <Scrollbtn />
 
       <Toaster
         position="top-left"

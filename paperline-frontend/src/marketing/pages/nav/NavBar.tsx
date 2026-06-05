@@ -48,11 +48,9 @@ const NavBar = () => {
 
         {/* Right Section: Search + Auth */}
         <div className="flex items-center gap-4 md:gap-6">
-          {!isMobile && (
-            <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-              <Search size={18} onClick={() => navigate("/search")} />
-            </button>
-          )}
+          <Button size={`icon-lg`} variant={`ghost`} onClick={() => navigate("/search")}>
+            <Search />
+          </Button>
 
           {isLoading ? (
             <div className="flex items-center gap-3">
@@ -61,9 +59,11 @@ const NavBar = () => {
           ) : authUser ? (
             <div className="flex items-center gap-4">
               {!isMobile && (
-                <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+                <Button
+                  size={`icon-lg`} variant={`ghost`}
+                >
                   <Bell size={18} />
-                </button>
+                </Button>
               )}
 
               <Avatar
@@ -160,7 +160,7 @@ const NavBar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </nav >
   );
 };
 

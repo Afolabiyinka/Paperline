@@ -1,5 +1,4 @@
 import Logo from "@/components/custom/Logo";
-import Scrollbtn from "@/components/custom/Scrollbtn";
 import { motion } from "framer-motion";
 
 const SOCIAL_LINKS = [
@@ -97,7 +96,6 @@ export default function Footer() {
           <p className="text-xs text-gray-500 dark:text-gray-500 uppercase tracking-wide">
             © {currentYear} Paperline. All rights reserved.
           </p>
-          <Scrollbtn />
         </div>
       </div>
     </footer>
