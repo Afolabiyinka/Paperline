@@ -71,7 +71,7 @@ const ProfilePicDialog = () => {
         <div className="flex flex-col items-center gap-4">
 
           <Avatar className="w-28 h-28">
-            <AvatarImage src={preview} />
+            <AvatarImage src={preview || updatedData.profilePic} />
             <AvatarFallback>
               {updatedData?.username?.substring(0, 2)}
             </AvatarFallback>
@@ -92,7 +92,7 @@ const ProfilePicDialog = () => {
             htmlFor="profile-upload"
             className="text-sm text-neutral-600 hover:text-black cursor-pointer transition"
           >
-            Choose image
+            {updatedData.profilePic ? "Change photo" : "Upload photo"}
           </label>
 
           <p className="text-xs text-neutral-400">

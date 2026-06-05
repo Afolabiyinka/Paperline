@@ -50,7 +50,7 @@ const NavBar = () => {
         <div className="flex items-center gap-4 md:gap-6">
           {!isMobile && (
             <button className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-              <Search size={18} />
+              <Search size={18} onClick={() => navigate("/search")} />
             </button>
           )}
 

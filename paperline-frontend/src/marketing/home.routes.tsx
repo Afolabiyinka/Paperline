@@ -1,6 +1,7 @@
 import { lazy } from "react";
 import type { RouteObject } from "react-router-dom";
 import MyProfile from "@/app/profile/pages/MyProfile";
+import SearchPage from "@/app/search/pages/SearchPage";
 
 const Home = lazy(() => import("@/marketing/pages/Home"));
 const About = lazy(() => import("@/marketing/pages/About"));
@@ -34,4 +35,9 @@ export const markettingRoutes: RouteObject[] = [
         Component: Pricing,
         handle: { title: "Plans" }
     },
+    {
+        path: "search",
+        Component: SearchPage,
+        handle: { title: "Search results" },
+    }
 ];
