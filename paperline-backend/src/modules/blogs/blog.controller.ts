@@ -90,7 +90,7 @@ const getAllBlogs = async (req: Request, res: Response) => {
 };
 
 const deleteBlog = async (req: AuthenticatedRequest, res: Response) => {
-  const { id } = req.body as DeleteBlogPayload;
+  const { id } = req.params;
   const authorId = req.user?.id;
 
   try {
