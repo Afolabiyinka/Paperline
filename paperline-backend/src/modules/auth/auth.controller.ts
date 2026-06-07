@@ -55,7 +55,6 @@ const loginUser = async (req: AuthenticatedRequest, res: Response) => {
     console.error("Login error:", err);
     return res.status(500).json({
       message: "Something went wrong",
-      error: err instanceof Error ? err.message : "Unknown error",
     });
   }
 };

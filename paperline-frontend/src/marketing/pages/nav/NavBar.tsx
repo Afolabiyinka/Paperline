@@ -21,12 +21,10 @@ const NavBar = () => {
   return (
     <nav className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
         <div className="shrink-0">
           <Logo />
         </div>
 
-        {/* Desktop Nav Links */}
         {!isMobile && (
           <div className="flex items-center gap-8 flex-1 ml-8">
             {NAVLINKS.map((link) => (
@@ -34,9 +32,10 @@ const NavBar = () => {
                 key={link.path}
                 to={link.path}
                 className={({ isActive }) =>
-                  `text-sm font-normal transition-colors duration-200 ${isActive
-                    ? "text-black dark:text-white font-medium"
-                    : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
+                  `text-sm font-normal transition-colors duration-200 ${
+                    isActive
+                      ? "text-black dark:text-white font-medium"
+                      : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
                   }`
                 }
               >
@@ -46,9 +45,12 @@ const NavBar = () => {
           </div>
         )}
 
-        {/* Right Section: Search + Auth */}
         <div className="flex items-center gap-4 md:gap-6">
-          <Button size={`icon-lg`} variant={`ghost`} onClick={() => navigate("/search")}>
+          <Button
+            size={`icon-lg`}
+            variant={`ghost`}
+            onClick={() => navigate("/search")}
+          >
             <Search />
           </Button>
 
@@ -59,9 +61,7 @@ const NavBar = () => {
           ) : authUser ? (
             <div className="flex items-center gap-4">
               {!isMobile && (
-                <Button
-                  size={`icon-lg`} variant={`ghost`}
-                >
+                <Button size={`icon-lg`} variant={`ghost`}>
                   <Bell size={18} />
                 </Button>
               )}
@@ -94,7 +94,6 @@ const NavBar = () => {
             </div>
           )}
 
-          {/* Mobile Menu Toggle */}
           {isMobile && (
             <button
               onClick={() => setOpen(!open)}
@@ -106,7 +105,6 @@ const NavBar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
         {isMobile && open && (
           <motion.div
@@ -123,9 +121,10 @@ const NavBar = () => {
                   to={link.path}
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
-                    `text-sm font-normal transition-colors ${isActive
-                      ? "text-black dark:text-white font-medium"
-                      : "text-gray-600 dark:text-gray-400"
+                    `text-sm font-normal transition-colors ${
+                      isActive
+                        ? "text-black dark:text-white font-medium"
+                        : "text-gray-600 dark:text-gray-400"
                     }`
                   }
                 >
@@ -160,7 +159,7 @@ const NavBar = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav >
+    </nav>
   );
 };
 

@@ -20,7 +20,7 @@ const createBlog = async (req: AuthenticatedRequest, res: Response) => {
       return res.status(400).json({ message: "Title & content is required" });
     }
 
-    const blog = await Blog.create({
+    await Blog.create({
       title,
       content,
       authorId,

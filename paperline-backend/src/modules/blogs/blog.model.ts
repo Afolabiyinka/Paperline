@@ -8,7 +8,7 @@ interface BlogAttributes {
   title: string;
   content: string;
   coverImageUrl?: string;
-  authorId: string;
+  authorId?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

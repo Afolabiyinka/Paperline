@@ -4,6 +4,8 @@ import { Blog } from "../../modules/blogs/blog.model";
 import { Comments } from "../../modules/comment/comment.model";
 import { Likes } from "../../modules/likes/likes.model";
 
+
+//Associations
 User.hasMany(Blog, {
   foreignKey: "authorId",
   as: "blogs",

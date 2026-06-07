@@ -21,9 +21,7 @@ export default function Footer() {
   return (
     <footer className="w-full border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-4 md:py-6">
-        {/* Main Footer Content */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
-          {/* Left: Logo & Description */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +35,6 @@ export default function Footer() {
             </p>
           </motion.div>
 
-          {/* Center: Footer Links */}
           <motion.div
             initial={{ opacity: 0, y: 8 }}
             whileInView={{ opacity: 1, y: 0 }}
