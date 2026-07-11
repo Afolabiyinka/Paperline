@@ -1,8 +1,9 @@
 // import { useEffect, useRef } from "react";
 import { Outlet } from "react-router-dom";
 // import Lenis from "@studio-freight/lenis";
-import NavBar from "./pages/nav/NavBar";
 import Footer from "./pages/nav/Footer";
+import NavLayout from "./pages/nav";
+// import { useAnimationFrame } from "framer-motion";
 
 const HomeLayout = () => {
   // const lenisRef = useRef<Lenis | null>(null);
@@ -24,7 +25,7 @@ const HomeLayout = () => {
 
   return (
     <div className="font-[Open Sans] flex flex-col h-full w-full">
-      <NavBar />
+      <NavLayout />
       <Outlet />
       <Footer />
     </div>

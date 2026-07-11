@@ -8,6 +8,7 @@ interface InputProps {
   placeholder?: string;
   onChange?: (val: string) => void;
   value?: string;
+  id?: string;
 }
 
 const Input = ({
@@ -16,6 +17,7 @@ const Input = ({
   type,
   onChange,
   value,
+  id,
   ...props
 }: InputProps) => {
   const IconComponent = LucideIcon[startIcon] as React.FC<
@@ -31,21 +33,22 @@ const Input = ({
         border border-neutral-200
         px-4 py-4
         w-full
-        bg-white
+        
         focus-within:border-neutral-400
         transition
       "
     >
-
       <IconComponent className="w-5 h-5 text-neutral-500" />
 
       <input
+        id={id}
         className="
           w-full
           outline-none
           bg-transparent
           text-sm
           text-black
+
         "
         placeholder={placeholder}
         onChange={(e) => onChange?.(e.target.value)}

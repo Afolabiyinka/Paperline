@@ -1,5 +1,5 @@
 import { useQuery, keepPreviousData } from "@tanstack/react-query";
-import { getUserBlogs } from "../services/user";
+import { getUserBlogs } from "../services/user.requests";
 
 export const useUserBlogs = ({ page }: { page: number }) => {
     const { data, isLoading, error, isFetching } = useQuery({

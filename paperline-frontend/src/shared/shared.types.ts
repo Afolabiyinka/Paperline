@@ -14,3 +14,15 @@ export interface ErrorResponse {
 export interface Response {
   message: string;
 }
+
+
+export interface PaginatedResponse<T> {
+  blogs: T[],
+  pagination: {
+    hasNextPage: boolean
+    hasPrevPage: boolean
+    page: number
+    total: number
+    totalPages: number
+  }
+}

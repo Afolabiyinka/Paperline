@@ -1,5 +1,5 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import type { BlogPost } from "../types/types";
+import type { BlogPost } from "../types/blog.types";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
@@ -27,9 +27,7 @@ const BlogCard = ({ blog }: { blog: BlogPost }) => {
         <div className="flex items-center gap-2 text-sm text-neutral-600">
           <Avatar className="h-7 w-7">
             <AvatarImage src={blog.author?.profilePic} />
-            <AvatarFallback>
-              {blog.author?.username?.[0]}
-            </AvatarFallback>
+            <AvatarFallback>{blog.author?.username?.[0]}</AvatarFallback>
           </Avatar>
 
           <p className="text-black">{blog.author?.username}</p>

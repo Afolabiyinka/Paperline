@@ -181,9 +181,7 @@ const getUserBlogs = async (req: AuthenticatedRequest, res: Response) => {
       offset,
     });
 
-    if (count === 0) {
-      return res.status(404).json({ message: "You have no blogs yet" });
-    }
+
 
     return res.status(200).json({
       blogs,

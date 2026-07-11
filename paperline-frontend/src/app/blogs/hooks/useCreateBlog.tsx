@@ -1,9 +1,11 @@
-import { prodEndpoint } from "@/shared/constants/api";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useCloudinary } from "@/shared/utils/cloudinary";
+import { useCloudinary } from "@/shared/hooks/useCloudinary";
+import { apiClient } from "@/shared/api/apiClient";
+import type { CreateBlogPayload } from "../types/blog.types";
+import { queryClient } from "@/shared/constants/api";
 
 export default function useCreateBlog() {
   const { toastError, toastSuccess, toastLoading } = useToastMessage();
@@ -12,26 +14,20 @@ export default function useCreateBlog() {
   const { uploadImage, uploading } = useCloudinary();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (coverImageUrl: string | null) => {
-      const res = await fetch(`${prodEndpoint}/api/blogs`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ title, content, coverImageUrl }),
-        credentials: "include",
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Failed to create blog");
+    mutationFn: async (payload: CreateBlogPayload) => {
+      try {
+        const res = await apiClient.post(`blogs`, payload);
+        return res.data;
+      } catch (err) {
+        throw new Error();
       }
-
-      return res.json();
     },
 
     onMutate: () => toastLoading("Creating blog…"),
 
     onSuccess: (data) => {
       toastSuccess(data.message || "Blog created successfully");
+      queryClient.invalidateQueries({ queryKey: ["blogs"] });
       reset();
       navigate("/blogs");
     },
@@ -46,7 +42,8 @@ export default function useCreateBlog() {
     }
 
     const coverImageUrl = await uploadImage(imageFile, "paperline/blog_images");
-    mutate(coverImageUrl);
+    const payload = { content, title, coverImageUrl };
+    mutate(payload);
   };
 
   return { createBlog, imageUploading: uploading, creatingBlog: isPending };

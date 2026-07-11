@@ -1,4 +1,4 @@
-import type { AuthUser } from "@/app/settings/types/types";
+import type { AuthUser } from "@/app/settings/types/settings.types";
 import { create } from "zustand";
 
 type AuthUserStore = {

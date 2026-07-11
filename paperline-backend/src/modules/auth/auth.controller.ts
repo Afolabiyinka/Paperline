@@ -23,11 +23,6 @@ const cookieOptions = {
 const loginUser = async (req: AuthenticatedRequest, res: Response) => {
   const { email, password } = req.body as LoginPayload;
 
-  if (!email || !password) {
-    return res.status(400).json({
-      message: "Email, and password is required",
-    });
-  }
 
   try {
     //Check if user with email exists

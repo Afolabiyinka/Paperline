@@ -10,7 +10,7 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useMutation } from "@tanstack/react-query";
-import { deleteAccount } from "../services/user";
+import { deleteAccount } from "../services/user.requests";
 import useToastMessage from "@/shared/lib/useToastmsg";
 import { useAuthStore } from "@/app/auth/store/authStore";
 import { useState } from "react";

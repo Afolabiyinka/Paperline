@@ -1,21 +1,21 @@
-import { useMutation } from "@tanstack/react-query"
-import { logout } from "../services/user"
-import { queryClient } from "@/shared/constants/api"
+import { useMutation } from "@tanstack/react-query";
+import { logout } from "../services/user.requests";
+import { queryClient } from "@/shared/constants/api";
 import { useNavigate } from "react-router-dom";
 
 export const useLogout = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const { mutate, isPending } = useMutation({
-        mutationFn: () => logout(),
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["user"] })
-            navigate("/")
-        }
-    })
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => logout(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["user"] });
+      navigate("/");
+    },
+  });
 
-    return {
-        logoutMutate: mutate,
-        logoutLoading: isPending,
-    }
-}
+  return {
+    logoutMutate: mutate,
+    logoutLoading: isPending,
+  };
+};

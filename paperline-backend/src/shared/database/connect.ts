@@ -11,33 +11,33 @@ if (!DATABASE_URL) {
 
 
 
-export const sequelize =
+// export const sequelize =
 
-  new Sequelize(DATABASE_URL, {
-    dialect: "postgres",
-    logging: false,
-    dialectOptions: {
-      ssl: {
-        require: true,
-        rejectUnauthorized: false,
-      },
-    },
-  });
+//   new Sequelize(DATABASE_URL, {
+//     dialect: "postgres",
+//     logging: false,
+//     dialectOptions: {
+//       ssl: {
+//         require: true,
+//         rejectUnauthorized: false,
+//       },
+//     },
+//   });
 
 
 //Local database connection
 
-// export const sequelize = new Sequelize(
-//   process.env.DATABASE_NAME as string,
-//   process.env.DATABASE_USERNAME as string,
-//   process.env.DATABASE_PASSWORD,
-//   {
-//     port: Number(process.env.DATABASE_HOST) || 5432,
-//     host: process.env.DATABASE_HOST || "localhost",
-//     dialect: "postgres",
-//     logging: false,
-//   }
-// );
+export const sequelize = new Sequelize(
+  process.env.DATABASE_NAME as string,
+  process.env.DATABASE_USERNAME as string,
+  process.env.DATABASE_PASSWORD,
+  {
+    port: Number(process.env.DATABASE_HOST) || 5432,
+    host: process.env.DATABASE_HOST || "localhost",
+    dialect: "postgres",
+    logging: false,
+  }
+);
 
 
 export const connectDb = async () => {

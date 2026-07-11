@@ -1,9 +1,10 @@
 import React from "react";
 import useToastMessage from "@/shared/lib/useToastmsg";
-import type { LoginPayload } from "../types/types";
+import type { LoginPayload } from "../types/auth.types";
 import { useMutation } from "@tanstack/react-query";
-import { login } from "../services/request";
+import { login } from "../services/auth.request";
 import { useNavigate } from "react-router-dom";
+import { getErrorMessage } from "@/shared/lib/errorHelper";
 
 export default function useLogin() {
   const [loginData, setLoginData] = React.useState<LoginPayload>({
@@ -25,7 +26,7 @@ export default function useLogin() {
       }
     },
     onError: (err: any) => {
-      toastError(err.message || "Something went wrong");
+      toastError(getErrorMessage(err.message));
     },
   });
 

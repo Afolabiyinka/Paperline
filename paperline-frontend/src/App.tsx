@@ -6,8 +6,8 @@ import { useEffect } from "react";
 import Scrollbtn from "./components/custom/Scrollbtn";
 
 function App() {
-  const { fetchedUser, isLoading, } = useFetchUser()
-  const { setAuthUser, setAuthResolved } = useAuthStore()
+  const { fetchedUser, isLoading } = useFetchUser();
+  const { setAuthUser, setAuthResolved } = useAuthStore();
 
   useEffect(() => {
     if (!isLoading) {
@@ -19,7 +19,6 @@ function App() {
     <div className="font-['IBM_Plex_Serif'] text-primary min-h-screen">
       <Routesconfig />
       <Scrollbtn />
-
       <Toaster
         position="top-left"
         richColors
@@ -30,7 +29,8 @@ function App() {
             borderRadius: "1px",
           },
         }}
-      />    </div>
+      />
+    </div>
   );
 }
 

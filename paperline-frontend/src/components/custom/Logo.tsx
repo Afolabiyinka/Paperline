@@ -7,7 +7,7 @@ const Logo = () => {
       <Button className="rounded-full" size={`icon-lg`} variant={`link`}>
         <Feather />
       </Button>
-      <h1 className="font-bold tracking-widest text-xl">Paper line</h1>
+      <h1 className="text-xl font-bold tracking-tight">Paperline</h1>
     </a>
   );
 };

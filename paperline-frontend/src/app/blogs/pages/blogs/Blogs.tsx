@@ -1,39 +1,19 @@
 import { motion } from "framer-motion";
 import BlogCard from "../../components/BlogCard";
 import { Button } from "@/components/ui/button";
-import { Frown, Loader2, Pen } from "lucide-react";
+import { Frown, Pen } from "lucide-react";
 import { Link } from "react-router-dom";
 import useBlogs from "../../hooks/useBlogs";
-import type { BlogPost } from "../../types/types";
+import type { BlogPost } from "../../types/blog.types";
 import BlogCardSkeleton from "./sub-components/blog-card-skeloton";
+import { containerVariants, itemVariants } from "@/shared/lib/motion";
 
 const Blogs = () => {
   const { blogsLoading, blogError, blogs, refetch } = useBlogs();
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 12 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.5 },
-    },
-  };
-
   return (
-    <div className="min-h-screen w-full bg-white dark:bg-black">
+    <div className="min-h-screen w-full  dark:bg-black">
       <div className="max-w-7xl mx-auto px-4 md:px-6 lg:px-8 py-12 md:py-16">
-
         {/* Header Section */}
         <motion.div
           initial={{ opacity: 0, y: -12 }}
@@ -99,13 +79,12 @@ const Blogs = () => {
 
             <Button
               onClick={() => refetch()}
-              className="bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-normal text-sm px-6"
+              className="bg-black dark: text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100 font-normal text-sm px-6"
             >
-              <Loader2 className="animate-spin mr-2 w-4 h-4" />
               Try again
             </Button>
           </motion.div>
-        ) : blogs.length === 0 ? (
+        ) : blogs?.blogs.length === 0 ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -127,7 +106,7 @@ const Blogs = () => {
             animate="visible"
             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
           >
-            {blogs.map((blog: BlogPost) => (
+            {blogs?.blogs.map((blog: BlogPost) => (
               <motion.div key={blog.id} variants={itemVariants}>
                 <BlogCard blog={blog} />
               </motion.div>

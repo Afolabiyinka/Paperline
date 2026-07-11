@@ -7,11 +7,10 @@ type BlogPost = {
   createdAt?: Date | string;
 };
 
-type CreateBlogPost = {
+type CreateBlogPayload = {
   title: string;
   content: string;
-  authorId: number | string;
-  coverImageUrl: string;
+  coverImageUrl: string | null;
 };
 
-export type { BlogPost, CreateBlogPost };
+export type { BlogPost, CreateBlogPayload };

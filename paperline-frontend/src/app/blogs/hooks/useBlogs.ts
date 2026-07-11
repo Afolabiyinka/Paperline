@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllblogs } from "../services/blogs";
+import { getAllblogs } from "../services/blogs.request";
 
 export default function useBlogs() {
   const {
     isLoading: blogsLoading,
     isFetching,
-    error: blogError,
-    data: blogs = [],
+    isError: blogError,
+    data: blogs,
     refetch,
   } = useQuery({
     queryKey: ["blogs"],

@@ -62,7 +62,7 @@ const BlogCoverUploader = () => {
             <button
               type="button"
               onClick={handleClick}
-              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2  text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <ImageUp className="w-3.5 h-3.5" />
@@ -72,21 +72,20 @@ const BlogCoverUploader = () => {
             <button
               type="button"
               onClick={handleRemove}
-              className="flex items-center gap-2 bg-white text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
+              className="flex items-center gap-2  text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <X className="w-3.5 h-3.5" />
               Remove
             </button>
           </div>
-
         </div>
       ) : (
         /* ── Empty state ── */
         <button
           type="button"
           onClick={handleClick}
-          className="w-full h-72 flex flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 hover:border-neutral-400 bg-neutral-50 hover:bg-white transition-all duration-300 group disabled:opacity-50 disabled:pointer-events-none"
+          className="w-full h-72 flex flex-col items-center justify-center gap-3 border border-dashed border-neutral-200 hover:border-neutral-400 bg-neutral-50 hover: transition-all duration-300 group disabled:opacity-50 disabled:pointer-events-none"
         >
           <UploadCloud className="w-6 h-6 text-neutral-300 group-hover:text-neutral-500 transition-colors duration-300" />
           <div

@@ -8,13 +8,15 @@ import { ChevronLeft, Heart, MessageCircle } from "lucide-react";
 import DOMPurify from "dompurify";
 import { useEffect } from "react";
 
-
-
 const BlogPage = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
 
-  const { particularBlog: blog, isLoading, error } = useParticularBlog(id ?? "");
+  const {
+    particularBlog: blog,
+    isLoading,
+    error,
+  } = useParticularBlog(id ?? "");
 
   useEffect(() => {
     if (blog?.title) document.title = blog.title;
@@ -24,24 +26,20 @@ const BlogPage = () => {
   if (isLoading) return <LoadingContainer />;
   if (error || !blog || !blog.author) return <Noblog />;
 
-
   const formattedDate = blog.createdAt
     ? new Date(blog.createdAt).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    })
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      })
     : null;
 
   const sanitizedContent = DOMPurify.sanitize(blog.content);
 
   return (
-    <div className="min-h-screen bg-white px-4 py-12">
+    <div className="min-h-screen  px-4 py-12">
       <div className="max-w-3xl mx-auto mb-8">
-        <Button
-          onClick={() => navigate(-1)}
-          variant="secondary"
-        >
+        <Button onClick={() => navigate(-1)} variant="secondary">
           <ChevronLeft className="w-4 h-4" />
           Back
         </Button>
@@ -52,14 +50,11 @@ const BlogPage = () => {
           {blog.title}
         </h1>
         <div className="flex md:items-center gap-4 justify-between mb-10 text-sm text-neutral-600 flex-col md:flex-row">
-
           {/* Left: Author info */}
           <div className="flex items-center gap-3">
             <Avatar className="h-9 w-9">
               <AvatarImage src={blog.author?.profilePic} />
-              <AvatarFallback>
-                {blog.author?.username?.[0]}
-              </AvatarFallback>
+              <AvatarFallback>{blog.author?.username?.[0]}</AvatarFallback>
             </Avatar>
 
             <Link
@@ -85,9 +80,7 @@ const BlogPage = () => {
               <span className="text-xs">0</span>
             </div>
           </div>
-
         </div>
-
 
         <div className="mb-12">
           <img
@@ -116,7 +109,6 @@ const BlogPage = () => {
           dangerouslySetInnerHTML={{ __html: sanitizedContent }}
         />
       </article>
-
     </div>
   );
 };
