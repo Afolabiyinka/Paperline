@@ -1,8 +1,8 @@
 import axios from "axios";
-import { prodEndpoint, testingEndpoint } from "../constants/api";
+import { prodEndpoint, } from "../constants/api";
 
 export const apiClient = axios.create({
-   baseURL: testingEndpoint,
+   baseURL: prodEndpoint,
    headers: {
       "Content-Type": "application/json",
    },
