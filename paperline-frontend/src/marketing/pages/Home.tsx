@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
-import landingImg from "@/assets/undraw_blogging_38kl (1).svg";
+import landingImg from "@/assets/blog_image.svg";
 import { ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import type { Variants } from "framer-motion";
@@ -49,7 +49,6 @@ const Home = () => {
 
             {/* Main Heading */}
             <motion.h1
-
               variants={itemVariants}
               className="text-5xl md:text-6xl lg:text-7xl font-serif font-normal leading-tight text-black dark:text-white"
             >
@@ -61,12 +60,15 @@ const Home = () => {
               variants={itemVariants}
               className="text-lg md:text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl font-light"
             >
-              A calm space to read, write, and publish ideas — one paragraph at a
-              time. No algorithms, no distractions. Just you and your words.
+              A calm space to read, write, and publish ideas — one paragraph at
+              a time. No algorithms, no distractions. Just you and your words.
             </motion.p>
 
             {/* CTA Buttons */}
-            <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-4">
+            <motion.div
+              variants={itemVariants}
+              className="flex flex-col sm:flex-row gap-4 pt-4"
+            >
               <Button
                 size="lg"
                 className="font-normal text-base"
@@ -92,16 +94,28 @@ const Home = () => {
 
             <motion.div variants={itemVariants} className="flex gap-12 pt-4">
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Stories</p>
-                <p className="text-2xl font-light text-black dark:text-white">10K+</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Stories
+                </p>
+                <p className="text-2xl font-light text-black dark:text-white">
+                  10K+
+                </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Writers</p>
-                <p className="text-2xl font-light text-black dark:text-white">5K+</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Writers
+                </p>
+                <p className="text-2xl font-light text-black dark:text-white">
+                  5K+
+                </p>
               </div>
               <div>
-                <p className="text-sm text-gray-500 dark:text-gray-400">Readers</p>
-                <p className="text-2xl font-light text-black dark:text-white">50K+</p>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Readers
+                </p>
+                <p className="text-2xl font-light text-black dark:text-white">
+                  50K+
+                </p>
               </div>
             </motion.div>
           </motion.div>

@@ -1,16 +1,12 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import aboutImg from "@/assets/undraw_add-post_prex.svg"
-
+import aboutImg from "@/assets/newsletter.svg";
 
 const About = () => {
   return (
-    <div
-      className="flex items-center justify-center min-h-screen px-6 lg:px-16"
-    >
+    <div className="flex items-center justify-center min-h-screen px-6 lg:px-16">
       <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24 max-w-5xl w-full">
-
         {/* Illustration */}
         <motion.div
           className="shrink flex justify-center w-full lg:w-auto"
@@ -46,19 +42,25 @@ const About = () => {
               color: "#1a1a1a",
             }}
           >
-            A space for writing<br />
+            A space for writing
+            <br />
             and reading <em>ideas</em>
           </h1>
 
           {/* Divider */}
-          <div className="mb-5 w-full" style={{ height: 2, background: "#1a1a1a" }} />
+          <div
+            className="mb-5 w-full"
+            style={{ height: 2, background: "#1a1a1a" }}
+          />
 
           {/* Body */}
           <p
             className="font-light leading-relaxed mb-9"
             style={{ fontSize: 17, color: "#3d3d3d", lineHeight: 1.72 }}
           >
-            Paperline is a minimal blog platform for people who prefer clarity over noise. No distractions, no clutter — just the words that matter.
+            Paperline is a minimal blog platform for people who prefer clarity
+            over noise. No distractions, no clutter — just the words that
+            matter.
           </p>
 
           {/* CTA */}
@@ -70,20 +72,13 @@ const About = () => {
               Stay in the loop. New stories, weekly.
             </p>
 
-            <div
-              className="flex items-center overflow-hidden"
-
-            >
+            <div className="flex items-center overflow-hidden">
               <Input
                 startIcon="Mail"
                 type="email"
                 placeholder="your@email.com"
-
               />
-              <Button
-                variant="default"
-                size={`lg`}
-              >
+              <Button variant="default" size={`lg`}>
                 Join
               </Button>
             </div>
@@ -96,7 +91,6 @@ const About = () => {
             </p>
           </div>
         </motion.div>
-
       </div>
     </div>
   );

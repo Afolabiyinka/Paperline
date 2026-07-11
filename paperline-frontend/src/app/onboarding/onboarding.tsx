@@ -12,7 +12,7 @@ import {
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useCloudinary } from "@/shared/utils/cloudinary";
+import { useCloudinary } from "@/shared/hooks/useCloudinary";
 import { useAuthStore } from "@/app/auth/store/authStore";
 import { Loader2 } from "lucide-react";
 import { useUpdateUser } from "../settings/hooks/useUpdateProfile";
@@ -35,7 +35,7 @@ const Onboarding = () => {
     const image_url = await uploadImage(file, "paperline/profile_pics");
     if (image_url) {
       updateProfilePic(image_url);
-      setAvatarPreview(image_url)
+      setAvatarPreview(image_url);
     }
   };
 
@@ -103,7 +103,8 @@ const Onboarding = () => {
                 className="w-full"
                 onClick={() => navigate("/blogs/create")}
               >
-                Start writing your first story              </Button>
+                Start writing your first story{" "}
+              </Button>
             </CardContent>
 
             <CardFooter>

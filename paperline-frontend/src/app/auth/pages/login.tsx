@@ -15,9 +15,7 @@ export default function Login() {
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center px-6">
-
       <div className="w-full max-w-sm space-y-8">
-
         {/* Header */}
         <div className="text-center space-y-2">
           <User size={22} className="mx-auto text-neutral-600" />
@@ -31,15 +29,12 @@ export default function Login() {
 
         {/* Form */}
         <form onSubmit={onSubmit} className="space-y-5">
-
           <Input
             startIcon="Mail"
             placeholder="Email"
             type="email"
             value={loginData.email}
-            onChange={(e) =>
-              setLoginData({ ...loginData, email: e })
-            }
+            onChange={(e) => setLoginData({ ...loginData, email: e })}
           />
 
           <Input
@@ -47,9 +42,7 @@ export default function Login() {
             placeholder="Password"
             type="password"
             value={loginData.password}
-            onChange={(e) =>
-              setLoginData({ ...loginData, password: e })
-            }
+            onChange={(e) => setLoginData({ ...loginData, password: e })}
           />
 
           {/* Options */}
@@ -59,20 +52,13 @@ export default function Login() {
               <label htmlFor="remember">Remember me</label>
             </div>
 
-            <Link
-              to="/forgot-password"
-              className="hover:text-black transition"
-            >
+            <Link to="/forgot-password" className="hover:text-black transition">
               Forgot?
             </Link>
           </div>
 
           {/* Button */}
-          <Button
-            type="submit"
-            className="w-full"
-            disabled={isLoading}
-          >
+          <Button type="submit" className="w-full" disabled={isLoading}>
             {isLoading ? (
               <Loader2 className="animate-spin w-4 h-4" />
             ) : (
@@ -84,14 +70,10 @@ export default function Login() {
         {/* Footer */}
         <p className="text-center text-sm text-neutral-500">
           No account?
-          <Link
-            to="/signup"
-            className="ml-2 text-black hover:underline"
-          >
+          <Link to="/signup" className="ml-2 text-black hover:underline">
             Create one
           </Link>
         </p>
-
       </div>
     </div>
   );

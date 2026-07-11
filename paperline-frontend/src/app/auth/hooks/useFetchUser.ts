@@ -1,4 +1,4 @@
-import { getUser } from "@/app/settings/services/user";
+import { getUser } from "@/app/settings/services/user.requests";
 import { useQuery } from "@tanstack/react-query";
 
 export const useFetchUser = () => {
@@ -10,7 +10,7 @@ export const useFetchUser = () => {
     });
 
     return {
-        fetchedUser: data?.user,
+        fetchedUser: data,
         isLoading,
         isFetched,
         error,

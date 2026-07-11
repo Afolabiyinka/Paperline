@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { getParticularBlog } from "../services/blogs";
+import { getParticularBlog } from "../services/blogs.request";
 
 export default function useParticularBlog(id: number | string) {
   const {

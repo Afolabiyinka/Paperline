@@ -6,7 +6,7 @@ export const createBlog = async (authorId: string, payload: CreateBlogPayload) =
         throw new Error("Unauthorized");
     }
 
-    const { title, content, coverImageUrl } = payload;
+    const { title, content, } = payload;
 
     if (!title || !content) {
         throw new Error("Title & content is required");

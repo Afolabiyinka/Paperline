@@ -1,31 +1,31 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { AtSign, Loader2, LogOut } from "lucide-react";
+import { AtSign, NotebookText } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuthStore } from "../../auth/store/authStore";
 import { useUserBlogs } from "../../settings/hooks/useUserBlogs";
 import { useState } from "react";
 import MyBlogActions from "../myBlogActions";
 import SettingsTabs from "@/app/settings/SettingsTabs";
-import { useLogout } from "@/app/settings/hooks/useLogout";
+import { motion } from "framer-motion";
+import { containerVariants, itemVariants } from "@/shared/lib/motion";
+import BlogCard from "@/app/blogs/components/BlogCard";
 
 const MyProfile = () => {
   const { authUser } = useAuthStore();
+  const naviagate = useNavigate();
 
-  const { logoutLoading, logoutMutate } = useLogout()
   const [page, setPage] = useState(1);
-  const { error, isLoading, myBlogs, pagination } = useUserBlogs({ page: page })
+  const { error, isLoading, myBlogs, pagination } = useUserBlogs({
+    page: page,
+  });
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center px-6">
-
-      <div className="w-full max-w-lg space-y-10">
-
+      <div className="space-y-10 w-full md:max-w-4xl">
         {/* Profile header */}
         <div className="flex items-center justify-between">
-
           <div className="flex items-center gap-4">
-
             <Avatar className="h-12 w-12">
               <AvatarImage src={authUser?.profilePic} />
               <AvatarFallback>
@@ -43,7 +43,6 @@ const MyProfile = () => {
                 {authUser?.email}
               </p>
             </div>
-
           </div>
 
           <SettingsTabs />
@@ -53,8 +52,7 @@ const MyProfile = () => {
         <div className="border-t border-neutral-200" />
 
         {/* My Blogs */}
-        <div className="space-y-2 overflow-y-scroll p-1">
-
+        <div className="space-y-2 p-1">
           {/* Loading skeleton */}
           {isLoading && (
             <div className="space-y-2">
@@ -72,48 +70,61 @@ const MyProfile = () => {
 
           {/* Error */}
           {!isLoading && error && (
-            <p className="text-sm text-red-500">
-              Failed to load posts
-            </p>
+            <p className="text-sm text-red-500">Failed to load your posts</p>
           )}
 
           {/* Empty */}
-          {!isLoading && !error && myBlogs?.length === 0 && (
-            <p className="text-sm text-neutral-400">
-              No posts yet
-            </p>
+          {!isLoading && !error && myBlogs.length === 0 && (
+            <div className="flex md:max-h-screen md:h-full flex-col-reverse md:flex-row overflow-hidden justify-center items-center">
+              <motion.div
+                className="w-full flex flex-col justify-center items-start  gap-4 p-8 md:p-12"
+                variants={containerVariants}
+              >
+                <NotebookText
+                  className="text-secondary-foreground stroke-[1.25px]"
+                  aria-hidden
+                  size={32}
+                />
+                <motion.h1
+                  variants={itemVariants}
+                  className="text-3xl font-semibold text-muted-foreground"
+                >
+                  Your blog is waiting
+                </motion.h1>
+                <motion.p
+                  variants={itemVariants}
+                  className="max-w-sm text-sm md:text-base text-muted-foreground"
+                >
+                  Looks a little quiet here. Write your first blog and start
+                  sharing your ideas
+                </motion.p>
+                <motion.div
+                  variants={itemVariants}
+                  className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto"
+                >
+                  <Button onClick={() => naviagate(`/blogs/create`)}>
+                    Write your first blog
+                  </Button>
+                </motion.div>
+              </motion.div>
+            </div>
           )}
 
           {/* Data */}
-          {!isLoading && !error && myBlogs?.length > 0 && (
-            myBlogs.map((blog) => (
-              <div
-                key={blog.id}
-                className="p-3 border-b border-border hover:border-neutral-300 transition flex items-center justify-between group"
-              >
-                <Link to={`/blogs/${blog.id}`} className="flex-1">
-                  <div>
-                    <p className="text-sm text-black">
-                      {blog.title}
-                    </p>
-
-                    {blog.createdAt && (
-                      <p className="text-xs text-neutral-400 mt-1">
-                        {new Date(blog.createdAt).toDateString()}
-                      </p>
-                    )}
-                  </div>
-                </Link>
-
-                <MyBlogActions blogId={blog.id} />
-              </div>
-            ))
-          )}
-
+          <div className="grid md:grid-cols-2 gap-10 overflow-y-scroll max-h-[60vh] p-1">
+            {!isLoading &&
+              !error &&
+              myBlogs?.length > 0 &&
+              myBlogs.map((blog) => (
+                <div key={blog.id} className="shadow p-3">
+                  <BlogCard blog={blog} />
+                  <MyBlogActions blogId={blog.id} />
+                </div>
+              ))}
+          </div>
         </div>
         {!isLoading && !error && myBlogs?.length > 0 && (
           <div className="flex items-center justify-between mt-4">
-
             <Button
               variant="outline"
               disabled={page === 1}
@@ -133,25 +144,8 @@ const MyProfile = () => {
             >
               Next
             </Button>
-
           </div>
         )}
-
-        <div className="flex justify-end">
-
-          <Button
-            onClick={() => logoutMutate()}
-            disabled={logoutLoading}
-            variant="destructive"
-          >
-            {logoutLoading ? <Loader2 className="animate-spin" /> : (<>
-              <LogOut className="w-4 h-4 mr-2" />
-              Logout
-            </>)}
-          </Button>
-
-        </div>
-
       </div>
     </div>
   );

@@ -21,14 +21,14 @@ const getUser = async (req: AuthenticatedRequest, res: Response) => {
       });
 
     res.status(200).json({
-      user: {
-        username: user.getDataValue("username"),
-        email: user.getDataValue("email"),
-        firstname: user.getDataValue("firstname"),
-        lastname: user.getDataValue("lastname"),
-        profilePic: user.getDataValue("profilePic")
-      },
-    });
+
+      username: user.getDataValue("username"),
+      email: user.getDataValue("email"),
+      firstname: user.getDataValue("firstname"),
+      lastname: user.getDataValue("lastname"),
+      profilePic: user.getDataValue("profilePic")
+    },
+    );
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Something went wrong" });
@@ -59,14 +59,6 @@ const getUser = async (req: AuthenticatedRequest, res: Response) => {
 
     return res.status(200).json({
       message: "Profile updated successfully",
-      user: {
-        username: user.getDataValue("username"),
-        firstname: user.getDataValue("firstname"),
-        lastname: user.getDataValue("lastname"),
-        email: user.getDataValue("email"),
-        id: user.getDataValue("id"),
-        profilePic: user.getDataValue("profilePic"),
-      },
     });
   } catch (error) {
     console.log(error);

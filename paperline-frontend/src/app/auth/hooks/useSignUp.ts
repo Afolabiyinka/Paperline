@@ -1,9 +1,9 @@
 import useToastMessage from "@/shared/lib/useToastmsg";
-import type { SignupPayload } from "../types/types";
+import type { SignupPayload } from "../types/auth.types";
 import React from "react";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../services/request";
+import { signup } from "../services/auth.request";
 
 export default function useSignUp() {
   const [signUpData, setSignUpData] = React.useState<SignupPayload>({

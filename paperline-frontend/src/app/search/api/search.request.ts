@@ -1,4 +1,4 @@
-import type { BlogPost } from "@/app/blogs/types/types";
+import type { BlogPost } from "@/app/blogs/types/blog.types";
 import { prodEndpoint } from "@/shared/constants/api";
 
 interface SearchResult {

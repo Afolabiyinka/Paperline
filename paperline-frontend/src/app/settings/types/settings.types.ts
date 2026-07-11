@@ -1,7 +1,7 @@
-import type { BlogPost } from "@/app/blogs/types/types";
+import type { BlogPost } from "@/app/blogs/types/blog.types";
 
 export interface AuthUser {
-    id?: string | number;
+    id: string | number;
     email: string;
     username: string;
     firstname: string;

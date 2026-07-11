@@ -11,15 +11,13 @@ import {
   DialogClose,
 } from "@/components/ui/dialog";
 import { Loader2 } from "lucide-react";
-import { useCloudinary } from "@/shared/utils/cloudinary";
+import { useCloudinary } from "@/shared/hooks/useCloudinary";
 import { useUpdateUser } from "@/app/settings/hooks/useUpdateProfile";
 
 const ProfilePicDialog = () => {
   const { updatedData, updateProfilePic } = useUpdateUser();
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [preview, setPreview] = useState(
-    updatedData.profilePic
-  );
+  const [preview, setPreview] = useState(updatedData.profilePic);
 
   const { uploadImage, uploading } = useCloudinary();
 
@@ -37,10 +35,7 @@ const ProfilePicDialog = () => {
   const handleUpload = async (close: () => void) => {
     if (!selectedFile) return;
 
-    const url = await uploadImage(
-      selectedFile,
-      "paperline/profile_pics"
-    );
+    const url = await uploadImage(selectedFile, "paperline/profile_pics");
 
     if (url) {
       updateProfilePic(url);
@@ -51,7 +46,6 @@ const ProfilePicDialog = () => {
 
   return (
     <Dialog>
-
       <DialogTrigger asChild>
         <Button variant="ghost" className="text-sm">
           Change photo
@@ -59,7 +53,6 @@ const ProfilePicDialog = () => {
       </DialogTrigger>
 
       <DialogContent className="max-w-sm space-y-6">
-
         {/* Header */}
         <DialogHeader>
           <DialogTitle className="text-base font-serif font-normal">
@@ -69,7 +62,6 @@ const ProfilePicDialog = () => {
 
         {/* Preview */}
         <div className="flex flex-col items-center gap-4">
-
           <Avatar className="w-28 h-28">
             <AvatarImage src={preview || updatedData.profilePic} />
             <AvatarFallback>
@@ -95,15 +87,11 @@ const ProfilePicDialog = () => {
             {updatedData.profilePic ? "Change photo" : "Upload photo"}
           </label>
 
-          <p className="text-xs text-neutral-400">
-            JPG, PNG or GIF (max 5MB)
-          </p>
-
+          <p className="text-xs text-neutral-400">JPG, PNG or GIF (max 5MB)</p>
         </div>
 
         {/* Actions */}
         <DialogFooter className="flex justify-between">
-
           <DialogClose asChild>
             <Button variant="ghost" disabled={uploading}>
               Cancel
@@ -111,18 +99,12 @@ const ProfilePicDialog = () => {
           </DialogClose>
 
           <Button
-            onClick={() => handleUpload(() => { })}
+            onClick={() => handleUpload(() => {})}
             disabled={!selectedFile || uploading}
           >
-            {uploading ? (
-              <Loader2 className="w-4 h-4 animate-spin" />
-            ) : (
-              "Save"
-            )}
+            {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Save"}
           </Button>
-
         </DialogFooter>
-
       </DialogContent>
     </Dialog>
   );

@@ -4,12 +4,14 @@ import Logo from "@/components/custom/Logo";
 import { useIsMobile } from "@/shared/hooks/useMobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X, Search, Bell } from "lucide-react";
+import { Search, Bell, PenLine } from "lucide-react";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useFetchUser } from "@/app/auth/hooks/useFetchUser";
 import { useAuthStore } from "@/app/auth/store/authStore";
+import ProfileDropdown from "@/app/profile/components/profileDropdown";
+import NavIcon from "@/components/custom/NavIcon";
+import MenuButton from "@/components/custom/MenuBtn";
 
 const NavBar = () => {
   const isMobile = useIsMobile(768);
@@ -19,8 +21,8 @@ const NavBar = () => {
   const navigate = useNavigate();
 
   return (
-    <nav className="w-full border-b border-gray-200 bg-white sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
+    <nav className="w-full bg-white sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-2 md:px-6 py-4 lg:flex items-center justify-between hidden">
         <div className="shrink-0">
           <Logo />
         </div>
@@ -45,36 +47,23 @@ const NavBar = () => {
           </div>
         )}
 
-        <div className="flex items-center gap-4 md:gap-6">
-          <Button
-            size={`icon-lg`}
-            variant={`ghost`}
-            onClick={() => navigate("/search")}
-          >
-            <Search />
-          </Button>
+        <div className="flex items-center gap-2  md:gap-6">
+          <NavIcon icon={Search} linkTo="/search" tooltip="Search here" />
 
           {isLoading ? (
             <div className="flex items-center gap-3">
               <div className="h-8 w-8 bg-gray-200 dark:bg-gray-700 rounded-full animate-pulse" />
             </div>
           ) : authUser ? (
-            <div className="flex items-center gap-4">
-              {!isMobile && (
-                <Button size={`icon-lg`} variant={`ghost`}>
-                  <Bell size={18} />
-                </Button>
-              )}
+            <div className="flex items-center gap-1 md:gap-4">
+              {!isMobile && <NavIcon icon={Bell} linkTo="" />}
 
-              <Avatar
-                onClick={() => navigate(`me`)}
-                className="cursor-pointer w-8 h-8 border border-gray-300 dark:border-gray-700"
-              >
-                <AvatarImage src={authUser.profilePic} />
-                <AvatarFallback className="text-xs">
-                  {authUser.username?.substring(0, 2)?.toUpperCase() ?? "U"}
-                </AvatarFallback>
-              </Avatar>
+              <NavIcon
+                icon={PenLine}
+                linkTo="/blogs/create"
+                tooltip="Create a new blog"
+              />
+              <ProfileDropdown />
             </div>
           ) : (
             <div className="md:flex items-center gap-3 hidden">
@@ -86,7 +75,7 @@ const NavBar = () => {
                 Sign in
               </Button>
               <Button
-                className="text-sm font-normal bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100"
+                className="text-sm font-normal bg-black dark: text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-100"
                 onClick={() => navigate("/signup")}
               >
                 Write
@@ -95,12 +84,7 @@ const NavBar = () => {
           )}
 
           {isMobile && (
-            <button
-              onClick={() => setOpen(!open)}
-              className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200"
-            >
-              {open ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            <MenuButton open={open} onClick={() => setOpen(!open)} />
           )}
         </div>
       </div>
@@ -112,7 +96,7 @@ const NavBar = () => {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="border-t border-gray-200 dark:border-gray-800 bg-white dark:bg-black"
+            className="border-t border-gray-200 dark:border-gray-800  dark:bg-black"
           >
             <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 flex flex-col gap-4">
               {NAVLINKS.map((link) => (
@@ -145,7 +129,7 @@ const NavBar = () => {
                     Sign in
                   </Button>
                   <Button
-                    className="flex-1 text-sm font-normal bg-black dark:bg-white text-white dark:text-black"
+                    className="flex-1 text-sm font-normal bg-black dark: text-white dark:text-black"
                     onClick={() => {
                       navigate("/signup");
                       setOpen(false);
