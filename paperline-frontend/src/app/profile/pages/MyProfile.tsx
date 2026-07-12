@@ -10,6 +10,7 @@ import SettingsTabs from "@/app/settings/SettingsTabs";
 import { motion } from "framer-motion";
 import { containerVariants, itemVariants } from "@/shared/lib/motion";
 import BlogCard from "@/app/blogs/components/BlogCard";
+import BlogCardSkeleton from "@/app/blogs/pages/blogs/sub-components/blog-card-skeloton";
 
 const MyProfile = () => {
   const { authUser } = useAuthStore();
@@ -55,15 +56,12 @@ const MyProfile = () => {
         <div className="space-y-2 p-1">
           {/* Loading skeleton */}
           {isLoading && (
-            <div className="space-y-2">
+            <div className="grid md:grid-cols-2 gap-10 overflow-y-scroll max-h-[60vh] p-1">
+              {" "}
               {[...Array(3)].map((_, i) => (
-                <div
-                  key={i}
-                  className="p-3 border border-neutral-100 rounded-md animate-pulse"
-                >
-                  <div className="h-4 w-3/4 bg-neutral-200 rounded" />
-                  <div className="h-3 w-1/3 bg-neutral-100 rounded mt-2" />
-                </div>
+                <motion.div key={i} variants={itemVariants}>
+                  <BlogCardSkeleton />
+                </motion.div>
               ))}
             </div>
           )}

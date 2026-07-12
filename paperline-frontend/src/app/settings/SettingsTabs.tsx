@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Tabs, TabsTrigger, TabsContent, TabsList } from "@/components/ui/tabs";
-import { AlertTriangle, Cog, User } from "lucide-react";
+import { AlertTriangle, Settings, User } from "lucide-react";
 import UpdateProfile from "./updateprofile";
 
 const SettingsTabs = () => {
@@ -16,7 +16,7 @@ const SettingsTabs = () => {
     <Dialog>
       <DialogTrigger>
         <Button variant={`secondary`} size={`icon-lg`}>
-          <Cog />
+          <Settings />
         </Button>
       </DialogTrigger>
 
