@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useCreateStore } from "@/app/blogs/store/createStore";
 import { ImageUp, UploadCloud, X } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const BlogCoverUploader = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -59,25 +60,25 @@ const BlogCoverUploader = () => {
 
           {/* Actions — appear on hover */}
           <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <button
+            <Button
               type="button"
               onClick={handleClick}
-              className="flex items-center gap-2  text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
+              // className="flex items-center gap-2  text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <ImageUp className="w-3.5 h-3.5" />
               Change
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="button"
+              variant={`destructive`}
               onClick={handleRemove}
-              className="flex items-center gap-2  text-neutral-800 text-xs font-medium tracking-wide px-4 py-2 hover:bg-neutral-100 transition-colors disabled:opacity-50"
               style={{ fontFamily: "system-ui, sans-serif" }}
             >
               <X className="w-3.5 h-3.5" />
               Remove
-            </button>
+            </Button>
           </div>
         </div>
       ) : (

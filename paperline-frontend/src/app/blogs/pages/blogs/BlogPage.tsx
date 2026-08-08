@@ -86,7 +86,7 @@ const BlogPage = () => {
           <img
             src={blog.coverImageUrl}
             alt={blog.title}
-            className="w-full object-cover h-[420px]"
+            className="w-full object-cover h-[420px] shadow shadow-muted p-1 rounded-lg"
           />
         </div>
 

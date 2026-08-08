@@ -26,7 +26,7 @@ export default function useLogin() {
       }
     },
     onError: (err: any) => {
-      toastError(getErrorMessage(err.message));
+      toastError(getErrorMessage(err.message) || "Something went wrong");
     },
   });
 

@@ -4,7 +4,7 @@ import Logo from "@/components/custom/Logo";
 import { useIsMobile } from "@/shared/hooks/useMobile";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Search, Bell, PenLine } from "lucide-react";
+import { Search, Bell, Pen } from "lucide-react";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { useFetchUser } from "@/app/auth/hooks/useFetchUser";
@@ -59,7 +59,7 @@ const NavBar = () => {
               {!isMobile && <NavIcon icon={Bell} linkTo="" />}
 
               <NavIcon
-                icon={PenLine}
+                icon={Pen}
                 linkTo="/blogs/create"
                 tooltip="Create a new blog"
               />

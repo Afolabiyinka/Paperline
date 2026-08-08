@@ -28,7 +28,7 @@ const loginUser = async (req: AuthenticatedRequest, res: Response) => {
     //Check if user with email exists
     const user = await User.findOne({ where: { email } });
     if (!user) {
-      return res.status(400).json({ message: "User not found" });
+      return res.status(400).json({ message: "Invalid Credentials" });
     }
 
     //Check if passwords match

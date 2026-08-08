@@ -10,24 +10,12 @@ const CreateBlog = () => {
   const { title, setTitle } = useCreateStore();
 
   return (
-    <div
-      className="min-h-screen w-full"
-    >
+    <div className="min-h-screen w-full">
       {/* Top bar */}
-      <header
-        className="sticky top-0 z-10 flex items-center justify-between px-6 py-3 border-b"
-      >
+      <header className="sticky top-0 z-10 flex items-center justify-between px-6 py-3 border-b bg-white">
         <div className="flex items-center gap-2">
-          <span
-            className="text-lg font-medium tracking-tight"
-          >
-            Paperline
-          </span>
-          <span
-            className="text-xs px-2 py-0.5 rounded-full"
-          >
-            Draft
-          </span>
+          <span className="text-lg font-medium tracking-tight">Paperline</span>
+          <span className="text-xs px-2 py-0.5 rounded-full">Draft</span>
         </div>
 
         <div className="flex items-center gap-2">
@@ -49,17 +37,20 @@ const CreateBlog = () => {
             className="flex items-center gap-1.5 text-xs font-medium rounded-full px-4"
             style={{ background: "#1a1a1a", color: "#faf9f7" }}
           >
-            {imageUploading || creatingBlog ? "Creating..." : <span className="flex items-center gap-2">
-              <Send size={13} />
-              Publish
-            </span>}
+            {imageUploading || creatingBlog ? (
+              "Creating..."
+            ) : (
+              <span className="flex items-center gap-2">
+                <Send size={13} />
+                Publish
+              </span>
+            )}
           </Button>
         </div>
       </header>
 
       {/* Body */}
       <div className="max-w-2xl mx-auto px-6 py-12 flex flex-col gap-8">
-
         {/* Cover */}
         <BlogCoverUploader />
 
@@ -87,7 +78,6 @@ const CreateBlog = () => {
         <div style={{ minHeight: 400 }}>
           <TextEditor />
         </div>
-
       </div>
     </div>
   );

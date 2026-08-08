@@ -1,5 +1,5 @@
 import type { BlogPost } from "@/app/blogs/types/blog.types";
-import { prodEndpoint } from "@/shared/constants/api";
+import { apiClient } from "@/shared/api/apiClient";
 
 interface SearchResult {
     blogs: BlogPost[],
@@ -14,10 +14,8 @@ interface SearchResult {
 }
 export const searchBlogs = async (query: string): Promise<SearchResult> => {
     try {
-        const res = await fetch(`${prodEndpoint}/api/blogs/search?q=${encodeURIComponent(query)}`);
-        if (!res.ok) throw new Error("Search failed");
-        const data = await res.json();
-        return data;
+        const res = await apiClient.get(`/blogs/search?q=${encodeURIComponent(query)}`)
+        return res.data;
     } catch (err) {
         console.error("Search error:", err);
         throw err;

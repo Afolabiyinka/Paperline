@@ -20,15 +20,19 @@ const ProfileDropdown = () => {
         <Avatar
           size="sm"
           onClick={() => navigate(`/me`)}
-          className="cursor-pointer w-8 h-8 border-0 shadow-none ring-0"
+          className="cursor-pointer w-8 h-8 border-none shadow-none ring-0"
         >
           <AvatarImage src={authUser?.profilePic} />
-          <AvatarFallback className="text-xs">
-            {authUser?.username?.substring(0, 2)?.toUpperCase() ?? "U"}
+          <AvatarFallback className="text-xs border-0 shadow-none ring-0">
+            {authUser?.username
+              ?.split(" ")
+              .map((n) => n[0])
+              .join("")
+              .slice(0, 2)}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="rounded-none">
+      <DropdownMenuContent className="shadow-none">
         <DropdownMenuItem className="" onClick={() => navigate("/me")}>
           <UserRound />
           My Profile

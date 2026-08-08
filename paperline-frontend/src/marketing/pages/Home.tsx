@@ -78,7 +78,7 @@ const Home = () => {
               </Button>
 
               <Button
-                variant="ghost"
+                variant="secondary"
                 size="lg"
                 className="font-normal text-base group"
                 onClick={() => navigate("/blogs/create")}
